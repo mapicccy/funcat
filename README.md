@@ -6,6 +6,13 @@ Funcat 将同花顺、通达信、文华财经等的公式移植到了 Python �
 
 苦于 Python 缺乏这种领域特定语言的表达能力，所以用 Python 基于 numpy 实现了一套。
 
+原作者\后端tushare接口已经不再维护，牛市以来，为方便个人对金融量化的兴趣，顾迫切建此仓库
+
+## 更新计划
+
+- 增加加密数字货币后端(已完成)
+- 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)
+
 ## 安装
 ```
 python setup.py install
