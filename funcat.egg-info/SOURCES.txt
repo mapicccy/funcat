@@ -19,12 +19,7 @@ funcat.egg-info/requires.txt
 funcat.egg-info/top_level.txt
 funcat/data/__init__.py
 funcat/data/backend.py
-funcat/data/client.py
-funcat/data/consts.py
 funcat/data/crypto_backend.py
-funcat/data/exceptions.py
-funcat/data/futures_api.py
 funcat/data/rqalpha_data_backend.py
 funcat/data/rqdata_data_backend.py
 funcat/data/tushare_backend.py
-funcat/data/utils.py

@@ -73,12 +73,9 @@ class TushareDataBackend(DataBackend):
     def get_order_book_id_list(self):
         """获取所有的股票代码列表
         """
-        info = self.ts.get_stock_basics()
-        code_list = info.index.sort_values().tolist()
-        order_book_id_list = [
-            (code + ".SH" if code.startswith("6") else code + ".SZ")
-            for code in code_list
-        ]
+        pro = self.ts.pro_api()
+        info = pro.query('stock_basic', exchange='', list_status='L', field='ts_code')
+        order_book_id_list = info['ts_code'].tolist()
         return order_book_id_list
 
     @lru_cache()
@@ -88,10 +85,11 @@ class TushareDataBackend(DataBackend):
         :param start: 20160101
         :param end: 20160201
         """
-        start = get_str_date_from_int(start)
-        end = get_str_date_from_int(end)
-        df = self.ts.get_k_data("000001", index=True, start=start, end=end)
-        trading_dates = [get_int_date(date) for date in df.date.tolist()]
+        start = get_str_date_from_int(start).replace('-', '')
+        end = get_str_date_from_int(end).replace('-', '')
+        pro = self.ts.pro_api()
+        df = pro.query('trade_cal', start_date=start, end_date=end, is_open=1)
+        trading_dates = [get_int_date(date) for date in df['cal_date'].tolist()]
         return trading_dates
 
     @lru_cache(maxsize=4096)

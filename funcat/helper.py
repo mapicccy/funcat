@@ -5,6 +5,7 @@ from __future__ import print_function
 
 import datetime
 import numpy as np
+from tqdm import tqdm
 
 from .context import ExecutionContext, set_current_security, set_current_date, symbol
 from .utils import getsourcelines, FormulaException, get_int_date
@@ -47,8 +48,10 @@ def select(func, start_date="2016-10-01", end_date=None, callback=print):
         set_current_date(str(date))
         print("[{}]".format(date))
 
+        order_book_id_list = tqdm(order_book_id_list)
         for order_book_id in order_book_id_list:
             choose(order_book_id, func, callback)
+            order_book_id_list.set_description("Processing {}".format(order_book_id))
 
     print("")
 
