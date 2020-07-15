@@ -17,7 +17,7 @@ python setup.py install
 ```
 
 ## notebooks 教程
-- [quick-start](https://github.com/cedricporter/funcat/blob/master/notebooks/funcat-tutorial.ipynb)
+- [quick-start](https://github.com/mapicccy/funcat/blob/master/notebooks/funcat-tutorial.ipynb)
 
 ## API
 ### 行情变量
