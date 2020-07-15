@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: funcat
+Version: 0.3.2
+Summary: funcat
+Home-page: https://github.com/cedricporter/funcat
+Author: Hua Liang
+Author-email: et@everet.org
+License: Apache License v2
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
