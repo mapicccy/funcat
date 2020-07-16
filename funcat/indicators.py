@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from .api import (
-    OPEN, HIGH, LOW, CLOSE, VOLUME, VOL,
+    OPEN, HIGH, LOW, CLOSE, VOL,
     ABS, MAX, HHV, LLV,
     REF, IF, SUM, STD,
     MA, EMA, SMA,

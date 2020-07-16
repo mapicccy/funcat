@@ -56,15 +56,17 @@ class TushareDataBackend(DataBackend):
             ktype = "D"
         # else W M
 
-        df = self.ts.get_k_data(code, start=start, end=end, index=is_index, ktype=ktype)
+        pro = self.ts.pro_api()
+        df = pro.daily(ts_code=order_book_id, start_date=get_int_date(start), end_date=get_int_date(end), fields='trade_date,open,close,high,low,vol,ts_code')
+        df = df.sort_index(ascending=False)
 
         if freq[-1] == "m":
             df["datetime"] = df.apply(
-                lambda row: int(row["date"].split(" ")[0].replace("-", "")) * 1000000 + int(row["date"].split(" ")[1].replace(":", "")) * 100, axis=1)
+                lambda row: int(row["trade_date"].split(" ")[0].replace("-", "")) * 1000000 + int(row["trade_date"].split(" ")[1].replace(":", "")) * 100, axis=1)
         elif freq in ("1d", "W", "M"):
-            df["datetime"] = df["date"].apply(lambda x: int(x.replace("-", "")) * 1000000)
+            df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 1000000)
 
-        del df["code"]
+        del df["ts_code"]
         arr = df.to_records()
 
         return arr
