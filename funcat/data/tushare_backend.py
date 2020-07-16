@@ -54,8 +54,9 @@ class TushareDataBackend(DataBackend):
             ktype = "D"
         # else W M
 
-        pro = self.ts.pro_api()
-        df = pro.daily(ts_code=order_book_id, start_date=start, end_date=end, fields='trade_date,open,close,high,low,vol,ts_code')
+        # pro = self.ts.pro_api()
+        # df = pro.daily(ts_code=order_book_id, start_date=start, end_date=end, fields='trade_date,open,close,high,low,vol,ts_code')
+        df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
         df = df.sort_index(ascending=False)
 
         if freq[-1] == "m":
