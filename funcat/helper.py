@@ -37,6 +37,7 @@ def select(func, start_date="2016-10-01", end_date=None, callback=print):
     start_date = get_int_date(start_date)
     if end_date is None:
         end_date = datetime.date.today()
+    end_date = get_int_date(end_date)
     data_backend = ExecutionContext.get_data_backend()
     order_book_id_list = data_backend.get_order_book_id_list()
     trading_dates = data_backend.get_trading_dates(start=start_date, end=end_date)
