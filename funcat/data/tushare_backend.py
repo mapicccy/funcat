@@ -41,8 +41,6 @@ class TushareDataBackend(DataBackend):
         :returns:
         :rtype: numpy.rec.array
         """
-        start = get_str_date_from_int(start)
-        end = get_str_date_from_int(end)
         code = self.convert_code(order_book_id)
         is_index = False
         if ((order_book_id.startswith("0") and order_book_id.endswith(".XSHG")) or
@@ -87,10 +85,8 @@ class TushareDataBackend(DataBackend):
         :param start: 20160101
         :param end: 20160201
         """
-        start = get_str_date_from_int(start).replace('-', '')
-        end = get_str_date_from_int(end).replace('-', '')
         pro = self.ts.pro_api()
-        df = pro.query('trade_cal', start_date=start, end_date=end, is_open=1)
+        df = pro.query('trade_cal', start_date=get_int_date(start), end_date=get_int_date(end), is_open=1)
         trading_dates = [get_int_date(date) for date in df['cal_date'].tolist()]
         return trading_dates
 
