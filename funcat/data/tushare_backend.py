@@ -3,6 +3,8 @@
 
 from cached_property import cached_property
 
+import numpy as np
+
 from .backend import DataBackend
 from ..utils import lru_cache, get_str_date_from_int, get_int_date
 
@@ -57,7 +59,10 @@ class TushareDataBackend(DataBackend):
         # pro = self.ts.pro_api()
         # df = pro.daily(ts_code=order_book_id, start_date=start, end_date=end, fields='trade_date,open,close,high,low,vol,ts_code')
         df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
-        df = df.sort_index(ascending=False)
+        if df is not None:
+            df = df.sort_index(ascending=False)
+        else:
+            return np.array([])
 
         if freq[-1] == "m":
             df["datetime"] = df.apply(
