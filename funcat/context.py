@@ -109,6 +109,10 @@ def set_current_security(order_book_id):
     ExecutionContext.set_current_security(order_book_id)
 
 
+def get_current_security():
+    return ExecutionContext.get_current_security()
+
+
 def set_start_date(date):
     ExecutionContext.set_start_date(date)
 

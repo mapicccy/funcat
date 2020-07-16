@@ -30,6 +30,7 @@ from .func import (
 from .context import (
     symbol,
     set_current_security,
+    get_current_security,
     set_current_date,
     set_start_date,
     set_data_backend,
@@ -118,6 +119,7 @@ __all__ = [
     "select",
     "symbol",
     "set_current_security",
+    "get_current_security",
     "set_current_date",
     "set_start_date",
     "set_data_backend",
