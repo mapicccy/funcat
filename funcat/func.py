@@ -3,6 +3,7 @@
 
 from functools import reduce
 
+import warnings
 import numpy as np
 import talib
 
@@ -21,7 +22,7 @@ from .time_series import (
     ensure_timeseries,
 )
 
-
+warnings.simplefilter(action='ignore', category=FutureWarning)
 class OneArgumentSeries(NumericSeries):
     func = talib.MA
 
