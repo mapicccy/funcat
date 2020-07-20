@@ -56,6 +56,11 @@ def select(func, start_date="2016-10-01", end_date=None, callback=print):
 
     print("")
 
+@suppress_numpy_warn
+def backtest(func, account, start_date="2016-10-01", end_date=None, callback=print):
+    pass
+
+
 def zig_helper(series, n):
     i = 0
     start = 0
