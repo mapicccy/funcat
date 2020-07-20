@@ -7,7 +7,7 @@ import datetime
 import numpy as np
 from tqdm import tqdm
 
-from .context import ExecutionContext, set_current_security, set_current_date, symbol
+from .context import ExecutionContext, set_current_security, set_current_date, symbol, get_current_security
 from .utils import getsourcelines, FormulaException, get_int_date
 
 
@@ -57,8 +57,23 @@ def select(func, start_date="2016-10-01", end_date=None, callback=print):
     print("")
 
 @suppress_numpy_warn
-def backtest(func, account, start_date="2016-10-01", end_date=None, callback=print):
-    pass
+def backtest(func_buy, func_sell, account, start_date="2016-10-01", end_date=None, callback=print):
+    start_date = get_int_date(start_date)
+    if end_date is None:
+        end_date = datetime.date.today()
+    end_date = get_int_date(end_date)
+    date_backend = ExecutionContext.get_data_backend()
+    trading_dates = date_backend.get_trading_dates(start=start_date, end=end_date)
+    for idx, date in enumerate(trading_dates):
+        if date < start_date:
+            continue
+        if date > end_date:
+            break
+        set_current_date(date)
+        func_buy()
+        func_sell()
+        print(account.value)
+
 
 
 def zig_helper(series, n):

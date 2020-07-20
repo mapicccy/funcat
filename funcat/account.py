@@ -29,7 +29,7 @@ class Account(object):
             self.position_price = 0.
 
         self.balance += price * num
-        self.update(price=price)
+        self.update(price=0.)
 
     def update(self, price):
         self.curr_price = price
