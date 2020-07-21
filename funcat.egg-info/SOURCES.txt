@@ -4,6 +4,7 @@ requirements.txt
 setup.py
 funcat/VERSION.txt
 funcat/__init__.py
+funcat/account.py
 funcat/api.py
 funcat/context.py
 funcat/func.py

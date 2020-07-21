@@ -121,6 +121,10 @@ def set_current_date(date):
     ExecutionContext.set_current_date(date)
 
 
+def get_current_date():
+    return ExecutionContext.get_current_date()
+
+
 def set_current_freq(freq):
     ExecutionContext.set_current_freq(freq)
 

@@ -32,11 +32,12 @@ from .context import (
     set_current_security,
     get_current_security,
     set_current_date,
+    get_current_date,
     set_start_date,
     set_data_backend,
     set_current_freq,
 )
-from .helper import select
+from .helper import select, backtest
 
 
 # create open high low close volume datetime
@@ -117,10 +118,12 @@ __all__ = [
     "T",
 
     "select",
+    "backtest",
     "symbol",
     "set_current_security",
     "get_current_security",
     "set_current_date",
+    "get_current_date",
     "set_start_date",
     "set_data_backend",
     "set_current_freq",

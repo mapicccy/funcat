@@ -57,7 +57,7 @@ def select(func, start_date="2016-10-01", end_date=None, callback=print):
     print("")
 
 @suppress_numpy_warn
-def backtest(func_buy, func_sell, account, start_date="2016-10-01", end_date=None, callback=print):
+def backtest(func_buy, func_sell, func_update, account, start_date="2016-10-01", end_date=None, callback=print):
     start_date = get_int_date(start_date)
     if end_date is None:
         end_date = datetime.date.today()
@@ -70,9 +70,11 @@ def backtest(func_buy, func_sell, account, start_date="2016-10-01", end_date=Non
         if date > end_date:
             break
         set_current_date(date)
-        func_buy()
-        func_sell()
-        print(account.value)
+        func_buy(account)
+        func_sell(account)
+        func_update(account)
+
+    callback(account.value)
 
 
 
