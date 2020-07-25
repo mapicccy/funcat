@@ -8,6 +8,8 @@ class Account(object):
         self.position_price = 0.
         self.position_num = 0
         self.update(price=0.)
+        self.tp = 1.0
+        self.sl = 1.0
 
     def buy(self, code, price, num):
         if self.balance < price * num:

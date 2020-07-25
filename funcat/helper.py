@@ -74,8 +74,7 @@ def backtest(func_buy, func_sell, func_update, account, start_date="2016-10-01",
         func_sell(account)
         func_update(account)
 
-    callback(account.value)
-
+    print('[{}]'.format(account.value))
 
 
 def zig_helper(series, n):
