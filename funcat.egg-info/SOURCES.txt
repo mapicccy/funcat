@@ -24,3 +24,15 @@ funcat/data/crypto_backend.py
 funcat/data/rqalpha_data_backend.py
 funcat/data/rqdata_data_backend.py
 funcat/data/tushare_backend.py
+funcat/data/okex/__init__.py
+funcat/data/okex/account_api.py
+funcat/data/okex/client.py
+funcat/data/okex/consts.py
+funcat/data/okex/ett_api.py
+funcat/data/okex/exceptions.py
+funcat/data/okex/futures_api.py
+funcat/data/okex/lever_api.py
+funcat/data/okex/spot_api.py
+funcat/data/okex/swap_api.py
+funcat/data/okex/utils.py
+funcat/data/okex/websocket.py

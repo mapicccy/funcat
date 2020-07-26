@@ -8,8 +8,8 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 
 ## 更新计划
 
-- 增加加密数字货币后端(已完成)
-- 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)
+- 增加加密数字货币后端，需要在funcat/data/crytobackend.py填入api_key\seceret_key\passphrase, [了解详情](https://www.okex.com/account/my-api)(已完成)
+- 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)(已完成)
 
 ## 安装
 ```
