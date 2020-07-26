@@ -10,6 +10,10 @@ class Account(object):
         self.update(price=0.)
         self.tp = 1.0
         self.sl = 1.0
+        self.profit_average_time = 0
+        self.max_value_time = 0
+        self.max_value = 0
+        self.cnt = True
 
     def buy(self, code, price, num):
         if self.balance < price * num:

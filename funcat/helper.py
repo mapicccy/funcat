@@ -70,8 +70,14 @@ def backtest(func_buy, func_sell, func_update, account, start_date="2016-10-01",
         if date > end_date:
             break
         set_current_date(date)
-        func_buy(account)
-        func_sell(account)
+        if account.position_num == 0:
+            func_buy(account)
+            if account.position_num != 0:
+                continue
+
+        if account.position_num != 0:
+            func_sell(account)
+
         func_update(account)
 
     print('[{}]'.format(account.value))
