@@ -43,12 +43,18 @@ def get_int_date(date):
         return date
 
     try:
-        return int(datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%Y%m%d"))
+        if len(date) != 10:
+            return int(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S").strftime("%Y%m%d%H%M%S"))
+        else:
+            return int(datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%Y%m%d"))
     except:
         pass
 
     try:
-        return int(datetime.datetime.strptime(date, "%Y%m%d").strftime("%Y%m%d"))
+        if len(date) != 8:
+            return int(datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S").strftime("%Y%m%d%H%M%S"))
+        else:
+            return int(datetime.datetime.strptime(date, "%Y%m%d").strftime("%Y%m%d"))
     except:
         pass
 
