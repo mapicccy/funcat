@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import datetime
 import time
+import os
 
 from .okex.spot_api import SpotAPI
 from pandas.core.frame import DataFrame
@@ -35,6 +36,7 @@ class CryptoBackend(DataBackend):
 
     @lru_cache(maxsize=4096)
     def get_price(self, ts_code, start, end, freq):
+        tmp_end = end
         if len(str(start)) == 14:
             start = datetime.datetime.strptime(str(start), "%Y%m%d%H%M%S").strftime("%Y-%m-%dT%H:%M:%S")
         else:
@@ -44,11 +46,20 @@ class CryptoBackend(DataBackend):
             end = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S").strftime("%Y-%m-%dT%H:%M:%S")
         else:
             end = get_str_date_from_int(end)+'T23:59:59'
+
+        nt = datetime.datetime.now().strftime('%Y-%m-%d') + 'T23:59:59'
+        filename = ts_code + '-' + freq + '-' + end + '.csv'
+        update_to_date = ts_code + '-' + freq + '-' + nt + '.csv'
+        if os.path.isfile(update_to_date) and end <= nt:
+            data = pd.read_csv(update_to_date)
+            data = data.loc[data['datetime'] <= tmp_end]
+            self.data = data.to_records()
+            return self.data
+
         sp = SpotAPI(self.api_key, self.seceret_key, self.passphrase, use_server_time=True)
         data0 = sp.get_kline(ts_code, start+'.000Z', end+'.000Z', freq)
 
         data0 = DataFrame(data0)
-        data0.reset_index(drop=True, inplace=True)
         pd_list = [data0]
         for i in range(5):
             e1 = (datetime.datetime.strptime(data0.iloc[-1, 0].replace('T', ' ')[:-5], '%Y-%m-%d %H:%M:%S') + datetime.timedelta(seconds=-int(freq))).strftime('%Y-%m-%dT%H:%M:%S')
@@ -61,6 +72,7 @@ class CryptoBackend(DataBackend):
         data = pd.concat(pd_list, axis=0, ignore_index=True)
         data.rename(columns={0:'trade_time', 1:'open', 2:'high', 3:'low', 4:'close', 5:'vol'}, inplace=True)
         data = data.sort_index(ascending=False)
+        print(end, data)
 
         if freq != '86400':
             data["datetime"] = data.apply(
@@ -68,29 +80,10 @@ class CryptoBackend(DataBackend):
         else:
             data["datetime"] = data["trade_time"].apply(lambda x: int(x.replace("T", " ").split(" ")[0].replace("-", "")) * 1000000)
 
+        data.to_csv(update_to_date)
         self.data = data.to_records()
         return self.data
         
-    """
-    def get_price(self, order_book_id, start, end, freq):
-        self.data = np.array([])
-
-        try:
-            if order_book_id == 'BTC-USDT':
-                self.data = pd.read_csv('/home/guanjun/project/confidential_big_project/btc_backend.csv')
-            else:
-                self.data = pd.read_csv('/home/guanjun/project/confidential_big_project/eth_backend.csv')
-        except IOError:
-            print("-" * 50)
-            print(">>> The input file does not exist or cannot be read")
-            print("-" * 50)
-            raise
-
-        if len(self.data) != 0:
-            return self.data.to_records() 
-        else:
-            return np.array([])
-    """
     def get_order_book_id_list(self):
         """获取所有的股票代码列表
         """
