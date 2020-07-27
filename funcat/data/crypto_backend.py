@@ -16,10 +16,11 @@ from ..utils import lru_cache, get_str_date_from_int, get_int_date
 
 
 class CryptoBackend(DataBackend):
-    def __init__(self, api_key, seceret_key, passphrase, url='wss://real.okex.com:8443/ws/v3'):
+    def __init__(self, api_key, seceret_key, passphrase, freq, url='wss://real.okex.com:8443/ws/v3'):
         self.api_key = api_key
         self.seceret_key = seceret_key
         self.passphrase = passphrase
+        self.freq = int(freq)
 
     @cached_property
     def ts(self):
@@ -68,7 +69,6 @@ class CryptoBackend(DataBackend):
             data["datetime"] = data["trade_time"].apply(lambda x: int(x.replace("T", " ").split(" ")[0].replace("-", "")) * 1000000)
 
         self.data = data.to_records()
-        self.freq = int(freq)
         return self.data
         
     """
@@ -104,7 +104,7 @@ class CryptoBackend(DataBackend):
         """
         if len(str(end)) == 14:
             start = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=-self.freq*200)
-            end = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S").strftime("%Y-%m-%dT%H:%M:%S")
+            end = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S")
         else:
             end = get_str_date_from_int(end)+'T23:59:59'
 
@@ -112,8 +112,9 @@ class CryptoBackend(DataBackend):
         be = start.strftime("%Y%m%d%H%M%S")
         en = end.strftime("%Y%m%d%H%M%S")
         while be <= en:
-            date_list.append(be)
-            be = start + datetime.timedelta(seconds=self.freq)
+            date_list.append(int(be))
+            be = datetime.datetime.strptime(str(be), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=self.freq)
+            be = be.strftime("%Y%m%d%H%M%S")
 
         return date_list
 

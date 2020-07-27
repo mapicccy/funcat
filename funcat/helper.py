@@ -65,9 +65,9 @@ def backtest(func_buy, func_sell, func_update, account, start_date="2016-10-01",
     date_backend = ExecutionContext.get_data_backend()
     trading_dates = date_backend.get_trading_dates(start=start_date, end=end_date)
     for idx, date in enumerate(trading_dates):
-        if date < start_date:
+        if get_int_date(date) < start_date:
             continue
-        if date > end_date:
+        if get_int_date(date) > end_date:
             break
         set_current_date(date)
         if account.position_num == 0:
