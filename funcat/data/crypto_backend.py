@@ -72,7 +72,6 @@ class CryptoBackend(DataBackend):
         data = pd.concat(pd_list, axis=0, ignore_index=True)
         data.rename(columns={0:'trade_time', 1:'open', 2:'high', 3:'low', 4:'close', 5:'vol'}, inplace=True)
         data = data.sort_index(ascending=False)
-        print(end, data)
 
         if freq != '86400':
             data["datetime"] = data.apply(

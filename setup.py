@@ -31,7 +31,7 @@ setup(
     author_email='et@everet.org',
     license='Apache License v2',
     package_data={'': ['*.*']},
-    install_requires=[str(ir.req) for ir in parse_requirements("requirements.txt", session=False)],
+    install_requires=req,
     zip_safe=False,
     classifiers=[
         'Programming Language :: Python',
