@@ -4,6 +4,7 @@
 from cached_property import cached_property
 
 import numpy as np
+import datetime
 
 from .backend import DataBackend
 from ..utils import lru_cache, get_str_date_from_int, get_int_date
@@ -56,9 +57,14 @@ class TushareDataBackend(DataBackend):
             ktype = "D"
         # else W M
 
-        # pro = self.ts.pro_api()
-        # df = pro.daily(ts_code=order_book_id, start_date=start, end_date=end, fields='trade_date,open,close,high,low,vol,ts_code')
-        df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
+        if end is None:
+            end = datetime.date.today().strftime("%Y%m%d")
+
+        if is_index:
+            df = self.ts.pro_bar(ts_code='000001.SH', asset='I', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
+        else:
+            df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
+
         if df is not None:
             df = df.sort_index(ascending=False)
         else:
