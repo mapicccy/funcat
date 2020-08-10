@@ -46,8 +46,8 @@ class TushareDataBackend(DataBackend):
         """
         code = self.convert_code(order_book_id)
         is_index = False
-        if ((order_book_id.startswith("0") and order_book_id.endswith(".XSHG")) or
-            (order_book_id.startswith("3") and order_book_id.endswith(".XSHE"))
+        if ((order_book_id.startswith("0") and order_book_id.endswith(".SH")) or
+            (order_book_id.startswith("39") and order_book_id.endswith(".SZ"))
             ):
             is_index = True
         ktype = freq
@@ -61,7 +61,7 @@ class TushareDataBackend(DataBackend):
             end = datetime.date.today().strftime("%Y%m%d")
 
         if is_index:
-            df = self.ts.pro_bar(ts_code='000001.SH', asset='I', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
+            df = self.ts.pro_bar(ts_code=order_book_id, asset='I', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
         else:
             df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
 
