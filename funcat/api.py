@@ -37,7 +37,7 @@ from .context import (
     set_data_backend,
     set_current_freq,
 )
-from .helper import select, backtest
+from .helper import select, backtest, zig_helper
 
 
 # create open high low close volume datetime
@@ -119,6 +119,7 @@ __all__ = [
 
     "select",
     "backtest",
+    "zig_helper",
     "symbol",
     "set_current_security",
     "get_current_security",
