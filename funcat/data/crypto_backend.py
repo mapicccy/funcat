@@ -79,7 +79,7 @@ class CryptoBackend(DataBackend):
         else:
             data["datetime"] = data["trade_time"].apply(lambda x: int(x.replace("T", " ").split(" ")[0].replace("-", "")) * 1000000)
 
-        data.to_csv(update_to_date)
+        data.to_csv(update_to_date, index=False)
         self.data = data.to_records()
         return self.data
         

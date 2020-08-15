@@ -11,7 +11,7 @@ from .utils import get_int_date
 class ExecutionContext(object):
     stack = []
 
-    def __init__(self, date=None, order_book_id=None, data_backend=None, freq="1d", start_date=datetime.date(2018, 6, 1)):
+    def __init__(self, date=None, order_book_id=None, data_backend=None, freq="1d", start_date=datetime.date(2018, 4, 1)):
         self._current_date = self._convert_date_to_int(date)
         self._start_date = self._convert_date_to_int(start_date)
         self._order_book_id = order_book_id
