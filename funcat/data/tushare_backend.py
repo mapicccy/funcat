@@ -3,8 +3,10 @@
 
 from cached_property import cached_property
 
+import pandas as pd
 import numpy as np
 import datetime
+import os
 
 from .backend import DataBackend
 from ..utils import lru_cache, get_str_date_from_int, get_int_date
@@ -44,7 +46,6 @@ class TushareDataBackend(DataBackend):
         :returns:
         :rtype: numpy.rec.array
         """
-        code = self.convert_code(order_book_id)
         is_index = False
         if ((order_book_id.startswith("0") and order_book_id.endswith(".SH")) or
             (order_book_id.startswith("39") and order_book_id.endswith(".SZ"))
@@ -60,23 +61,34 @@ class TushareDataBackend(DataBackend):
         if end is None:
             end = datetime.date.today().strftime("%Y%m%d")
 
-        if is_index:
-            df = self.ts.pro_bar(ts_code=order_book_id, asset='I', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
+        str_start_date = get_str_date_from_int(start)
+        str_end_date = get_str_date_from_int(end)
+        filename = (order_book_id + str_start_date + str_end_date).replace('.', '-') + '.csv'
+        if os.path.exists('data'):
+            if os.path.exists('data/' + filename):
+                df = pd.read_csv('data/' + filename)
         else:
-            df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=get_str_date_from_int(start), end_date=get_str_date_from_int(end))
+            os.mkdir('data')
 
-        if df is not None:
-            df = df.sort_index(ascending=False)
-        else:
+        if 'df' not in dir():
+            if is_index:
+                df = self.ts.pro_bar(ts_code=order_book_id, asset='I', start_date=str_start_date, end_date=str_end_date)
+            else:
+                df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=str_start_date, end_date=str_end_date)
+
+            if freq[-1] == "m":
+                df["datetime"] = df.apply(
+                    lambda row: int(row["trade_date"].split(" ")[0].replace("-", "")) * 1000000 + int(row["trade_date"].split(" ")[1].replace(":", "")) * 100, axis=1)
+            elif freq in ("1d", "W", "M"):
+                df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 1000000)
+
+            df.to_csv('data/' + filename, index=False)
+
+        if df.empty:
             return np.array([])
+        else:
+            df = df.sort_index(ascending=False)
 
-        if freq[-1] == "m":
-            df["datetime"] = df.apply(
-                lambda row: int(row["trade_date"].split(" ")[0].replace("-", "")) * 1000000 + int(row["trade_date"].split(" ")[1].replace(":", "")) * 100, axis=1)
-        elif freq in ("1d", "W", "M"):
-            df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 1000000)
-
-        del df["ts_code"]
         arr = df.to_records()
 
         return arr
