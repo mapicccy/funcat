@@ -76,6 +76,9 @@ class TushareDataBackend(DataBackend):
             else:
                 df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=str_start_date, end_date=str_end_date)
 
+            if df is None:
+                return np.array([])
+
             if freq[-1] == "m":
                 df["datetime"] = df.apply(
                     lambda row: int(row["trade_date"].split(" ")[0].replace("-", "")) * 1000000 + int(row["trade_date"].split(" ")[1].replace(":", "")) * 100, axis=1)
@@ -84,11 +87,7 @@ class TushareDataBackend(DataBackend):
 
             df.to_csv('data/' + filename, index=False)
 
-        if df.empty:
-            return np.array([])
-        else:
-            df = df.sort_index(ascending=False)
-
+        df = df.sort_index(ascending=False)
         arr = df.to_records()
 
         return arr
