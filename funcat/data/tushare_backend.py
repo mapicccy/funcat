@@ -8,6 +8,7 @@ import numpy as np
 import datetime
 import os
 
+from .rt_data import get_runtime_data
 from .backend import DataBackend
 from ..utils import lru_cache, get_str_date_from_int, get_int_date
 
@@ -70,8 +71,9 @@ class TushareDataBackend(DataBackend):
             ktype = "D"
         # else W M
 
-        if end is None:
-            end = datetime.date.today().strftime("%Y%m%d")
+        now = datetime.date.today().strftime("%Y%m%d")
+        last_day = (datetime.date.today() + datetime.timedelta(days=-1)).strftime("%Y%m%d")
+        end = now if end is None else end
 
         str_start_date = get_str_date_from_int(start)
         str_end_date = get_str_date_from_int(end)
@@ -80,7 +82,7 @@ class TushareDataBackend(DataBackend):
             if os.path.exists('data/' + filename):
                 df = pd.read_csv('data/' + filename)
             elif str_start_date >= '2018-04-01':
-                update_to_date = datetime.date.today().strftime("%Y%m%d")
+                update_to_date = now
                 trading_dates = self.get_trading_dates(start, update_to_date)
                 for td in reversed(trading_dates):
                     str_td = get_str_date_from_int(td)
@@ -108,6 +110,11 @@ class TushareDataBackend(DataBackend):
                 df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 1000000)
 
             df.to_csv('data/' + filename, index=False)
+
+        if str(df.at[0, 'trade_date']) == last_day:
+            rt = get_runtime_data(order_book_id, token=None)
+            if rt is not None and str(rt.at[0, 'trade_date']) == now:
+                df = pd.concat([rt, df], ignore_index=True)
 
         df = df.sort_index(ascending=False)
         arr = df.to_records()
