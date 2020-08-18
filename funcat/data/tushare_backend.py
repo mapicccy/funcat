@@ -41,8 +41,8 @@ class TushareDataBackend(DataBackend):
     def get_trading_dates(self, start, end):
         """获取所有的交易日
 
-        :param start: 20160101
-        :param end: 20160201
+        :param start: 20190101
+        :param end: 20190201
         """
         pro = self.ts.pro_api()
         df = pro.query('trade_cal', start_date=start, end_date=end, is_open=1)
@@ -52,9 +52,9 @@ class TushareDataBackend(DataBackend):
     @lru_cache(maxsize=4096)
     def get_price(self, order_book_id, start, end, freq):
         """
-        :param order_book_id: e.g. 000002.XSHE
-        :param start: 20160101
-        :param end: 20160201
+        :param order_book_id: e.g. 000002.SZ
+        :param start: 20190101
+        :param end: 20190201
         :returns:
         :rtype: numpy.rec.array
         """
@@ -79,14 +79,16 @@ class TushareDataBackend(DataBackend):
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 df = pd.read_csv('data/' + filename)
-            else:
+            elif str_start_date >= '2018-04-01':
                 update_to_date = datetime.date.today().strftime("%Y%m%d")
                 trading_dates = self.get_trading_dates(start, update_to_date)
-                last_trading_date = get_str_date_from_int(trading_dates[-1])
-                ad_filename = order_book_id.replace('.', '-') + '2018-04-01' + last_trading_date + '.csv'
-                if os.path.exists('data/' + ad_filename):
-                    df = pd.read_csv('data/' + ad_filename)
-                    df = df.loc[df['trade_date'] <= end]
+                for td in reversed(trading_dates):
+                    str_td = get_str_date_from_int(td)
+                    ad_filename = order_book_id.replace('.', '-') + '2018-04-01' + str_td + '.csv'
+                    if os.path.exists('data/' + ad_filename) and str_end_date <= str_td:
+                        df = pd.read_csv('data/' + ad_filename)
+                        df = df.loc[df['trade_date'] <= end]
+                        break
         else:
             os.mkdir('data')
 
