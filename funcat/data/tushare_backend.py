@@ -90,6 +90,7 @@ class TushareDataBackend(DataBackend):
                     if os.path.exists('data/' + ad_filename) and str_end_date <= str_td:
                         df = pd.read_csv('data/' + ad_filename)
                         df = df.loc[df['trade_date'] <= end]
+                        df = df.reset_index(drop=True)
                         break
         else:
             os.mkdir('data')
@@ -111,7 +112,7 @@ class TushareDataBackend(DataBackend):
 
             df.to_csv('data/' + filename, index=False)
 
-        if str(df.at[0, 'trade_date']) == last_day:
+        if not df.empty and str(df.at[0, 'trade_date']) == last_day:
             rt = get_runtime_data(order_book_id, token=None)
             if rt is not None and str(rt.at[0, 'trade_date']) == now:
                 df = pd.concat([rt, df], ignore_index=True)
