@@ -8,12 +8,7 @@ url = "https://api.doctorxiong.club/v1/stock?"
 
 
 def get_runtime_data(ts_code, token=None):
-    if ts_code.startswith('0') and ts_code.endswith('.SH'):
-        code_suffix = 'sh000001'
-    elif ts_code.startswith('39') and ts_code.endswith('SZ'):
-        code_suffix = 'sz399300'
-    else:
-        code_suffix = ts_code[-2:].lower() + ts_code[:-3]
+    code_suffix = ts_code[-2:].lower() + ts_code[:-3]
 
     if token:
         text = requests.get(url + 'code=' + code_suffix + '&token=' + token)
