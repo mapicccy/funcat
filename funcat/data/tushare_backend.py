@@ -72,7 +72,7 @@ class TushareDataBackend(DataBackend):
         # else W M
 
         now = datetime.date.today().strftime("%Y%m%d")
-        last_day = (datetime.date.today() + datetime.timedelta(days=-1)).strftime("%Y%m%d")
+        last_tradeday = self.get_trading_dates(start, end)[-2]
         end = now if end is None else end
 
         str_start_date = get_str_date_from_int(start)
@@ -112,7 +112,7 @@ class TushareDataBackend(DataBackend):
 
             df.to_csv('data/' + filename, index=False)
 
-        if not df.empty and str(df.at[0, 'trade_date']) == last_day and str(end) == now:
+        if not df.empty and df.at[0, 'trade_date'] == last_tradeday and str(end) == now:
             rt = get_runtime_data(order_book_id, token=None)
             if rt is not None and str(rt.at[0, 'trade_date']) == now:
                 df = pd.concat([rt, df], ignore_index=True)
