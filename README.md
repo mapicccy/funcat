@@ -12,7 +12,7 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 - 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)(已完成)
 - 优化tushare pro数据存储方式(已完成)
 - 优化DataFrame数据，降低内存占用(进行中...)
-- 增加实时数据获取(进行中...)
+- 增加实时数据获取(已完成，实时数据来自[小熊同学](https://www.doctorxiong.club/#/guide))
 
 ## 安装
 ```
