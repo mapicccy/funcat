@@ -7,6 +7,7 @@ from .func import (
     AbsSeries,
     StdSeries,
     SMASeries,
+    CCISeries,
     MovingAverageSeries,
     WeightedMovingAverageSeries,
     ExponentialMovingAverageSeries,
@@ -54,6 +55,7 @@ MA = MovingAverageSeries
 WMA = WeightedMovingAverageSeries
 EMA = ExponentialMovingAverageSeries
 SMA = SMASeries
+CCI = CCISeries
 
 SUM = SumSeries
 ABS = AbsSeries
@@ -89,6 +91,7 @@ __all__ = [
     "DATETIME",
 
     "SMA",
+    "CCI",
     "MA",
     "EMA",
     "WMA",

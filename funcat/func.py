@@ -86,6 +86,25 @@ class SMASeries(TwoArgumentSeries):
         return results
 
 
+class CCISeries(NumericSeries):
+    func = talib.CCI
+
+    def __init__(self, high, low, close):
+        if isinstance(high, NumericSeries) and isinstance(low, NumericSeries) and isinstance(close, NumericSeries):
+            series0 = high.series
+            series1 = low.series
+            series2 = close.series
+
+            try:
+                series0[series0 == np.inf] = np.nan
+                series1[series1 == np.inf] = np.nan
+                series1[series1 == np.inf] = np.nan
+                series = self.func(series0, series1, series2)
+            except Exception as e:
+                raise FormulaException(e)
+            super(CCISeries, self).__init__(series)
+
+
 class SumSeries(NumericSeries):
     """求和"""
 
