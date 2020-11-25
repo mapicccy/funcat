@@ -28,7 +28,7 @@ class TushareDataBackend(DataBackend):
 
     @cached_property
     def stock_basics(self):
-        return self.ts.get_stock_basics()
+        return self.ts.pro_api().stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date').set_index('symbol', drop=True)
 
     @cached_property
     def code_name_map(self):
