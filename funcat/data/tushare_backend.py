@@ -35,6 +35,14 @@ class TushareDataBackend(DataBackend):
         code_name_map = self.stock_basics[["name"]].to_dict()["name"]
         return code_name_map
 
+    @cached_property
+    def trading_dates(self):
+        now = datetime.date.today().strftime("%Y%m%d")
+        pro = self.ts.pro_api()
+        df = pro.query('trade_cal', start_date="20100808", end_date=now, is_open=1)
+        trading_dates = [get_int_date(date) for date in df['cal_date'].tolist()]
+        return trading_dates
+
     def convert_code(self, order_book_id):
         return order_book_id.split(".")[0]
 
@@ -45,10 +53,17 @@ class TushareDataBackend(DataBackend):
         :param start: 20190101
         :param end: 20190201
         """
-        pro = self.ts.pro_api()
-        df = pro.query('trade_cal', start_date=start, end_date=end, is_open=1)
-        trading_dates = [get_int_date(date) for date in df['cal_date'].tolist()]
-        return trading_dates
+        s = 0
+        e = len(self.trading_dates)
+        for i in range(len(self.trading_dates)):
+            if self.trading_dates[i] >= get_int_date(start):
+                s = i
+                break
+        for i in range(len(self.trading_dates)):
+            if self.trading_dates[i] > get_int_date(end):
+                e = i
+                break
+        return self.trading_dates[s:e]
 
     @lru_cache(maxsize=4096)
     def get_price(self, order_book_id, start, end, freq):
