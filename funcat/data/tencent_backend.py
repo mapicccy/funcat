@@ -17,6 +17,12 @@ from ..utils import lru_cache, get_str_date_from_int, get_int_date
 
 class TencentDataBackend(DataBackend):
 
+    def __init__(self, freq):
+        if freq[-1] == 'm':
+            self.freq = int(freq[:-1]) * 60
+        else:
+            raise "Only support minutes level of stock kline."
+
     @cached_property
     def ts(self):
         try:
@@ -51,21 +57,32 @@ class TencentDataBackend(DataBackend):
     @lru_cache()
     def get_trading_dates(self, start, end):
         """获取所有的交易日
+        tencent api只能获取最近480条记录
 
-        :param start: 20190101
-        :param end: 20190201
+        :param start: 20210101093000
+        :param end: 20210119150000
         """
-        s = 0
-        e = len(self.trading_dates)
-        for i in range(len(self.trading_dates)):
-            if self.trading_dates[i] >= get_int_date(start):
-                s = i
-                break
-        for i in range(len(self.trading_dates)):
-            if self.trading_dates[i] > get_int_date(end):
-                e = i
-                break
-        return self.trading_dates[s:e]
+        if len(str(end)) == 14:
+            start = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=-self.freq*400)
+            end = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S")
+        else:
+            end = get_str_date_from_int(end)+'15:00:00'
+
+        date_list = []
+        be = start.strftime("%Y%m%d%H%M%S")
+        en = end.strftime("%Y%m%d%H%M%S")
+        while be <= en:
+            # print("++", be, en, "++", be[:8])
+            if int(be[:8]) not in self.trading_dates or int(be[8:]) < 93000 or int(be[8:]) > 150000:
+                be = datetime.datetime.strptime(str(be), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=self.freq)
+                be = be.strftime("%Y%m%d%H%M%S")
+                continue
+            date_list.append(int(be))
+            be = datetime.datetime.strptime(str(be), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=self.freq)
+            be = be.strftime("%Y%m%d%H%M%S")
+
+        print(start, end, "trading_dates: ", date_list)
+        return date_list
 
     @lru_cache(maxsize=4096)
     def get_price(self, order_book_id, start, end, freq):
@@ -112,7 +129,7 @@ class TencentDataBackend(DataBackend):
                 if df is None:
                     return np.array([])
                 
-        df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")))
+        df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 100)
         df = df.sort_index(ascending=False)
         df.reset_index(inplace=True, drop=True)
         df = df.sort_index(ascending=False)
