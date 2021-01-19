@@ -56,14 +56,15 @@ class TencentDataBackend(DataBackend):
 
     @lru_cache()
     def get_trading_dates(self, start, end):
-        """获取所有的交易日
-        tencent api只能获取最近480条记录
+        """获取所有的交易时间戳
+        tencent api只能获取最近480条记录, 由于交易时间只占全天时间的1/6，所以获取
+        离end时间最近的4000条时间戳，然后再筛选有效时间戳
 
         :param start: 20210101093000
         :param end: 20210119150000
         """
         if len(str(end)) == 14:
-            start = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=-self.freq*400)
+            start = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=-self.freq*4000)
             end = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S")
         else:
             end = get_str_date_from_int(end)+'15:00:00'
@@ -81,7 +82,6 @@ class TencentDataBackend(DataBackend):
             be = datetime.datetime.strptime(str(be), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=self.freq)
             be = be.strftime("%Y%m%d%H%M%S")
 
-        print(start, end, "trading_dates: ", date_list)
         return date_list
 
     @lru_cache(maxsize=4096)
@@ -107,12 +107,10 @@ class TencentDataBackend(DataBackend):
             ktype = "D"
         # else W M
 
-        now = datetime.date.today().strftime("%Y%m%d")
+        now = datetime.date.today().strftime("%Y%m%d%H%M%S")
         end = now if end is None else end
 
-        str_start_date = get_str_date_from_int(start)
-        str_end_date = get_str_date_from_int(end)
-        print(str_start_date, str_end_date)
+        print(start, end)
 
         if is_index:
             pass
@@ -130,6 +128,7 @@ class TencentDataBackend(DataBackend):
                     return np.array([])
                 
         df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 100)
+        df = df.loc[df['datetime'] <= end]
         df = df.sort_index(ascending=False)
         df.reset_index(inplace=True, drop=True)
         df = df.sort_index(ascending=False)

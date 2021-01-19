@@ -18,9 +18,9 @@ def test_000001():
     f = funcat_execution_context.get_current_freq()
     print(f)
     trading_dates = data_backend.get_trading_dates('20210101093000', '20210119150000')
-    print(trading_dates)
+    # print(trading_dates)
 
-    T("20210119")
+    T("20210119120000")
     S("601360.SH")
 
     print(C)
