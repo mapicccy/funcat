@@ -16,7 +16,7 @@ def test_000001():
     order_book_id_list = data_backend.get_order_book_id_list()
     f = funcat_execution_context.get_current_freq()
     print(f)
-    funcat_execution_context.set_current_freq("1m")
+    funcat_execution_context.set_current_freq("15m")
     f = funcat_execution_context.get_current_freq()
     print(f)
 

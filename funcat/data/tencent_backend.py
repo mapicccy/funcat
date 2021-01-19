@@ -108,11 +108,13 @@ class TencentDataBackend(DataBackend):
             if text.status_code == 200:
                 raw = json.loads(text.text)
                 df = pd.DataFrame(raw['data'][code_suffix][str_suffix])
-                df.rename(columns={0:"trade_date", 1:"open", 2:"close", 3:"high", 4:"low", 5:"volume"}, inplace=True)
+                df.rename(columns={0:"trade_date", 1:"open", 2:"close", 3:"high", 4:"low", 5:"vol"}, inplace=True)
                 if df is None:
                     return np.array([])
                 
         df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")))
+        df = df.sort_index(ascending=False)
+        df.reset_index(inplace=True, drop=True)
         df = df.sort_index(ascending=False)
         print(df)
         arr = df.to_records()
