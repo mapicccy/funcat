@@ -24,6 +24,7 @@ funcat/data/crypto_backend.py
 funcat/data/rqalpha_data_backend.py
 funcat/data/rqdata_data_backend.py
 funcat/data/rt_data.py
+funcat/data/tencent_backend.py
 funcat/data/tushare_backend.py
 funcat/data/okex/__init__.py
 funcat/data/okex/account_api.py
