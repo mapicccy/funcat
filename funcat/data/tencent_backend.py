@@ -67,7 +67,7 @@ class TencentDataBackend(DataBackend):
             start = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S") + datetime.timedelta(seconds=-self.freq*4000)
             end = datetime.datetime.strptime(str(end), "%Y%m%d%H%M%S")
         else:
-            end = get_str_date_from_int(end)+'15:00:00'
+            end = get_str_date_from_int(end)+'150000'
 
         date_list = []
         be = start.strftime("%Y%m%d%H%M%S")
@@ -103,6 +103,8 @@ class TencentDataBackend(DataBackend):
         ktype = freq
         if freq[-1] == "m":
             ktype = freq[:-1]
+            if len(str(end)) == 8:
+                end = int(str(end) + "150000")
         elif freq == "1d":
             ktype = "D"
         # else W M

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
+import datetime
 import numpy as np
 
 from funcat import *
@@ -15,12 +16,10 @@ def test_000001():
     data_backend = funcat_execution_context.get_data_backend()
     order_book_id_list = data_backend.get_order_book_id_list()
     funcat_execution_context.set_current_freq("5m")
-    f = funcat_execution_context.get_current_freq()
-    print(f)
-    trading_dates = data_backend.get_trading_dates('20210101093000', '20210119150000')
-    # print(trading_dates)
 
-    T("20210119120000")
+    now = datetime.date.today().strftime("%Y%m%d")
+    print(now)
+    T(now)
     S("601360.SH")
 
     print(C)
