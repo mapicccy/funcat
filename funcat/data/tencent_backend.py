@@ -95,11 +95,6 @@ class TencentDataBackend(DataBackend):
         """
         url = "http://ifzq.gtimg.cn/appstock/app/kline/mkline?param="
 
-        is_index = False
-        if ((order_book_id.startswith("0") and order_book_id.endswith(".SH")) or
-            (order_book_id.startswith("39") and order_book_id.endswith(".SZ"))
-            ):
-            is_index = True
         ktype = freq
         if freq[-1] == "m":
             ktype = freq[:-1]
@@ -114,20 +109,17 @@ class TencentDataBackend(DataBackend):
 
         print(start, end)
 
-        if is_index:
-            pass
-        else:
-            if freq[-1] == "m":
-                str_suffix = freq[-1] + ktype
+        if freq[-1] == "m":
+            str_suffix = freq[-1] + ktype
 
-            code_suffix = order_book_id[-2:].lower() + order_book_id[:-3]
-            text = requests.get(url + code_suffix + "," + str_suffix)
-            if text.status_code == 200:
-                raw = json.loads(text.text)
-                df = pd.DataFrame(raw['data'][code_suffix][str_suffix])
-                df.rename(columns={0:"trade_date", 1:"open", 2:"close", 3:"high", 4:"low", 5:"vol"}, inplace=True)
-                if df is None:
-                    return np.array([])
+        code_suffix = order_book_id[-2:].lower() + order_book_id[:-3]
+        text = requests.get(url + code_suffix + "," + str_suffix)
+        if text.status_code == 200:
+            raw = json.loads(text.text)
+            df = pd.DataFrame(raw['data'][code_suffix][str_suffix])
+            df.rename(columns={0:"trade_date", 1:"open", 2:"close", 3:"high", 4:"low", 5:"vol"}, inplace=True)
+            if df is None:
+                return np.array([])
                 
         df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 100)
         df = df.loc[df['datetime'] <= end]

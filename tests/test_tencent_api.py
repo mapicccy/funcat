@@ -22,7 +22,7 @@ def test_000001():
     T(now)
     S("601360.SH")
 
-    print(C)
+    print(C, CCI(C, H, L))
 
 if __name__ == '__main__':
     test_000001()
