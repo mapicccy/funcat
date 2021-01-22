@@ -17,6 +17,8 @@ def get_runtime_data(ts_code, token=None):
 
     if text.status_code == 200:
         raw = json.loads(text.text)
+        if len(raw['data']) == 0:
+            return None
         data = {
             'ts_code': [ts_code],
             'trade_date': [get_int_date(raw['data'][0]['date'][:10])],
