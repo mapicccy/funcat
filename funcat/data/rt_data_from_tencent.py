@@ -17,7 +17,7 @@ def get_runtime_data(ts_code, token=None):
         raw = text.text.split("~")
         data = {
             'ts_code': [ts_code],
-            'trade_date': [int(raw[30][:10])],
+            'trade_date': [int(raw[30][:8])],
             'close': [float(raw[3])],
             'open': [float(raw[5])],
             'high': [float(raw[33])],
