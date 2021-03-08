@@ -35,4 +35,5 @@ def get_runtime_data(ts_code, token=None):
 
 
 if __name__ == '__main__':
-    get_runtime_data('601360.SH')
+    df = get_runtime_data('601360.SH')
+    print(df)
