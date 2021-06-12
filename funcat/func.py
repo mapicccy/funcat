@@ -98,7 +98,7 @@ class CCISeries(NumericSeries):
             try:
                 series0[series0 == np.inf] = np.nan
                 series1[series1 == np.inf] = np.nan
-                series1[series1 == np.inf] = np.nan
+                series2[series2 == np.inf] = np.nan
                 series = self.func(series0, series1, series2)
             except Exception as e:
                 raise FormulaException(e)
