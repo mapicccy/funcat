@@ -255,3 +255,52 @@ True
 >>> CROSS(MA(C, 10), MA(C, 20))
 False
 ```
+
+## 策略
+### MACD三次金叉线性拟合趋势
+``` python
+import numpy as np
+from funcat import *
+from funcat.data.tushare_backend import TushareDataBackend
+
+from sklearn.linear_model import LinearRegression
+
+def select_macd_cross_up():
+	diff = EMA(C, 12) - EMA(C, 26)
+	dea = EMA(diff, 9)
+	macd = 2 * (diff - dea)
+
+	x_train = []
+	y_train = []
+	# 获取最近三次MACD金叉的diff值和索引位置
+	for i in rang(100):
+		if macd[i] > 0 and macd[i + 1] < 0:
+			x_train.append(i)
+			y_train.append(diff[i].value)
+
+		if len(x_train) == 3:
+			break
+
+	if len(x_train) != 3:
+		return -np.nan
+
+	x_train.reverse()
+	y_train.reverse()
+	x_train = list(map(lambda i: -i + max(x_train), x_train))
+
+	# 线性回归拟合趋势
+	model = LinearRegression()
+	model.fit(np.array(x_train).reshape(-1, 1), np.array(y_train).reshape(-1, 1))
+
+	# 返回趋势线的斜率
+	return model.coef_
+
+
+set_data_backend(TushareDataBackend())
+
+# 设置目前天数为2021年5月19日
+T("20210519")
+# 设置关注股票为300298.SZ
+S("300298.SZ")
+```
+
