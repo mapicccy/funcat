@@ -8,7 +8,7 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 
 注：回测系统需要长时间运行，回测两年的A股交易数据需要至少2GB内存（若内存不够请创建足够swap空间）
 
-## 更新计划
+## 重磅更新计划
 
 - 增加加密数字货币后端，创建实例时需要填入api_key\seceret_key\passphrase, [了解详情](https://www.okex.com/account/my-api)(已完成)
 - 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)(已完成)
@@ -16,11 +16,15 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 - 优化DataFrame数据，降低内存占用(进行中...)
 - 增加实时数据获取(已完成，实时数据来自腾讯股票接口，http://qt.gtimg.cn/q=sh601360)
 - 更新个人选股策略，并使用回测系统回测（进行中...）
+	- **[MACD三次金叉线性拟合趋势](https://github.com/mapicccy/funcat#macd%E4%B8%89%E6%AC%A1%E9%87%91%E5%8F%89%E7%BA%BF%E6%80%A7%E6%8B%9F%E5%90%88%E8%B6%8B%E5%8A%BF)**
+	- ...
 
 ## 安装
 ```
 python setup.py install
 ```
+**注意**：talib由于兼容性问题，请选择合适的版本自行安装，推荐通过conda管理python环境和安装软件
+
 
 ## notebooks 教程
 - [quick-start](https://github.com/mapicccy/funcat/blob/master/notebooks/funcat-tutorial.ipynb)
@@ -257,6 +261,8 @@ False
 ```
 
 ## 策略
+本人选股结合众多筛选条件。在每个交易日14：00左右推送当日推荐股票，感兴趣可以关注本人[微信推送服务](//wxpusher.zjiecode.com/api/qrcode/JciNb6iYRbAG7eFH3omWJ2Vtw9iBPdLVnH8MYEB8EFO8s3tHd1iTXjB55GSZQL5t.jpg)
+
 ### MACD三次金叉线性拟合趋势
 ``` python
 import numpy as np
@@ -273,7 +279,7 @@ def select_macd_cross_up():
 	x_train = []
 	y_train = []
 	# 获取最近三次MACD金叉的diff值和索引位置
-	for i in rang(100):
+	for i in range(100):
 		if macd[i] > 0 and macd[i + 1] < 0:
 			x_train.append(i)
 			y_train.append(diff[i].value)
@@ -302,5 +308,48 @@ set_data_backend(TushareDataBackend())
 T("20210519")
 # 设置关注股票为300298.SZ
 S("300298.SZ")
-```
 
+# 输出结果[[-0.03154982]]
+# 表明最近2021/05/19之前3次macd金叉趋势向下
+# 趋势时刻有可能发生变化，该股在2021/08/02的趋势开始向上
+print(select_macd_cross_up())
+```
+![image](https://user-images.githubusercontent.com/11815231/128622717-a5517f26-cc3a-492e-a283-51aec4819964.png)
+
+import tushare as ts
+import time
+
+from funcat import *
+
+from funcat.data.tushare_backend import TushareDataBackend
+
+set_data_backend(TushareDataBackend())
+pro = ts.pro_api()
+df = pro.daily_basic(ts_code='601360.SH', fields='trade_date,turnover_rate,volume_ratio,pe,pb,circ_mv,float_share')
+print(df)
+
+# 流通股数(单位： 万股)
+float_share = df.at[0, 'float_share'] * 10000
+print(float_share)
+
+df = pro.top10_floatholders(ts_code='601360.SH', start_date='20210101')
+print(df)
+
+# 十大流通股东持有股数
+holder10_mv = 0
+for i in range(10):
+    holder10_mv = holder10_mv + df.at[i, 'hold_amount']
+
+# 排除十大股东持有股数(单位: 万股)
+others_share = float_share - holder10_mv
+
+df = pro.stk_holdernumber(ts_code='601360.SH', start_date='20160101')
+print(df)
+
+avg_share = others_share / df.at[0, 'holder_num']
+print("人均持有股数：", avg_share)
+
+S('601360.SH')
+T('20210826')
+
+print("人均持有市值：", avg_share * C.value)
