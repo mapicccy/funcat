@@ -79,6 +79,11 @@ class TushareDataBackend(DataBackend):
             (order_book_id.startswith("39") and order_book_id.endswith(".SZ"))
             ):
             is_index = True
+        is_found = False
+        if ((order_book_id.startswith("5") and order_book_id.endswith(".SH")) or
+            (order_book_id.startswith("1") and order_book_id.endswith(".SZ"))
+            ):
+            is_found = True
         ktype = freq
         if freq[-1] == "m":
             ktype = freq[:-1]
@@ -113,6 +118,8 @@ class TushareDataBackend(DataBackend):
         if 'df' not in dir():
             if is_index:
                 df = self.ts.pro_bar(ts_code=order_book_id, asset='I', start_date=str_start_date, end_date=str_end_date)
+            elif is_found:
+                df = self.ts.pro_bar(ts_code=order_book_id, asset='FD', start_date=str_start_date, end_date=str_end_date)
             else:
                 df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=str_start_date, end_date=str_end_date)
 
