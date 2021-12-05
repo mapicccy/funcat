@@ -4,9 +4,9 @@ Funcat 将同花顺、通达信、文华财经等的指标公式移植到了 Pyt
 
 Funcat 适合做股票、期货、合约、加密数字货币的量化分析与量化交易。
 
-原作者\后端tushare接口已经不再维护，牛市以来，为方便个人对金融量化的兴趣，顾迫切建此仓库
+## 策略
 
-注：回测系统需要长时间运行，回测两年的A股交易数据需要至少2GB内存（若内存不够请创建足够swap空间）
+基于funcat实现选股策略，在每个交易日14：00左右推送当日推荐股票。感兴趣可以关注本人[微信推送服务](//wxpusher.zjiecode.com/api/qrcode/JciNb6iYRbAG7eFH3omWJ2Vtw9iBPdLVnH8MYEB8EFO8s3tHd1iTXjB55GSZQL5t.jpg)
 
 ## 重磅更新计划
 
@@ -261,8 +261,7 @@ True
 False
 ```
 
-## 策略
-本人选股结合众多筛选条件。在每个交易日14：00左右推送当日推荐股票，感兴趣可以关注本人[微信推送服务](//wxpusher.zjiecode.com/api/qrcode/JciNb6iYRbAG7eFH3omWJ2Vtw9iBPdLVnH8MYEB8EFO8s3tHd1iTXjB55GSZQL5t.jpg)
+## 其它策略示例
 
 ### MACD三次金叉线性拟合趋势
 ``` python
