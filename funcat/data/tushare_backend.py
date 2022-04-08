@@ -6,6 +6,7 @@ from cached_property import cached_property
 import pandas as pd
 import numpy as np
 import datetime
+import time
 import os
 
 from .rt_data_from_tencent import get_runtime_data
@@ -116,12 +117,15 @@ class TushareDataBackend(DataBackend):
             os.mkdir('data')
 
         if 'df' not in dir():
-            if is_index:
-                df = self.ts.pro_bar(ts_code=order_book_id, asset='I', start_date=str_start_date, end_date=str_end_date)
-            elif is_found:
-                df = self.ts.pro_bar(ts_code=order_book_id, asset='FD', start_date=str_start_date, end_date=str_end_date)
-            else:
-                df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=str_start_date, end_date=str_end_date)
+            try:
+                if is_index:
+                    df = self.ts.pro_bar(ts_code=order_book_id, asset='I', start_date=str_start_date, end_date=str_end_date)
+                elif is_found:
+                    df = self.ts.pro_bar(ts_code=order_book_id, asset='FD', start_date=str_start_date, end_date=str_end_date)
+                else:
+                    df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=str_start_date, end_date=str_end_date)
+            except IOError:
+                sleep(60)
 
             if df is None:
                 return np.array([])
