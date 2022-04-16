@@ -125,7 +125,7 @@ class TushareDataBackend(DataBackend):
                 else:
                     df = self.ts.pro_bar(ts_code=order_book_id, adj='qfq', start_date=str_start_date, end_date=str_end_date)
             except IOError:
-                sleep(60)
+                time.sleep(60)
 
             if df is None:
                 return np.array([])
