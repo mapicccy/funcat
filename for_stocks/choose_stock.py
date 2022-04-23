@@ -178,6 +178,9 @@ def backtest_update(act):
 
 
 def callback(date, order_book_id, sym):
+    if order_book_id >= "688000.SH":
+        return
+
     pro = ts.pro_api()
     df = pro.query('daily_basic', ts_code=order_book_id,
                    fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,circ_mv,float_share')
@@ -187,8 +190,8 @@ def callback(date, order_book_id, sym):
         if df.at[i, 'turnover_rate'] <= 1:
             count = count + 1
 
-    # 最近21换手率低于1%的天数大于3天，直接返回
-    if count > 3:
+    # 最近21换手率低于1%的天数大于13天，直接返回
+    if count > 13:
         return
 
     # 流通股数(单位： 万股)
@@ -240,6 +243,10 @@ data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates(day0, day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
+S("000878.SZ")
+T("20200615")
+print(HHV(H, 21) / C)
+
 engine_ts = create_engine('mysql+mysqlconnector://root:@localhost:3306/ts_stock_basic')
 conn = engine_ts.connect()
 ATT = """\n注意：\n1. 已屏蔽换手率过低股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n"""
@@ -247,8 +254,6 @@ select(
    lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
-   # start_date="20210119",
-   # end_date="20210119",
    callback=callback,
 )
 conn.close()
