@@ -102,12 +102,12 @@ class TushareDataBackend(DataBackend):
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 df = pd.read_csv('data/' + filename)
-            elif str_start_date >= '2018-04-01':
+            elif str_start_date >= '2015-04-01':
                 update_to_date = now
                 trading_dates = self.get_trading_dates(start, update_to_date)
                 for td in reversed(trading_dates):
                     str_td = get_str_date_from_int(td)
-                    ad_filename = order_book_id.replace('.', '-') + '2018-04-01' + str_td + '.csv'
+                    ad_filename = order_book_id.replace('.', '-') + '2015-04-01' + str_td + '.csv'
                     if os.path.exists('data/' + ad_filename) and str_end_date <= str_td:
                         df = pd.read_csv('data/' + ad_filename)
                         df = df.loc[df['trade_date'] <= end]
