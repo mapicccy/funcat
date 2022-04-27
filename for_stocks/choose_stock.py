@@ -243,9 +243,38 @@ data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates(day0, day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
-S("000878.SZ")
-T("20200615")
-print(HHV(H, 21) / C)
+for code in order_book_id_list:
+    S(code)
+    T(day)  # 获取最新的交易数据，防止多次获取
+    print(code, C)
+    trading_dates = data_backend.get_trading_dates("20180801", day)
+    for itr, time in enumerate(trading_dates):
+        T(time)
+        mm = LinearRegression()
+        yn = []
+        for i in range(7, -1, -1):
+            yn.append(MA(C[i], 250).value)
+        try:
+            mm.fit(np.array(range(len(yn))).reshape(-1, 1), np.array(yn).reshape(-1, 1))
+        except Exception as e:
+            print("something wrong with " + symbol(code))
+            continue
+        ma250 = mm.coef_
+
+        try:
+            if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
+                cur_price = C.value
+                max_price = C.value
+                max_dates = itr + 30
+                if itr + 30 >= len(trading_dates):
+                    max_dates = len(trading_dates)
+                for it in range(itr, max_dates, 1):
+                    T(trading_dates[it])
+                    if C.value > max_price:
+                        max_price = C.value
+                print("buy " + symbol(code) + " at " + str(time) + ", 收盘价"  + str(cur_price) + " 30日内最大盈利: " + str(int(round((max_price - cur_price) / cur_price, 2) * 100)) + "%, 250均线斜率" + str(ma250))
+        except Exception as e:
+            continue
 
 engine_ts = create_engine('mysql+mysqlconnector://root:@localhost:3306/ts_stock_basic')
 conn = engine_ts.connect()
