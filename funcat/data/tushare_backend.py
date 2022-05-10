@@ -101,7 +101,11 @@ class TushareDataBackend(DataBackend):
         filename = (order_book_id + str_start_date + str_end_date).replace('.', '-') + '.csv'
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
-                df = pd.read_csv('data/' + filename)
+                # csv file may be empty, raise except EmptyDataError
+                try:
+                    df = pd.read_csv('data/' + filename)
+                except Exception as e:
+                    return np.array([])
             elif str_start_date >= '2015-04-01':
                 update_to_date = now
                 trading_dates = self.get_trading_dates(start, update_to_date)
