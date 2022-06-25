@@ -178,12 +178,9 @@ def backtest_update(act):
 
 
 def callback(date, order_book_id, sym):
-    if order_book_id >= "688000.SH":
-        return
-
     pro = ts.pro_api()
     df = pro.query('daily_basic', ts_code=order_book_id,
-                   fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,circ_mv,float_share')
+                   fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,total_mv,circ_mv,float_share')
 
     count = 0
     for i in range(21):
@@ -230,6 +227,34 @@ def callback(date, order_book_id, sym):
     rw = "人均市值:" + str(avg_holding_mv) + "万元"
 
     rw = sym + " " + rw
+
+    ccnt = 0
+    tcnt = 0
+    uup = 0
+    # trading_dates not include today for cache issue
+    for itr, time in enumerate(trading_dates[:-7]):
+        T(time)
+        try:
+            if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
+                tcnt = tcnt + 1
+                cur_price = C.value
+                max_price = C.value
+                max_dates = itr + 30
+                if itr + 30 >= len(trading_dates):
+                    max_dates = len(trading_dates)
+                for it in range(itr, max_dates, 1):
+                    T(trading_dates[it])
+                    if C.value > max_price:
+                        max_price = C.value
+
+                if max_price > cur_price:
+                    ccnt = ccnt + 1
+                    uup = int(round((max_price - cur_price) / cur_price, 2) * 100)
+        except Exception as e:
+            continue
+
+    if ccnt != 0:
+        rw = rw + " 3年选中" + str(tcnt) + "次，正确" + str(ccnt) + "次，最高盈利" + str(uup) + "%"
     print(date, rw)
 
     with open('daily_stock', 'a+') as fp:
@@ -240,41 +265,8 @@ day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d')
 
 data_backend = funcat_execution_context.get_data_backend()
-trading_dates = data_backend.get_trading_dates(day0, day)
+trading_dates = data_backend.get_trading_dates("20190606", day)
 order_book_id_list = data_backend.get_order_book_id_list()
-
-for code in order_book_id_list:
-    S(code)
-    T(day)  # 获取最新的交易数据，防止多次获取
-    print(code, C)
-    trading_dates = data_backend.get_trading_dates("20180801", day)
-    for itr, time in enumerate(trading_dates):
-        T(time)
-        mm = LinearRegression()
-        yn = []
-        for i in range(7, -1, -1):
-            yn.append(MA(C[i], 250).value)
-        try:
-            mm.fit(np.array(range(len(yn))).reshape(-1, 1), np.array(yn).reshape(-1, 1))
-        except Exception as e:
-            print("something wrong with " + symbol(code))
-            continue
-        ma250 = mm.coef_
-
-        try:
-            if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
-                cur_price = C.value
-                max_price = C.value
-                max_dates = itr + 30
-                if itr + 30 >= len(trading_dates):
-                    max_dates = len(trading_dates)
-                for it in range(itr, max_dates, 1):
-                    T(trading_dates[it])
-                    if C.value > max_price:
-                        max_price = C.value
-                print("buy " + symbol(code) + " at " + str(time) + ", 收盘价"  + str(cur_price) + " 30日内最大盈利: " + str(int(round((max_price - cur_price) / cur_price, 2) * 100)) + "%, 250均线斜率" + str(ma250))
-        except Exception as e:
-            continue
 
 engine_ts = create_engine('mysql+mysqlconnector://root:@localhost:3306/ts_stock_basic')
 conn = engine_ts.connect()
