@@ -228,10 +228,24 @@ def callback(date, order_book_id, sym):
 
     rw = sym + " " + rw
 
+    good = 0.
+    index_df = ts.pro_bar(ts_code='000001.SH', asset="I", start_date=str(trading_dates[-24]), end_date=str(trading_dates[-1]))
+    # 计算最近21个交易日的主力活跃程度
+    for itr, time in enumerate(trading_dates[-23:-2]):
+        T(time)
+        if C.value > REF(C, 1).value:
+            index_chg = index_df.loc[index_df["trade_date"] == str(time)]
+            # print(time)
+            # print(index_chg)
+            # print(index_chg["pct_chg"].values[0], type(index_chg["pct_chg"]))
+            if len(index_chg) != 0:
+                good = round(good + (C.value - REF(C, 1).value) / REF(C, 1).value - index_chg["pct_chg"].values[0], 2)
+
     ccnt = 0
     tcnt = 0
     uup = 0
     # trading_dates not include today for cache issue
+    # 计算7年内选股策略盈利的次数，以及最大盈利比例
     for itr, time in enumerate(trading_dates[:-7]):
         T(time)
         try:
@@ -254,7 +268,7 @@ def callback(date, order_book_id, sym):
             continue
 
     if ccnt != 0:
-        rw = rw + " 3年选中" + str(tcnt) + "次，正确" + str(ccnt) + "次，最高盈利" + str(uup) + "%"
+        rw = rw + " 7年选中" + str(tcnt) + "次，正确" + str(ccnt) + "次，最高盈利" + str(uup) + "%, " + "主力活跃度" + str(good)
     print(date, rw)
 
     with open('daily_stock', 'a+') as fp:
@@ -265,7 +279,7 @@ day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d')
 
 data_backend = funcat_execution_context.get_data_backend()
-trading_dates = data_backend.get_trading_dates("20190606", day)
+trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
 engine_ts = create_engine('mysql+mysqlconnector://root:@localhost:3306/ts_stock_basic')
