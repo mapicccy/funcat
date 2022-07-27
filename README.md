@@ -21,10 +21,30 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 - 由于tushare pro某些数据获取频次有特殊限制，所以计划将数据整体搬移至mysql（未开始）
 
 ## 安装
+
+推荐Python版本为3.6.8，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
+
+创建python==3.6.8的虚拟环境：
+```
+conda create -n py36 python=3.6.8
+```
+
+激活虚拟环境：
+```
+conda activate py36
+```
+
+安装funcat:
 ```
 python setup.py install
 ```
-**注意**：talib由于兼容性问题，请选择合适的版本自行安装，推荐通过conda管理python环境和安装软件
+
+**注意**：使用该仓库必须安装TA-lib (v0.4.9), TA-lib没办法通过pip安装, 请通过minconda\anaconda来管理环境、安装依赖。安装命令：
+```
+conda install -c quantopian ta-lib
+```
+
+如有其他安装问题，请提issue，并附上足够的环境信息。
 
 
 ## notebooks 教程
