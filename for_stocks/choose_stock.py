@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 import datetime
 
-from sqlalchemy import create_engine
 from sklearn.linear_model import LinearRegression
 from funcat import *
 from funcat.account import Account
@@ -191,42 +190,7 @@ def callback(date, order_book_id, sym):
     if count > 13:
         return
 
-    # 流通股数(单位： 万股)
-    float_share = df.at[0, 'float_share'] * 10000
-
-    proxy = conn.execute("select * from top10_floatholders where ts_code='{}' order by end_date desc".format(order_book_id))
-    top10_floatholder = proxy.fetchall()
-    df = pd.DataFrame(top10_floatholder)
-
-    # 十大流通股东持有股数
-    holder10_mv = 0
-    for i in range(10):
-        try:
-            holder10_mv = holder10_mv + df.at[i, 4]
-        except Exception as e:
-            break
-
-    # 排除十大股东持有股数(单位: 万股)
-    others_share = float_share - holder10_mv
-
-    proxy = conn.execute("select * from holdernumber where ts_code='{}' order by end_date desc".format(order_book_id))
-    holder_num = proxy.fetchall()
-    df = pd.DataFrame(holder_num)
-
-    # 新股不披露股东人数做异常处理
-    try:
-        holder_num = df.at[0, 3]
-        avg_share = others_share / holder_num
-        avg_holding_mv = int(avg_share * C.value / 10000)
-    except Exception as e:
-        holder_num = 1
-        avg_holding_mv = 0
-
-    coef = select_macd_cross_up()
-
-    rw = "人均市值:" + str(avg_holding_mv) + "万元"
-
-    rw = sym + " " + rw
+    rw = sym + " "
 
     good = 0.
     index_df = ts.pro_bar(ts_code='000001.SH', asset="I", start_date=str(trading_dates[-24]), end_date=str(trading_dates[-1]))
@@ -282,8 +246,6 @@ data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
-engine_ts = create_engine('mysql+mysqlconnector://root:@localhost:3306/ts_stock_basic')
-conn = engine_ts.connect()
 ATT = """\n注意：\n1. 已屏蔽换手率过低股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n"""
 select(
    lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
@@ -291,7 +253,6 @@ select(
    end_date=trading_dates[-1],
    callback=callback,
 )
-conn.close()
 
 with open('daily_stock', 'a+') as fp:
     fp.write(ATT)
