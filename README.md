@@ -8,7 +8,7 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 
 基于funcat实现选股策略，在每个交易日14：00左右推送当日推荐股票。感兴趣可以关注本人[微信推送服务](//wxpusher.zjiecode.com/api/qrcode/JciNb6iYRbAG7eFH3omWJ2Vtw9iBPdLVnH8MYEB8EFO8s3tHd1iTXjB55GSZQL5t.jpg)
 
-## 重磅更新计划
+## 更新计划
 
 - 增加加密数字货币后端，创建实例时需要填入api_key\seceret_key\passphrase, [了解详情](https://www.okex.com/account/my-api)(已完成)
 - 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)(已完成)
@@ -19,10 +19,11 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 	- **[MACD三次金叉线性拟合趋势](https://github.com/mapicccy/funcat#macd%E4%B8%89%E6%AC%A1%E9%87%91%E5%8F%89%E7%BA%BF%E6%80%A7%E6%8B%9F%E5%90%88%E8%B6%8B%E5%8A%BF)**
 	- ...
 - 由于tushare pro某些数据获取频次有特殊限制，所以计划将数据整体搬移至mysql（未开始）
+- 适配更高的python版本，并且提供docker容器部署方案（未开始）
 
 ## 安装
 
-推荐Python版本为3.6.8，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
+当前推荐Python版本为3.6.8，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
 
 创建python==3.6.8的虚拟环境：
 ```
