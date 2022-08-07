@@ -3,6 +3,7 @@ import tushare as ts
 import numpy as np
 import pandas as pd
 import datetime
+import time
 
 from sklearn.linear_model import LinearRegression
 from funcat import *
@@ -179,10 +180,12 @@ def backtest_update(act):
 def callback(date, order_book_id, sym):
     global df
 
-    index_df = ts.pro_bar(ts_code='000001.SH', asset="I", start_date=str(date), end_date=str(date))
+    try:
+        index_df = ts.pro_bar(ts_code='000001.SH', asset="I", start_date=str(date), end_date=str(date))
+    except IOError as e:
+        time.sleep(60)
+        return
     df = df.append([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, 'pct_chg': round((C.value - REF(C, 1).value) / REF(C, 1).value, 3), 'index_pct_chg': index_df.at[0, 'pct_chg']}], ignore_index=True)
-
-    print(df)
 
     df.to_csv('statistics.csv')
     print(date, sym)
