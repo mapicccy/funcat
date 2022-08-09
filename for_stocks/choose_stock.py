@@ -231,6 +231,9 @@ def callback(date, order_book_id, sym):
         except Exception as e:
             continue
 
+    # set trade date back to origin.
+    T(date)
+
     if ccnt != 0:
         rw = rw + " 7年选中" + str(tcnt) + "次，正确" + str(ccnt) + "次，最高盈利" + str(uup) + "%, " + "主力活跃度" + str(good)
     print(date, rw)

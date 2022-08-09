@@ -45,11 +45,15 @@ def callback(date, order_book_id, sym):
                 if deviation > 3.:
                     if cur_date == date and not first_found:
                         print(date, sym, "select_date:", select_date)
+                        with open('daily_stock', 'a+') as fp:
+                            rw = date
+                            fp.write(sym + " 买入信号时间: " + str(select_date) + "\n")
 
                     first_found = True
 
 
-df = pd.read_csv("statistics.csv")
+df = pd.read_csv("statistics.csv", index_col=False)
+print(df)
 
 day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d')
@@ -58,9 +62,12 @@ data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
+with open('daily_stock', 'a+') as fp:
+    fp.write("\nConfirmed Candidates:\n")
+
 select(
    lambda: ((C - C[1]) / C[1]).value > 0,
-   start_date=20220720,
+   start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
 )
