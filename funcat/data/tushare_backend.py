@@ -98,7 +98,14 @@ class TushareDataBackend(DataBackend):
 
         str_start_date = get_str_date_from_int(start)
         str_end_date = get_str_date_from_int(end)
-        filename = (order_book_id + str_start_date + str_end_date).replace('.', '-') + '.csv'
+
+        # should find up-to-date filename, in case of lossing data.
+        filename = "NAF"
+        for trade_date_suffix in reversed(self.trading_dates):
+            filename = (order_book_id + str_start_date + str(trade_date_suffix)).replace('.', '-') + '.csv'
+            if os.path.exists('data/' + filename):
+                break
+
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 # csv file may be empty, raise except EmptyDataError
@@ -145,6 +152,7 @@ class TushareDataBackend(DataBackend):
 
             df.to_csv('data/' + filename, index=False)
 
+        # dataframe needs update if found persistent data from disk and end time is equal to today
         if not df.empty and str(df.at[0, 'trade_date']) == str(last_tradeday) and str(end) == now:
             rt = get_runtime_data(order_book_id)
             if rt is not None and str(rt.at[0, 'trade_date']) == now:

@@ -11,8 +11,8 @@ def test_000001():
     from funcat.data.tushare_backend import TushareDataBackend
     set_data_backend(TushareDataBackend())
 
-    T("20200814")
-    S("000001.SH")
+    T("20220808")
+    S("002694.SZ")
 
     print(O, H, L, C, V)
     print(MA(C, 5), MA(C, 10), MA(C, 20))
