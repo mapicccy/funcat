@@ -143,11 +143,14 @@ class TushareDataBackend(DataBackend):
             elif freq in ("1d", "W", "M"):
                 df["datetime"] = df["trade_date"].apply(lambda x: int(x.replace("-", "")) * 1000000)
 
+            # in case the instance of (r, R, RATIO) to get percentage change
+            df.rename(columns={"pct_chg": "ratio"}, inplace=True)
             df.to_csv('data/' + filename, index=False)
 
         if not df.empty and str(df.at[0, 'trade_date']) == str(last_tradeday) and str(end) == now:
             rt = get_runtime_data(order_book_id)
             if rt is not None and str(rt.at[0, 'trade_date']) == now:
+                rt.rename(columns={"pct_chg": "ratio"}, inplace=True)
                 df = pd.concat([rt, df], ignore_index=True)
 
         df = df.sort_index(ascending=False)

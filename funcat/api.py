@@ -42,7 +42,7 @@ from .helper import select, backtest, zig_helper
 
 
 # create open high low close volume datetime
-for name in ["open", "high", "low", "close", "vol", "datetime"]:
+for name in ["open", "high", "low", "close", "vol", "datetime", "pre_close", "ratio"]:
     dtype = np.float64 if name != "datetime" else np.uint64
     cls = type("{}Series".format(name.capitalize()), (MarketDataSeries, ), {"name": name, "dtype": dtype})
     obj = cls(dynamic_update=True)
@@ -89,6 +89,8 @@ __all__ = [
     "CLOSE", "C",
     "V", "VOL",
     "DATETIME",
+    "P", "PRE_CLOSE",
+    "R", "RATIO",
 
     "SMA",
     "CCI",

@@ -39,7 +39,7 @@ def callback(date, order_book_id, sym):
                 idx = list(map(lambda x: float(x), idx[1:]))
                 idx_pct_chg = round((idx[1] - idx[0]) / idx[0] * 100, 2)
 
-                deviation = round(((C - O) / O).value * 100 - float(idx_pct_chg), 2)
+                deviation = round(R.value - float(idx_pct_chg), 2)
 
                 # current stock deviate of 3% from the index. Got it!
                 if deviation > 3.:
@@ -66,7 +66,7 @@ with open('daily_stock', 'a+') as fp:
     fp.write("\nConfirmed Candidates:\n")
 
 select(
-   lambda: ((C - C[1]) / C[1]).value > 0,
+   lambda: R > 0,
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
