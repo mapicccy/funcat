@@ -182,12 +182,12 @@ def callback(date, order_book_id, sym):
                    fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,total_mv,circ_mv,float_share')
 
     count = 0
-    for i in range(21):
+    for i in range(31):
         if df.at[i, 'turnover_rate'] <= 1:
             count = count + 1
 
-    # 最近21换手率低于1%的天数大于13天，直接返回
-    if count > 13:
+    # 最近31交易日换手率低于1%的天数大于13天、涨幅超过3%的天数小于4，直接返回
+    if count > 13 and COUNT(R > 3., 31) < 4:
         return
 
     rw = sym + " "
