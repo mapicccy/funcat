@@ -151,7 +151,20 @@ class TushareDataBackend(DataBackend):
             rt = get_runtime_data(order_book_id)
             if rt is not None and str(rt.at[0, 'trade_date']) == now:
                 rt.rename(columns={"pct_chg": "ratio"}, inplace=True)
+
+                # if pre_amount and cur_amount is different, regard the data shoule be updated
+                pre_amount = df.at[0, 'amount']
+                cur_amount = rt.at[0, 'amount']
+
+                # rt data has already be updated at least once.
+                if str(df.at[0, 'trade_date']) == now:
+                    df.drop(labels=0, inplace=True)
+
                 df = pd.concat([rt, df], ignore_index=True)
+
+                # keep the persistent data dynamic update.
+                if pre_amount != cur_amount:
+                    df.to_csv('data/' + filename, index=False)
 
         df = df.sort_index(ascending=False)
         arr = df.to_records()

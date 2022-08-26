@@ -27,6 +27,7 @@ def get_runtime_data(ts_code, token=None):
             'pct_chg': [float(raw[32])],
             'vol': [float(raw[36])],
             'amount': [float(raw[37])],
+            'datetime': [int(raw[30][:8]) * 1000000], # TODO: only support freq 'd', 'w' and 'm'
         }
         df = pd.DataFrame(data)
         return df
