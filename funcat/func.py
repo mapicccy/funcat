@@ -83,7 +83,7 @@ class TwoArgumentSeries(NumericSeries):
 class SMASeries(TwoArgumentSeries):
     """同花顺专用SMA"""
 
-    def func(self, series, n, _):
+    def func(series, n, _):
         results = np.nan_to_num(series).copy()
         # FIXME this is very slow
         for i in range(1, len(series)):
