@@ -1,8 +1,10 @@
 import os
+import time
 import tushare as ts
 import numpy as np
 import pandas as pd
 import datetime
+import requests
 
 from sklearn.linear_model import LinearRegression
 from funcat import *
@@ -182,38 +184,40 @@ def callback(date, order_book_id, sym):
                    fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,total_mv,circ_mv,float_share')
 
     count = 0
-    for i in range(31):
+    for i in range(21):
         if df.at[i, 'turnover_rate'] <= 1:
             count = count + 1
 
-    # 最近31交易日换手率低于1%的天数大于13天、涨幅超过3%的天数小于4，直接返回
-    if count > 13 and COUNT(R > 3., 31) < 4:
+    # 最近31交易日换手率低于1%的天数大于13天、涨幅超过3%的天数小于6，直接返回
+    if count > 13 and COUNT(R > 3., 31) < 6:
         return
+
+    coef = select_macd_cross_up()
 
     rw = sym + " "
 
-    good = 0.
-    index_df = ts.pro_bar(ts_code='000001.SH', asset="I", start_date=str(trading_dates[-24]), end_date=str(trading_dates[-1]))
-    # 计算最近21个交易日的主力活跃程度
-    for itr, time in enumerate(trading_dates[-23:-2]):
-        T(time)
-        if C.value > REF(C, 1).value:
-            index_chg = index_df.loc[index_df["trade_date"] == str(time)]
-            # print(time)
-            # print(index_chg)
-            # print(index_chg["pct_chg"].values[0], type(index_chg["pct_chg"]))
-            if len(index_chg) != 0:
-                good = round(good + (C.value - REF(C, 1).value) / REF(C, 1).value - index_chg["pct_chg"].values[0], 2)
+    if os.path.exists("statistics.csv"):
+        dt = pd.read_csv("statistics.csv", index_col=False)
+        cur_dt = pd.DataFrame(columns=['select_date', 'ts_code', 'symbol', 'pct_chg', 'index_pct_chg'])
+        cur_dt = cur_dt.append([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, 'pct_chg': round((C.value - REF(C, 1).value) / REF(C, 1).value, 3), 'index_pct_chg': 0}], ignore_index=True)
+        dt = pd.concat([cur_dt, dt], ignore_index=True)
+        dt.to_csv("statistics.csv", index=0)
 
     ccnt = 0
     tcnt = 0
     uup = 0
+    time_tmp = ""
     # trading_dates not include today for cache issue
     # 计算7年内选股策略盈利的次数，以及最大盈利比例
     for itr, time in enumerate(trading_dates[:-7]):
         T(time)
         try:
             if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
+                if time_tmp == "":
+                    time_tmp = time
+                elif int(time) - int(time_tmp) < 23:  # interval between adjacent choosing must large than 23 days
+                    continue
+
                 tcnt = tcnt + 1
                 cur_price = C.value
                 max_price = C.value
@@ -225,17 +229,18 @@ def callback(date, order_book_id, sym):
                     if C.value > max_price:
                         max_price = C.value
 
-                if max_price > cur_price:
+                # regards profit if boom 4%
+                if max_price > cur_price * 1.04:
                     ccnt = ccnt + 1
                     uup = int(round((max_price - cur_price) / cur_price, 2) * 100)
         except Exception as e:
             continue
 
-    # set trade date back to origin.
+    # set trade date to the origin value.
     T(date)
 
     if ccnt != 0:
-        rw = rw + " 7年选中" + str(tcnt) + "次，正确" + str(ccnt) + "次，最高盈利" + str(uup) + "%, " + "主力活跃度" + str(good)
+        rw = rw + " 2015年至今选中" + str(tcnt) + "次，准确" + str(ccnt) + "次，最高盈利" + str(uup) + "%"
     print(date, rw)
 
     with open('daily_stock', 'a+') as fp:
@@ -249,7 +254,11 @@ data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
-ATT = """\n注意：\n1. 已屏蔽换手率过低股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n"""
+with open('daily_stock', 'a+') as fp:
+    fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
+
+ATT = """\n注意：\n1. 已屏蔽换手率过低以及不活跃股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n6. 历史数据显示，如果首次筛选选出较多的股票，代表大盘临近上涨趋势点\n7. 如果您有更好的交易\选股策略，苦于没有编程经验，请联系微信zhao9111，独家服务帮您实现\n8. 数据源tushare接口经常变动，潜在增加很多维护成本，如果当天没有收到消息，请不要着急\n"""
+"""
 select(
    lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
    start_date=trading_dates[-1],
@@ -257,5 +266,56 @@ select(
    callback=callback,
 )
 
+os.system('/root/.conda/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
+"""
+url = "http://qt.gtimg.cn/q="
 with open('daily_stock', 'a+') as fp:
+    fp.write("\n大象起舞(市值超500亿，量能狂飙):\n")
+for code in order_book_id_list:
+    if code > "688000.SH":
+        break
+
+    code_suffix = code[-2:].lower() + code[:-3]
+    text = requests.get(url + code_suffix)
+    if text.status_code == 200:
+        raw = text.text.split("~")
+        print(code, raw[44])
+        if raw[44] != "":
+            total_mv = float(raw[44])
+            # 总市值大于500亿
+            if total_mv > 500:
+                S(code)
+                T(trading_dates[-1])
+                # 上涨且成交量大于过去5天的评价成交量的两倍
+                if float(raw[32]) > 0 and float(raw[36]) > 2 * MA(V, 5):
+                    with open('daily_stock', 'a+') as fp:
+                        fp.write(code + "\n")
+
+df = pd.read_csv("statistics.csv", index_col=False)
+sd = (datetime.datetime.strptime(str(day), "%Y%m%d") + datetime.timedelta(days=-60)).strftime("%Y%m%d")
+dt = df.loc[(df["select_date"] <= int(day)) & (df["select_date"] >= int(sd))]
+st = list(set(dt["ts_code"].tolist()))
+stat = {}
+for i in st:
+    dtmp = dt.loc[dt["ts_code"] == i].reset_index(drop=True)
+    time_list = list(set(dtmp["select_date"].tolist()))
+    # get the nearest selection
+    time = time_list[0]
+    S(i)
+    T(time)
+    price = C.value
+    T(day)
+    stat[i] = int(round((C.value - price) / price, 2) * 100)
+sorted_stock = sorted(stat.items(), key=lambda x:-x[1])
+
+with open('daily_stock', 'a+') as fp:
+    fp.write("\n近2月内程序选出牛股TOP5:\n")
+    s = ""
+    for i in range(5):
+        if sorted_stock and len(sorted_stock) > i:
+            dtmp = dt.loc[dt["ts_code"] == sorted_stock[i][0]].reset_index(drop=True)
+            s = s + str(symbol(sorted_stock[i][0])) + " 选出日:" + str(dtmp.at[0, "select_date"]) + "，至今涨幅" + str(sorted_stock[i][1]) + "%\n"
+
+    if s != "":
+        fp.write(s)
     fp.write(ATT)

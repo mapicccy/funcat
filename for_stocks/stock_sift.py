@@ -47,7 +47,7 @@ def callback(date, order_book_id, sym):
                         print(date, sym, "select_date:", select_date)
                         with open('daily_stock', 'a+') as fp:
                             rw = date
-                            fp.write(sym + " 买入信号时间: " + str(select_date) + "\n")
+                            fp.write(sym + " 首次筛选关注时间: " + str(select_date) + "\n")
 
                     first_found = True
 
@@ -63,7 +63,7 @@ trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
 with open('daily_stock', 'a+') as fp:
-    fp.write("\nConfirmed Candidates:\n")
+    fp.write("\n二次筛选（捕捉长期趋势股，不计算历史准确率）:\n")
 
 select(
    lambda: R > 0,
