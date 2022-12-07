@@ -19,15 +19,15 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 	- **[MACD三次金叉线性拟合趋势](https://github.com/mapicccy/funcat#macd%E4%B8%89%E6%AC%A1%E9%87%91%E5%8F%89%E7%BA%BF%E6%80%A7%E6%8B%9F%E5%90%88%E8%B6%8B%E5%8A%BF)**
 	- ...
 - 由于tushare pro某些数据获取频次有特殊限制，所以计划将数据整体搬移至mysql（未开始）
-- 适配更高的python版本，并且提供docker容器部署方案（未开始）
+- 适配更高的python版本，并且提供docker容器部署方案（python3全版本适配完成，docker部署未开始）
 
 ## 安装
 
-当前推荐Python版本为3.6.8，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
+推荐python3，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
 
-创建python==3.6.8的虚拟环境：
+创建python 3.6.8的虚拟环境：
 ```
-conda create -n py36 python=3.6.8
+conda create -n py36 python==3.6.8
 ```
 
 激活虚拟环境：
@@ -35,14 +35,14 @@ conda create -n py36 python=3.6.8
 conda activate py36
 ```
 
-安装funcat:
+安装funcat（因python版本问题可能会有一些依赖库安装不成功，通过pip install xxx手动安装）:
 ```
 python setup.py install
 ```
 
-**注意**：使用该仓库必须安装TA-lib (v0.4.9), TA-lib没办法通过pip安装, 请通过minconda\anaconda来管理环境、安装依赖。安装命令：
+安装科学计算库：
 ```
-conda install -c quantopian ta-lib
+conda install -c conda-forge ta-lib
 ```
 
 如有其他安装问题，请提issue，并附上足够的环境信息。
