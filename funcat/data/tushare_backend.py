@@ -148,7 +148,11 @@ class TushareDataBackend(DataBackend):
             df.to_csv('data/' + filename, index=False)
 
         if not df.empty and str(df.at[0, 'trade_date']) == str(last_tradeday) and str(end) == now:
-            rt = get_runtime_data(order_book_id)
+            try:
+                rt = get_runtime_data(order_book_id)
+            except Exception as e:
+                rt = None
+
             if rt is not None and str(rt.at[0, 'trade_date']) == now:
                 rt.rename(columns={"pct_chg": "ratio"}, inplace=True)
 
