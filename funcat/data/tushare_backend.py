@@ -42,7 +42,7 @@ class TushareDataBackend(DataBackend):
         pro = self.ts.pro_api()
         df = pro.query('trade_cal', start_date="20100808", end_date=now, is_open=1)
         trading_dates = [get_int_date(date) for date in df['cal_date'].tolist()]
-        return trading_dates
+        return sorted(trading_dates)
 
     def convert_code(self, order_book_id):
         return order_book_id.split(".")[0]
