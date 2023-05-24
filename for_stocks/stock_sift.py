@@ -60,7 +60,10 @@ day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d'
 
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
-order_book_id_list = data_backend.get_order_book_id_list()
+with open("order_book_id_list", "r") as fp:
+    order_book_id_list = fp.readlines().replace("\n", "")
+
+order_book_id_list = [order_book_id.strip() for order_book_id in order_book_id_list]
 
 with open('daily_stock', 'a+') as fp:
     fp.write("\n二次筛选（捕捉长期趋势股，不计算历史准确率）:\n")
@@ -70,4 +73,5 @@ select(
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
+   order_book_id_list=order_book_id_list,
 )
