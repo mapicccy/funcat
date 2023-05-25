@@ -252,23 +252,17 @@ day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d'
 
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
-
-with open("order_book_id_list", "r") as fp:
-    order_book_id_list = fp.readlines()
-
-order_book_id_list = [order_book_id.strip() for order_book_id in order_book_id_list]
-print(order_book_id_list)
+order_book_id_list = data_backend.get_order_book_id_list()
 
 with open('daily_stock', 'a+') as fp:
     fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
 
-ATT = """\n注意：\n1. 已屏蔽换手率过低以及不活跃股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n6. 历史数据显示，如果首次筛选选出较多的股票，代表大盘临近上涨趋势点\n7. 如果您有更好的交易\选股策略，苦于没有编程经验，请联系微信zhao9111，独家服务帮您实现\n8. 数据源tushare接口经常变动，潜在增加很多维护成本，如果当天没有收到消息，请不要着急\n"""
+ATT = """\n注意：\n1. 已屏蔽换手率过低以及不活跃股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n6. 历史数据显示，如果首次筛选选出较多的股票，代表大盘临近上涨趋势点\n7. 如果您有更好的交易\选股策略，苦于没有编程经验，请联系微信zhao9111，独家服务帮您实现\n8. tushare数据源获取成本大幅提高，股票池固化在2023/05/24，总共5193只，后续不再更新股票池\n"""
 select(
    lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
-   order_book_id_list=order_book_id_list,
 )
 
 os.system('/root/.conda/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')

@@ -22,10 +22,12 @@ funcat.egg-info/top_level.txt
 funcat/data/__init__.py
 funcat/data/backend.py
 funcat/data/crypto_backend.py
+funcat/data/order_book_id_list.csv
 funcat/data/rqalpha_data_backend.py
 funcat/data/rqdata_data_backend.py
 funcat/data/rt_data.py
 funcat/data/rt_data_from_tencent.py
+funcat/data/stock_basic.csv
 funcat/data/tencent_backend.py
 funcat/data/tushare_backend.py
 funcat/data/okex/__init__.py

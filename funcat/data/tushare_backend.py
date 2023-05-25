@@ -29,7 +29,21 @@ class TushareDataBackend(DataBackend):
 
     @cached_property
     def stock_basics(self):
-        return self.ts.pro_api().stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date').set_index('symbol', drop=True)
+        pro = self.ts.pro_api()
+        try:
+            stock_basics = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date').set_index('symbol', drop=True)
+        except Exception as e:
+            cur_dir = os.path.dirname(__file__)
+            filepath = os.path.join(cur_dir, "stock_basic.csv")
+            if os.path.isfile(filepath):
+                order_book_id_list = self.get_order_book_id_list()
+                df = pd.read_csv(filepath)
+                df["symbol"] = df.apply(lambda row: row["ts_code"][:6], axis=1)
+                stock_basics = df.loc[df["ts_code"].isin(order_book_id_list)].set_index('symbol', drop=True)
+            else:
+                raise("No perm to access tushare stock basic api or stock_basic.csv doesn't exist")
+        return stock_basics
+
 
     @cached_property
     def code_name_map(self):
@@ -179,9 +193,18 @@ class TushareDataBackend(DataBackend):
     def get_order_book_id_list(self):
         """获取所有的股票代码列表
         """
+        cur_dir = os.path.dirname(__file__)
+        filepath = os.path.join(cur_dir, "order_book_id_list.csv")
         pro = self.ts.pro_api()
-        info = pro.query('stock_basic', exchange='', list_status='L', field='ts_code')
-        order_book_id_list = info['ts_code'].tolist()
+        try:
+            info = pro.query('stock_basic', exchange='', list_status='L', field='ts_code')
+            info.to_csv(filepath, index=False)
+            order_book_id_list = info['ts_code'].tolist()
+        except Exception as e:
+            if os.path.isfile(filepath):
+                order_book_id_list = pd.read_csv(filepath)['ts_code'].tolist()
+            else:
+                raise("No perm to access tushare stock basic or order_book_id_list.csv doesn't exist!")
         return order_book_id_list
 
     @lru_cache(maxsize=4096)

@@ -15,9 +15,4 @@ t0 = time.time() - start
 
 print(t0)
 print(df)
-start = time.time()
-df = ts.get_k_data("603488", start='2020-07-14', end='2020-07-16', index=False, ktype='D', autype='qfq')
-t0 = time.time() - start
 
-print(t0)
-print(df)
