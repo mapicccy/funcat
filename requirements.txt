@@ -13,5 +13,6 @@ certifi
 soupsieve
 websocket-client
 charset_normalizer
+ta-lib
 tushare
 akshare
