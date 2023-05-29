@@ -4,6 +4,7 @@
 
 import numpy as np
 import tushare as ts
+import akshare as ak
 
 from funcat import *
 
@@ -38,5 +39,20 @@ def test_stock_basic():
 
 
 # test_000001()
-test_bak_basic()
-test_stock_basic()
+# test_bak_basic()
+# test_stock_basic()
+
+
+def test_akshare():
+    from funcat.data.akshare_backend import AkshareDataBackend
+    set_data_backend(AkshareDataBackend())
+
+
+    T("20230526")
+    S("601360.SH")
+
+    print(O, H, L, C, V, R)
+    print(MA(C, 5), MA(C, 10), MA(C, 20))
+
+
+test_akshare()

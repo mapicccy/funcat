@@ -20,6 +20,7 @@ funcat.egg-info/not-zip-safe
 funcat.egg-info/requires.txt
 funcat.egg-info/top_level.txt
 funcat/data/__init__.py
+funcat/data/akshare_backend.py
 funcat/data/backend.py
 funcat/data/crypto_backend.py
 funcat/data/order_book_id_list.csv
