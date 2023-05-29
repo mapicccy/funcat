@@ -47,7 +47,6 @@ dependencies:
     - bs4==0.0.1
     - cached-property==1.5.2
     - charset-normalizer==2.1.1
-    - funcat==1.1.0
     - idna==3.3
     - joblib==1.1.0
     - pandas==1.5.0rc0
@@ -65,4 +64,5 @@ dependencies:
     - tushare==1.2.85
     - urllib3==1.26.12
     - websocket-client==0.57.0
+    - funcat==1.1.0
 prefix: /root/miniconda3/envs/py310

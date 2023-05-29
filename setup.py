@@ -22,13 +22,14 @@ with open(join(dirname(__file__), 'funcat/VERSION.txt'), 'rb') as f:
     version = f.read().decode('ascii').strip()
 
 setup(
-    name='funcat',
+    name='funcat3',
     version=version,
-    description='funcat',
+    long_description='Using very simple code to compute indicator of stock\crytocurrency. Make quantify easier to everyone',
+    long_description_content_type="text/x-rst",
     packages=find_packages(exclude=[]),
-    author='Hua Liang',
-    url='https://github.com/cedricporter/funcat',
-    author_email='et@everet.org',
+    author='Guanjun',
+    url='https://github.com/mapicccy/funcat',
+    author_email='mapicccy@gmail.com',
     license='Apache License v2',
     package_data={'': ['*.*']},
     install_requires=req,
@@ -41,5 +42,10 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
     ],
 )

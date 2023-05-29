@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: funcat3
+Version: 1.1.0
+Home-page: https://github.com/mapicccy/funcat
+Author: Guanjun
+Author-email: mapicccy@gmail.com
+License: Apache License v2
+Classifier: Programming Language :: Python
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+
+Using very simple code to compute indicator of stock\crytocurrency. Make quantify easier to everyone
