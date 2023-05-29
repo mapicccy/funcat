@@ -6,12 +6,13 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 
 ## 策略
 
-基于funcat实现选股策略，在每个交易日14：00左右推送当日推荐股票。感兴趣可以关注本人[微信推送服务](//wxpusher.zjiecode.com/api/qrcode/JciNb6iYRbAG7eFH3omWJ2Vtw9iBPdLVnH8MYEB8EFO8s3tHd1iTXjB55GSZQL5t.jpg)
+基于funcat实现选股策略，在每个交易日14：00左右推送当日推荐股票。感兴趣可以关注本人[微信推送服务](https://wxpusher.zjiecode.com/api/qrcode/xW1JFRyDVn3pBtdFEHOk2MEemewESUicDSvxBUdmF3QX5AgAQxOJ4hNLlWkQHqSs.jpg)
 
 ## 更新计划
 
 - 增加加密数字货币后端，创建实例时需要填入api_key\seceret_key\passphrase, [了解详情](https://www.okex.com/account/my-api)(已完成)
 - 增加对[tushare pro](https://tushare.pro/register?reg=379083)接口支持，使用需要注册[获取token](https://tushare.pro/register?reg=379083)(已完成)
+- 增加对[akshare](https://akshare.xyz/tutorial.html)接口支持
 - 优化tushare pro数据存储方式(已完成)
 - 优化DataFrame数据，降低内存占用(进行中...)
 - 增加实时数据获取(已完成，实时数据来自腾讯股票接口，http://qt.gtimg.cn/q=sh601360)
@@ -20,6 +21,13 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 	- ...
 - 由于tushare pro某些数据获取频次有特殊限制，所以计划将数据整体搬移至mysql（未开始）
 - 适配更高的python版本，并且提供docker容器部署方案（python3全版本适配完成，docker部署未开始）
+
+## 数据源支持
+- tushare pro
+- akshare
+- okex加密数字货币
+- rqdata
+- tencent实时A股接口
 
 ## 安装
 

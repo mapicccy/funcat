@@ -6,3 +6,5 @@ lxml
 requests
 cached-property
 tqdm
+tushare
+akshare
