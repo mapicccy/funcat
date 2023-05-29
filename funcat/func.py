@@ -187,7 +187,7 @@ def count(cond, n):
     series = cond.series
     size = len(cond.series) - n
     try:
-        result = np.full(size, 0, dtype=np.int)
+        result = np.full(size, 0, dtype=int)
     except ValueError as e:
         raise FormulaException(e)
     for i in range(size - 1, 0, -1):

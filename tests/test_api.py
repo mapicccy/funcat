@@ -38,9 +38,9 @@ def test_stock_basic():
     df.to_csv("stock_basic.csv", index=False)
 
 
-# test_000001()
-# test_bak_basic()
-# test_stock_basic()
+test_000001()
+test_bak_basic()
+test_stock_basic()
 
 
 def test_akshare():
