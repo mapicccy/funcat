@@ -17,8 +17,8 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 
 ## 安装
 
-### Python环境安装
-推荐python39，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
+### Python环境安装(可选)
+推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
 
 创建python 3.9.12的虚拟环境：
 ```
@@ -30,15 +30,22 @@ conda create -n py39 python==3.9.12
 conda activate py39
 ```
 ### 安装funcat
-安装funcat:
-```
-pip install funcat3==1.1.0 -i https://pypi.org/simple
-```
-
-安装科学计算库：
+1. 安装科学计算库(必选，用于funcat计算指标)
+以下安装方式2选1
+- 虚拟环境安装
 ```
 conda install -c conda-forge ta-lib
 ```
+- pip安装
+```
+pip install ta-lib
+```
+
+2. 安装funcat:
+```
+pip install funcat3 -i https://pypi.org/simple
+```
+如果上述命令在安装ta-lib时出现报错，请重新pip install ta-lib后再执行funcat3安装命令
 
 如有其他安装问题，请提issue，并附上足够的环境信息。
 

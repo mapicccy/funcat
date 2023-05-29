@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: funcat3
-Version: 1.1.1
+Version: 1.1.2
 Home-page: https://github.com/mapicccy/funcat
 Author: Guanjun
 Author-email: mapicccy@gmail.com
@@ -20,4 +20,5 @@ Classifier: Programming Language :: Python :: 3.11
 Description-Content-Type: text/x-rst
 License-File: LICENSE
 
-Using very simple code to compute indicator of stock\crytocurrency. Make quantify easier to everyone
+Using very simple code to compute indicator of stock\crytocurrency. Make quantify easier to everyone.
+Funcat has transplanted the indicator formulas of THS, Tongdaxin, Wenhua Finance, and other platforms into Python. It is suitable for quantitative analysis and trading of stocks, futures, contracts, and cryptocurrencies.
