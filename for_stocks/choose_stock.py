@@ -250,11 +250,13 @@ def callback(date, order_book_id, sym):
 day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d')
 
+set_data_backend(TushareDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
+print(trading_dates)
 order_book_id_list = data_backend.get_order_book_id_list()
 
-with open('daily_stock', 'a+') as fp:
+with open('daily_stock', 'w') as fp:
     fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
 
 select(

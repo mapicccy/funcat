@@ -31,12 +31,11 @@ conda activate py39
 ```
 ### 安装funcat
 1. 安装科学计算库(必选，用于funcat计算指标)
-以下安装方式2选1
-- 虚拟环境安装
+- 虚拟环境安装(推荐)
 ```
 conda install -c conda-forge ta-lib
 ```
-- pip安装
+- pip安装(不推荐，需要前置安装libta_lib.so，在大多数操作系统不提供该库)
 ```
 pip install ta-lib
 ```
