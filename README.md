@@ -31,16 +31,16 @@ Funcat 适合做股票、期货、合约、加密数字货币的量化分析与�
 
 ## 安装
 
-推荐python3，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
+推荐python39，推荐通过[miniconda](https://docs.conda.io/en/latest/miniconda.html)管理环境。
 
-创建python 3.6.8的虚拟环境：
+创建python 3.9.12的虚拟环境：
 ```
-conda create -n py36 python==3.6.8
+conda create -n py39 python==3.9.12
 ```
 
 激活虚拟环境：
 ```
-conda activate py36
+conda activate py39
 ```
 
 安装funcat（因python版本问题可能会有一些依赖库安装不成功，通过pip install xxx手动安装）:
