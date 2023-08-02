@@ -1,11 +1,11 @@
 import os
-import tushare as ts
+import time
+import akshare as ak
 import numpy as np
 import pandas as pd
 import datetime
-import talib
+import requests
 
-from sqlalchemy import create_engine
 from sklearn.linear_model import LinearRegression
 from funcat import *
 from funcat.account import Account
@@ -17,21 +17,6 @@ def select_down_from_max(m, n):
     return COUNT(HHV(H, 5) / L >= n, m) >= 1
 
 
-# m个交易日内股价涨停n次
-def select_limit_up(m, n):
-    A1 = 100 * (C - REF(C, 1)) / REF(C, 1) >= 9.9
-    A2 = COUNT(A1, m)
-    return A2 > n
-
-
-# m天内阴线成交量不能超过阳线成交量的1.3倍
-def select_vol_limited(m, n):
-    up_vol = HHV(V * (C > O), m)
-    down_vol = HHV(V * (C < O), m)
-    print(symbol(get_current_security()), down_vol.series)
-    return down_vol < up_vol * n
-
-
 def select_by_volume(n):
     d = IF(O > C, V, 0)
     u = IF(O > C, 0, V)
@@ -40,14 +25,12 @@ def select_by_volume(n):
     return d_max < u_max
 
 
-# 今天成交量至少在m个交易日有n天超过scale倍
-def select_buy_volumn(m, n, scale):
-    now = REF(V, 0)
-    for i in range(1, m, 1):
-        if now > REF(V, i) * scale:
-            n = n - 1
-
-    return (n <= 0)
+# 通达信八仙过海买入指标，趋势跟随
+def select_buy_signal(n):
+    return ((ZIG(C[n], 6) > REF(ZIG(C[n], 6), 1) and REF(ZIG(C[n], 6), 1) <= REF(ZIG(C[n], 6), 2) <= REF(
+        ZIG(C[n], 6), 3) or (
+                     ZIG(C[n], 22) > REF(ZIG(C[n], 22), 1) and REF(ZIG(C[n], 22), 1) <= REF(ZIG(C[n], 22), 2) <= REF(ZIG(C[n], 22),
+                                                                                                         3))))
 
 
 # n天内存在第一次高于收盘价高于5\13\21\34\55日线
@@ -113,7 +96,7 @@ def select_long_average_up(n):
     try:
         model.fit(np.array(range(len(y_train))).reshape(-1, 1), np.array(y_train).reshape(-1, 1))
     except Exception as e:
-        return False
+        print(e, y_train)
     ma34_coef = model.coef_
 
     # print(ma34_coef, y_train)
@@ -123,117 +106,94 @@ def select_long_average_up(n):
     try:
         model.fit(np.array(range(len(y_train))).reshape(-1, 1), np.array(y_train).reshape(-1, 1))
     except Exception as e:
-        return False
+        print(e, y_train)
     ma55_coef = model.coef_
 
     # print(ma55_coef, y_train)
     return (ma34_coef > 0.005 or ma55_coef > 0.005) and (ma34_coef + ma55_coef) > -0.1
 
 
-# 计算BOLL选择踩下轨后趋势反转碰上轨，然后回踩中轨买入
-def select_boll_reverse(n):
-    mid = MA(C, 20).series     # 20日均线中轨
-    lower = mid - 2 * talib.STDDEV(C.series, 20, 1)    # 下轨
-    upper = mid + 2 * talib.STDDEV(C.series, 20, 1)    # 上轨
-
-    cnt = 0     # 统计从最近一个上轨下来碰到中轨的次数
-    t = 0       # 统计从最近一个下轨选择的次数
-    lidx = 0
-    uidx = 56   # 选取一个足够大的数，防止选下降趋势
-    for i in range(n, 0, -1):
-        idx = len(mid) - i - 1;
-        if L[i] <= lower[idx]:
-            lidx = i
-            t = 0
-
-        if H[i] >= upper[idx]:
-            uidx = i
-            if cnt != 0:
-                t = t + 1
-                cnt = 0
-
-        if uidx != 56 and L[i].value < mid[idx] and H[i].value > mid[idx]:
-            cnt = cnt + 1
-
-    # print("这是第" + str(t) + "次选择")
-    # print(lidx, uidx)
-    # print(C[uidx].value, C[lidx].value * 1.15)
-
-    # 踩下轨之后再碰上轨，然后在今天回踩中轨，并且上轨股价不能超过下轨30%，防止趋势反转
-    return (t <= 2) and (lidx > uidx) and (L.value < mid[len(mid) - 1]) and (H.value > mid[len(mid) - 1]) and\
-            (C[uidx] < C[lidx] * 1.15)
-
-
-def backtest_buy(act):
-    if act.position_num == 0 and len(C.series) != 0 and select_over_average(31) and select_long_average_up(5) and\
-            select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
-        val = float(C.value)
-        num = int(act.balance / val * 100) / 100.0
-        print('+ {} +, buy at {}, num {}'.format(get_current_date(), C, num))
-        act.buy(get_current_security(), C.value, num)
-        act.update(C.value)
-
-
-def backtest_sell(act):
-    if act.value > act.max_value:
-        act.max_value = act.value
-
-    if act.cnt and act.position_num != 0:
-        act.profit_average_time =act.profit_average_time + 1
-
-    if C >= act.position_price * 1.07:
-        print('- {} -, sell at {}, profit average time: {}, max value: {}'.format(get_current_date(), C, act.profit_average_time, act.max_value))
-        act.sell(get_current_security(), C.value, act.position_num)
-        act.profit_average_time = 0
-        act.max_value = 0
-
-    if len(C.series) != 0:
-        act.update(C.value)
-
-
-def backtest_update(act):
-    if len(C.series) != 0:
-        act.update(C.value)
-
-
 def callback(date, order_book_id, sym):
-    pro = ts.pro_api()
-    df = pro.query('daily_basic', ts_code=order_book_id,
-                   fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,circ_mv,float_share')
+    df = ak.stock_zh_a_hist(order_book_id, start_date='20230101', end_date=date, adjust="qfq")
 
     count = 0
-    cnt = 0
     for i in range(21):
-        if df.at[i, 'turnover_rate'] <= 1:
+        if df.at[i, '换手率'] <= 1:
             count = count + 1
 
-        if df.at[i, 'turnover_rate'] >= 4.5:
-            cnt = cnt + 1
-
-    # 最近21换手率低于1%的天数大于13天，或者没有大于5%的天数直接返回
-    if count > 5 or cnt == 0:
+    # 最近31交易日换手率低于1%的天数大于13天、涨幅超过3%的天数小于6，直接返回
+    if count > 13 and COUNT(R > 3., 31) < 6:
         return
 
-    print(date, sym)
+    coef = select_macd_cross_up()
+
+    rw = sym + " "
+
+    if os.path.exists("statistics.csv"):
+        dt = pd.read_csv("statistics.csv", index_col=False)
+        cur_dt = pd.DataFrame(columns=['select_date', 'ts_code', 'symbol', 'pct_chg', 'index_pct_chg'])
+        cur_dt = cur_dt.append([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, 'pct_chg': round((C.value - REF(C, 1).value) / REF(C, 1).value, 3), 'index_pct_chg': 0}], ignore_index=True)
+        dt = pd.concat([cur_dt, dt], ignore_index=True)
+        dt.to_csv("statistics.csv", index=0)
+
+    ccnt = 0
+    tcnt = 0
+    uup = 0
+    time_tmp = ""
+    # trading_dates not include today for cache issue
+    # 计算7年内选股策略盈利的次数，以及最大盈利比例
+    for itr, time in enumerate(trading_dates[:-7]):
+        T(time)
+        try:
+            if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
+                if time_tmp == "":
+                    time_tmp = time
+                elif int(time) - int(time_tmp) < 23:  # interval between adjacent choosing must large than 23 days
+                    continue
+
+                tcnt = tcnt + 1
+                cur_price = C.value
+                max_price = C.value
+                max_dates = itr + 30
+                if itr + 30 >= len(trading_dates):
+                    max_dates = len(trading_dates)
+                for it in range(itr, max_dates, 1):
+                    T(trading_dates[it])
+                    if C.value > max_price:
+                        max_price = C.value
+
+                # regards profit if boom 4%
+                if max_price > cur_price * 1.04:
+                    ccnt = ccnt + 1
+                    uup = int(round((max_price - cur_price) / cur_price, 2) * 100)
+        except Exception as e:
+            continue
+
+    # set trade date to the origin value.
+    T(date)
+
+    if ccnt != 0:
+        rw = rw + " 2015年至今选中" + str(tcnt) + "次，准确" + str(ccnt) + "次，最高盈利" + str(uup) + "%"
+    print(date, rw)
+
+    with open('daily_stock', 'a+') as fp:
+        fp.write(rw + "\n")
 
 
 day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d')
 
+set_data_backend(AkshareDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
-trading_dates = data_backend.get_trading_dates(day0, day)
+trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
-S("000878.SZ")
-T("20200615")
-select_boll_reverse(31)
-print(select_long_average_up(5))
+with open('daily_stock', 'w') as fp:
+    fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
 
 select(
-   lambda: select_long_average_up(5) and select_boll_reverse(31),
+   lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
-   #start_date="20200615",
-   #end_date="20200615",
    callback=callback,
 )

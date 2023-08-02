@@ -127,7 +127,7 @@ class AkshareDataBackend(DataBackend):
                     ad_filename = order_book_id.replace('.', '-') + '2015-04-01' + str_td + '.csv'
                     if os.path.exists('data/' + ad_filename) and str_end_date <= str_td:
                         df = pd.read_csv('data/' + ad_filename)
-                        df = df.loc[df['trade_date'] <= end]
+                        df = df.loc[df['trade_date'] <= str_end_date]
                         df = df.reset_index(drop=True)
                         break
         else:
@@ -159,7 +159,7 @@ class AkshareDataBackend(DataBackend):
             df.rename(columns={"pct_chg": "ratio"}, inplace=True)
             df.to_csv('data/' + filename, index=False)
 
-        df = df.sort_index(ascending=False)
+        df = df.sort_index(ascending=True)
         arr = df.to_records()
 
         return arr
@@ -189,5 +189,8 @@ class AkshareDataBackend(DataBackend):
         :returns: 名字
         :rtype: str
         """
-        code = self.convert_code(order_book_id)
-        return "{}[{}]".format(order_book_id, self.code_name_map.get(code))
+        cur_dir = os.path.dirname(__file__)
+        filepath = os.path.join(cur_dir, "order_book_id_list.csv")
+        df = pd.read_csv(filepath, dtype={'ts_code': str, 'name': str})
+        df = df.loc[df['ts_code'] == order_book_id].reset_index(drop=True)
+        return "{}[{}]".format(order_book_id, df.loc[0, 'name'])

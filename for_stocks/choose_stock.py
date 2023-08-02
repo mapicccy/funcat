@@ -266,7 +266,7 @@ select(
    callback=callback,
 )
 
-os.system('/root/.conda/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
+os.system('/root/miniconda3/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
 url = "http://qt.gtimg.cn/q="
 with open('daily_stock', 'a+') as fp:
     fp.write("\n大象起舞(市值超500亿，量能狂飙):\n")
