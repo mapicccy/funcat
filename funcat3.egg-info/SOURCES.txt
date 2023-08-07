@@ -15,6 +15,7 @@ funcat/time_series.py
 funcat/utils.py
 funcat/data/__init__.py
 funcat/data/akshare_backend.py
+funcat/data/akshare_hk_backend.py
 funcat/data/backend.py
 funcat/data/crypto_backend.py
 funcat/data/order_book_id_list.csv

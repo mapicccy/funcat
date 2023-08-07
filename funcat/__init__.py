@@ -16,6 +16,7 @@ from .indicators import *
 
 from .data.tushare_backend import TushareDataBackend
 from .data.akshare_backend import AkshareDataBackend
+from .data.akshare_hk_backend import AkshareHKDataBackend
 from .context import ExecutionContext as funcat_execution_context
 
 funcat_execution_context(date=20170104,
