@@ -165,15 +165,15 @@ day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d'
 set_data_backend(AkshareHKDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
-print(trading_dates)
 order_book_id_list = data_backend.get_order_book_id_list()
 print(order_book_id_list)
+print(len(order_book_id_list))
 
 with open('hk_daily_stock', 'w') as fp:
     fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
 
 select(
-   lambda: select_over_average(31) and select_long_average_up(2),
+   lambda: V.value * C.value > 100000000 and select_over_average(31) and select_long_average_up(2),
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
