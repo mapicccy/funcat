@@ -89,6 +89,8 @@ class AkshareDataBackend(DataBackend):
         :rtype: numpy.rec.array
         """
         is_index = False
+        is_found = False
+        """
         if ((order_book_id.startswith("0") and order_book_id.endswith(".SH")) or
             (order_book_id.startswith("39") and order_book_id.endswith(".SZ"))
             ):
@@ -98,6 +100,8 @@ class AkshareDataBackend(DataBackend):
             (order_book_id.startswith("1") and order_book_id.endswith(".SZ"))
             ):
             is_found = True
+        """
+
         ktype = freq
         if freq[-1] == "m":
             ktype = freq[:-1]
