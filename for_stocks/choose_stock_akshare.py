@@ -197,7 +197,8 @@ select(
    end_date=trading_dates[-1],
    callback=callback,
 )
-os.system('/root/miniconda3/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
+
+# os.system('/root/miniconda3/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
 
 df = pd.read_csv("statistics.csv", index_col=False)
 sd = (datetime.datetime.strptime(str(day), "%Y%m%d") + datetime.timedelta(days=-60)).strftime("%Y%m%d")
