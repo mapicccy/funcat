@@ -200,19 +200,38 @@ select(
 
 # os.system('/root/miniconda3/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
 
+backward = 60
 df = pd.read_csv("statistics.csv", index_col=False)
-sd = (datetime.datetime.strptime(str(day), "%Y%m%d") + datetime.timedelta(days=-60)).strftime("%Y%m%d")
+sd = (datetime.datetime.strptime(str(day), "%Y%m%d") + datetime.timedelta(days=-backward)).strftime("%Y%m%d")
 dt = df.loc[(df["select_date"] <= int(day)) & (df["select_date"] >= int(sd))]
 st = list(set(dt["ts_code"].tolist()))
 stat = {}
+pro = []
 for i in st:
     dtmp = dt.loc[dt["ts_code"] == i].reset_index(drop=True)
     time_list = list(set(dtmp["select_date"].tolist()))
     # get the nearest selection
     time = time_list[0]
+    profit = 0
     S(i)
     T(time)
     price = C.value
+
+    # judge from choosing day to one week ago
+    for j in range(backward, 7, -1):
+        anchor = (datetime.datetime.strptime(str(day), "%Y%m%d") + datetime.timedelta(days=-j)).strftime("%Y%m%d")
+        if anchor <= str(time):
+            continue
+
+        T(anchor)
+        profit = max(int(round((C.value - price) / price, 2) * 100), profit)
+        # print(i, time, anchor, profit)
+
+    if profit > 3:
+        pro.append(profit)
+    else:
+        pro.append(-1)
+
     # day is today, due to tushare api limitation, this data may be NaN
     T(day)
     try:
@@ -220,8 +239,11 @@ for i in st:
     except Exception as e:
         print(e)
 sorted_stock = sorted(stat.items(), key=lambda x:-x[1])
+count = len([num for num in pro if num > 0])
 print("Guanjun: sorted stock")
 print(sorted_stock)
+
+print("Total candidates: ", len(sorted_stock), "profit: ", count)
 
 
 ATT = """\n注意：\n1. 已屏蔽换手率过低以及不活跃股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n6. 历史数据显示，如果首次筛选选出较多的股票，代表大盘临近上涨趋势点\n7. 如果您有更好的交易\选股策略，苦于没有编程经验，请联系微信zhao9111，独家服务帮您实现\n8. tushare数据源获取成本大幅提高，股票池固化在2023/05/24，总共5193只，后续不再更新股票池\n"""
