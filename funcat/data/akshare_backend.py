@@ -110,12 +110,11 @@ class AkshareDataBackend(DataBackend):
         # else W M
 
         now = datetime.date.today().strftime("%Y%m%d")
-        last_tradeday = self.get_trading_dates(start, end)[-2]
         end = now if end is None else end
 
         str_start_date = get_str_date_from_int(start)
         str_end_date = get_str_date_from_int(end)
-        filename = (order_book_id + str_start_date + str_end_date).replace('.', '-') + '.csv'
+        filename = (order_book_id + '-' + str_start_date + '-' + str_end_date).replace('.', '-') + '.csv'
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 # csv file may be empty, raise except EmptyDataError
@@ -128,7 +127,7 @@ class AkshareDataBackend(DataBackend):
                 trading_dates = self.get_trading_dates(start, update_to_date)
                 for td in reversed(trading_dates):
                     str_td = get_str_date_from_int(td)
-                    ad_filename = order_book_id.replace('.', '-') + '2015-04-01' + str_td + '.csv'
+                    ad_filename = (order_book_id + '-' + '2015-04-01' + '-' + str_td).replace('.', '-') + '.csv'
                     if os.path.exists('data/' + ad_filename) and str_end_date <= str_td:
                         df = pd.read_csv('data/' + ad_filename)
                         df = df.loc[df['trade_date'] <= str_end_date]
