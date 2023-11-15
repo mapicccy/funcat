@@ -203,11 +203,14 @@ select(
 backward = 60
 df = pd.read_csv("statistics.csv", index_col=False)
 sd = (datetime.datetime.strptime(str(day), "%Y%m%d") + datetime.timedelta(days=-backward)).strftime("%Y%m%d")
-dt = df.loc[(df["select_date"] <= int(day)) & (df["select_date"] >= int(sd))]
+dt = df.loc[(df["select_date"] <= int(day0)) & (df["select_date"] >= int(sd))]
 st = list(set(dt["ts_code"].tolist()))
 stat = {}
 pro = []
 for i in st:
+    if i[:6] >= "800000":
+        continue
+
     dtmp = dt.loc[dt["ts_code"] == i].reset_index(drop=True)
     time_list = list(set(dtmp["select_date"].tolist()))
     # get the nearest selection
