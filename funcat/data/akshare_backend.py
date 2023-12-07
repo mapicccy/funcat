@@ -58,7 +58,7 @@ class AkshareDataBackend(DataBackend):
         return sorted(trading_dates)
 
     def convert_code(self, order_book_id):
-        return order_book_id.split(".")[0]
+        return str(order_book_id).split(".")[0]
 
     @lru_cache()
     def get_trading_dates(self, start, end):
