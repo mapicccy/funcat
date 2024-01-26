@@ -32,7 +32,7 @@ def choose(order_book_id, func, callback):
 
 
 @suppress_numpy_warn
-def select(func, start_date="2016-10-01", end_date=None, callback=print, order_book_id_list=None):
+def select(func, start_date="2019-10-01", end_date=None, callback=print, order_book_id_list=None):
     print(getsourcelines(func))
     start_date = get_int_date(start_date)
     if end_date is None:

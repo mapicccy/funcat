@@ -199,7 +199,7 @@ def callback(date, order_book_id, sym):
     if os.path.exists("statistics.csv"):
         dt = pd.read_csv("statistics.csv", index_col=False)
         cur_dt = pd.DataFrame(columns=['select_date', 'ts_code', 'symbol', 'pct_chg', 'index_pct_chg'])
-        cur_dt = cur_dt.append([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, 'pct_chg': round((C.value - REF(C, 1).value) / REF(C, 1).value, 3), 'index_pct_chg': 0}], ignore_index=True)
+        cur_dt = pd.concat([cur_dt, pd.DataFrame([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, 'pct_chg': round((C.value - REF(C, 1).value) / REF(C, 1).value, 3), 'index_pct_chg': 0}])], ignore_index=True)
         dt = pd.concat([cur_dt, dt], ignore_index=True)
         dt.to_csv("statistics.csv", index=0)
 

@@ -225,7 +225,7 @@ class NumericSeries(TimeSeries):
 
 class DuplicateNumericSeries(NumericSeries):
     # FIXME size should come from other series
-    def __init__(self, series, size=640000):
+    def __init__(self, series, size=6400):
         try:
             val = series[-1]
         except:
