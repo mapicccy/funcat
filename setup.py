@@ -24,7 +24,7 @@ with open(join(dirname(__file__), 'funcat/VERSION.txt'), 'rb') as f:
 setup(
     name='funcat3',
     version=version,
-    long_description='Using very simple code to compute indicator of stock\crytocurrency. Make quantify easier to everyone.\nFuncat has transplanted the indicator formulas of THS, Tongdaxin, Wenhua Finance, and other platforms into Python. It is suitable for quantitative analysis and trading of stocks, futures, contracts, and cryptocurrencies.',
+    long_description='Using very simple code to compute indicator of stock and crytocurrency. Make quantify easier to everyone. Funcat has transplanted the indicator formulas of THS, Tongdaxin, Wenhua Finance, and other platforms into Python. It is suitable for quantitative analysis and trading of stocks, futures, contracts, and cryptocurrencies.',
     long_description_content_type="text/x-rst",
     packages=find_packages(exclude=[]),
     author='Guanjun',
