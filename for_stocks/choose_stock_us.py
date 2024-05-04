@@ -11,6 +11,13 @@ from funcat import *
 from funcat.account import Account
 from funcat.context import ExecutionContext as funcat_execution_context
 
+from wxpusher import WxPusher as wx
+
+
+uid = ['UID_4yb8qx3oxePh1ZHCvFpVxNGDRAuf',
+        'UID_6tyjJDIh80gYNw43z6sTkmMhsJWV',
+        'UID_x1ArbpSoVqdcRr8EHTJYPQzuwUtY']
+
 
 # 当前股价比最近m天股价最高点下跌n-1
 def select_down_from_max(m, n):
@@ -50,14 +57,14 @@ def select_over_average(n):
         if ret and select_by_volume(21) and COUNT(select_buy_signal(0), 34) >= 1 and (COUNT(100 * (C[i] - REF(C[i], 1)) / REF(C[i], 1) >= 3., 55) >= 4):
             _, peers = zig_helper(C.series[-(i+1):], 7)
             # print(i, ret, candidate, peers, get_current_date(), select_by_volume(13), COUNT(select_buy_signal(0), 15), COUNT(100 * (C[i] - REF(C[i], 1)) / REF(C[i], 1) >= 3., 55))
-            if len(peers) <= 3:
-                candidate = candidate + 1
+            # 美股可能会在底部多次震荡，这里不判断peers的数量，区别于A股
+            candidate = candidate + 1
                 # print(candidate, get_current_date(), symbol(get_current_security()), i, ma55, peers)
                 # print(C.series[-(i+1):])
         # if ret:
         #     print(get_current_date(), symbol(get_current_security()), "突破5\\13\\21\\34\\55日均线", C, ma5)
 
-    return candidate == 1
+    return candidate >= 1
 
 
 def select_macd_cross_up():
@@ -109,7 +116,7 @@ def select_long_average_up(n):
         print(e, y_train)
     ma55_coef = model.coef_
 
-    # print(ma55_coef, y_train)
+    # print(ma34_coef, ma55_coef)
     return ma34_coef > 0. or ma55_coef > 0.
 
 
@@ -124,13 +131,14 @@ def callback(date, order_book_id, sym):
     for itr, time in enumerate(trading_dates[:-7]):
         T(time)
         try:
-            if select_over_average(31) and select_long_average_up(2):
+            if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
                 if time_tmp == "":
                     time_tmp = time
                 elif int(time) - int(time_tmp) < 23:  # interval between adjacent choosing must large than 23 days
                     continue
 
                 tcnt = tcnt + 1
+                # print("select {} at {}".format(sym, time))
                 cur_price = C.value
                 max_price = C.value
                 max_dates = itr + 30
@@ -165,14 +173,28 @@ day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d'
 set_data_backend(AkshareUSDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
-print(trading_dates)
+S("SQQQ")
+T("20240504")
+print(O, H, L, C)
+print(V.value * C.value > 1000000000)
+print(select_over_average(31))
+print(select_long_average_up(5))
+print(select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12)
 
 with open('us_daily_stock', 'w') as fp:
-    fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
+    fp.write("美股选股(共114只热门股及ETF，30日内5%以上盈利视为准确):\n")
 
 select(
-   lambda: select_over_average(31) and select_long_average_up(2),
+   lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
 )
+
+if not os.path.exists('us_daily_stock'):
+    raise Exception('daily_stock no such file...')
+else:
+    with open('us_daily_stock', 'r') as fp:
+        text = fp.read()
+        text = text + "\n\n注意：\n美股趋势一但形成很难扭转，本选股策略只会挑选趋势反转的股票，注意止盈止损"
+        wx.send_message(text, uids=uid, token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')

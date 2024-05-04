@@ -1,0 +1,126 @@
+symbol,name
+YINN,"富时中国3倍做多"
+YANG,"富时中国3倍做空"
+SQQQ,"纳斯达克3倍做空"
+TQQQ,"纳斯达克3倍做多"
+SOXL,"半导体指数3倍做多"
+SOXS,"半导体指数3倍做空"
+UGL,"黄金两倍做多"
+ERX,"美国能源指数2倍做多"
+UCO,"原油2倍做多"
+CONL,"虚拟货币指数2倍做多"
+UVIX,"VIX恐慌指数2倍做多"
+CHAU,"沪深300 2倍做多"
+PILL,"美国医药指数3倍做多"
+GGLL,"Google 2X LONG"
+AAPX,"APPLE 2X LONG"
+AAPD,"APPLE 1X SHORT"
+NVDL,"NVDA 2X LONG"
+NVDQ,"NVDA 2X SHORT"
+FBL,"META 2X LONG"
+CWEB,"中国互联网2倍做多"
+AMZD,"AMAZON 1X SHORT"
+TSLQ,"TSLA 1X SHORT"
+YXI,"富时中国做空"
+WEBL,"美国互联网指数3倍做多"
+WEBS,"美国互联网指数3倍做空"
+GBTC,"比特币ETF"
+MSFT,Microsoft Corp.
+AAPL,"Apple, Inc."
+NVDA,NVIDIA Corp.
+GOOG,"Alphabet, Inc."
+GOOGL,"Alphabet, Inc."
+AMZN,"Amazon.com, Inc."
+META,"Meta Platforms, Inc."
+TSM,"Taiwan Semiconductor Manufacturing Co., Ltd."
+LLY,Eli Lilly & Co.
+AVGO,Broadcom Inc.
+TSLA,"Tesla, Inc."
+JPM,JPMorgan Chase & Co.
+NVO,Novo Nordisk A/S
+V,"Visa, Inc."
+WMT,"Walmart, Inc."
+XOM,Exxon Mobil Corp.
+UNH,"UnitedHealth Group, Inc."
+MA,"Mastercard, Inc."
+VXUS,Vanguard Total International Stock ETF
+PG,Procter & Gamble Co.
+JNJ,Johnson & Johnson
+ASML,ASML Holding NV
+HD,"The Home Depot, Inc."
+COST,Costco Wholesale Corp.
+MRK,"Merck & Co., Inc."
+ORCL,Oracle Corp.
+TM,Toyota Motor Corp.
+CVX,Chevron Corp.
+BAC,Bank of America Corp.
+ABBV,"AbbVie, Inc."
+KO,The Coca-Cola Co.
+CRM,"Salesforce, Inc."
+NFLX,"Netflix, Inc."
+AMD,"Advanced Micro Devices, Inc."
+PEP,"PepsiCo, Inc."
+AZN,AstraZeneca PLC
+SHEL,Shell Plc
+TMO,"Thermo Fisher Scientific, Inc."
+ADBE,"Adobe, Inc."
+SAP,SAP SE
+WFC,Wells Fargo & Co.
+DIS,The Walt Disney Co.
+BABA,Alibaba Group Holding Ltd.
+LIN,Linde Plc
+QCOM,"QUALCOMM, Inc."
+NVS,Novartis AG
+MCD,McDonald's Corp.
+PDD,"PDD Holdings, Inc."
+RDS.A,Shell Plc
+ACN,Accenture Plc
+CSCO,"Cisco Systems, Inc."
+VUG,Vanguard Growth Index Fund
+DHR,Danaher Corp.
+ABT,Abbott Laboratories
+GE,GE Aerospace
+INTU,"Intuit, Inc."
+AMAT,"Applied Materials, Inc."
+HSBC,HSBC Holdings Plc
+AMGN,"Amgen, Inc."
+TTE,TotalEnergies SE
+AXP,American Express Co.
+CAT,"Caterpillar, Inc."
+VZ,"Verizon Communications, Inc."
+TXN,Texas Instruments Incorporated
+VO,Vanguard Mid-Cap Index Fund
+PFE,Pfizer Inc.
+MS,Morgan Stanley
+IBM,International Business Machines Corp.
+CMCSA,Comcast Corp.
+PM,"Philip Morris International, Inc."
+HDB,HDFC Bank Ltd.
+NOW,"ServiceNow, Inc."
+UNP,Union Pacific Corp.
+UBER,"Uber Technologies, Inc."
+NEE,"NextEra Energy, Inc."
+COP,ConocoPhillips
+RY,Royal Bank of Canada
+BHP,BHP Group Ltd.
+GS,"The Goldman Sachs Group, Inc."
+NKE,"NIKE, Inc."
+SCHW,The Charles Schwab Corp.
+ISRG,"Intuitive Surgical, Inc."
+RTX,RTX Corp.
+SPGI,"S&P Global, Inc."
+LOW,"Lowe's Companies, Inc."
+INTC,Intel Corp.
+UL,Unilever Plc
+ETN,Eaton Corp. Plc
+HON,"Honeywell International, Inc."
+TOT,TotalEnergies SE
+MU,"Micron Technology, Inc."
+SYK,Stryker Corp.
+VB,Vanguard Small-Cap ETF
+UPS,"United Parcel Service, Inc."
+ELV,"Elevance Health, Inc."
+SNY,Sanofi
+XPEV,"XPeng, Inc."
+BILI,"Bilibili, Inc."
+BABX,GraniteShares 2x Long BABA Daily ETF

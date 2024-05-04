@@ -16,9 +16,11 @@ funcat/utils.py
 funcat/data/__init__.py
 funcat/data/akshare_backend.py
 funcat/data/akshare_hk_backend.py
+funcat/data/akshare_us_backend.py
 funcat/data/backend.py
 funcat/data/crypto_backend.py
 funcat/data/order_book_id_list.csv
+funcat/data/order_book_id_list_us.csv
 funcat/data/rqalpha_data_backend.py
 funcat/data/rqdata_data_backend.py
 funcat/data/rt_data.py
