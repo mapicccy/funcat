@@ -121,47 +121,21 @@ def select_long_average_up(n):
 
 
 def callback(date, order_book_id, sym):
-    rw = sym + " "
+    rw = str(date) + " " + sym + " "
     ccnt = 0
     tcnt = 0
     uup = 0
     time_tmp = ""
-    # trading_dates not include today for cache issue
-    # 计算7年内选股策略盈利的次数，以及最大盈利比例
-    for itr, time in enumerate(trading_dates[:-7]):
-        T(time)
-        try:
-            if select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12:
-                if time_tmp == "":
-                    time_tmp = time
-                elif int(time) - int(time_tmp) < 23:  # interval between adjacent choosing must large than 23 days
-                    continue
 
-                tcnt = tcnt + 1
-                # print("select {} at {}".format(sym, time))
-                cur_price = C.value
-                max_price = C.value
-                max_dates = itr + 30
-                if itr + 30 >= len(trading_dates):
-                    max_dates = len(trading_dates)
-                for it in range(itr, max_dates, 1):
-                    T(trading_dates[it])
-                    if C.value > max_price:
-                        max_price = C.value
+    if os.path.exists("statistics_us.csv"):
+       dt = pd.read_csv("statistics_us.csv", index_col=False)
+       new_row = [{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, 'pct_chg': round((C.value - REF(C, 1).value) / REF(C, 1).value, 3), 'index_pct_chg': 0}]
+       dt = pd.concat([dt, pd.DataFrame(new_row)], ignore_index=True)
+       dt.to_csv("statistics_us.csv", index=0)
 
-                # regards profit if boom 4%
-                if max_price > cur_price * 1.04:
-                    ccnt = ccnt + 1
-                    uup = int(round((max_price - cur_price) / cur_price, 2) * 100)
-        except Exception as e:
-            continue
-
-    # set trade date to the origin value.
     T(date)
 
-    if ccnt != 0:
-        rw = rw + " 2015年至今选中" + str(tcnt) + "次，准确" + str(ccnt) + "次，最高盈利" + str(uup) + "%"
-    print(date, rw)
+    print(rw)
 
     with open('us_daily_stock', 'a+') as fp:
         fp.write(rw + "\n")
@@ -196,3 +170,4 @@ else:
     with open('us_daily_stock', 'r') as fp:
         text = fp.read()
         text = text + "\n\n注意：\n美股趋势一但形成很难扭转，本选股策略只会挑选趋势反转的股票，注意止盈止损"
+        wx.send_message(text, uids=uid, token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')

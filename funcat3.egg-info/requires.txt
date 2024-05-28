@@ -1,9 +1,9 @@
 setuptools
 wheel
-numpy
+numpy==1.26.4
 six
 backports.functools_lru_cache
-pandas
+pandas==1.5.3
 lxml
 requests
 cached-property

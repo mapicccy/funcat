@@ -21,10 +21,10 @@ Description-Content-Type: text/x-rst
 License-File: LICENSE
 Requires-Dist: setuptools
 Requires-Dist: wheel
-Requires-Dist: numpy
+Requires-Dist: numpy==1.26.4
 Requires-Dist: six
 Requires-Dist: backports.functools_lru_cache
-Requires-Dist: pandas
+Requires-Dist: pandas==1.5.3
 Requires-Dist: lxml
 Requires-Dist: requests
 Requires-Dist: cached-property
