@@ -19,6 +19,7 @@ from .data.tushare_backend import TushareDataBackend
 from .data.akshare_backend import AkshareDataBackend
 from .data.akshare_hk_backend import AkshareHKDataBackend
 from .data.akshare_us_backend import AkshareUSDataBackend
+from .data.akshare_future_backend import AkshareFutureDataBackend
 from .context import ExecutionContext as funcat_execution_context
 
 now = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
