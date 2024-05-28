@@ -28,7 +28,7 @@ st = list(set(dt["ts_code"].tolist()))
 stat = {}
 pro = []
 for i in st:
-    if i[:6] >= "800000":
+    if i[:6] >= "800000" or "ST" in symbol(i[:6]):
         continue
 
     dtmp = dt.loc[dt["ts_code"] == i].reset_index(drop=True)
@@ -51,7 +51,7 @@ for i in st:
 
         T(anchor)
         profit = max(int(round((C.value - price) / price, 2) * 100), profit)
-        # print(i, time, anchor, profit)
+        # print(i, time, anchor, C.value, price, profit)
 
     # day is today, due to tushare api limitation, this data may be NaN
     T(day)
@@ -99,5 +99,3 @@ with open('daily_stock', 'r') as fp:
 text = text + ATT
 print(text)
 
-if int(day) not in trading_dates:
-    wx.send_message(text, topic_ids=['8112'], token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')

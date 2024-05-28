@@ -173,7 +173,7 @@ with open('hk_daily_stock', 'w') as fp:
     fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
 
 select(
-   lambda: V.value * C.value > 100000000 and select_over_average(31) and select_long_average_up(2),
+   lambda: V.value * C.value > 100000000 and select_over_average(31) and select_long_average_up(5),
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,

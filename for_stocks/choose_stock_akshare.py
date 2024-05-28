@@ -114,7 +114,7 @@ def select_long_average_up(n):
 
 
 def callback(date, order_book_id, sym):
-    if order_book_id[:6] >= "800000":
+    if order_book_id[:6] >= "800000" or "ST" in sym:
         return
 
     df = ak.stock_zh_a_hist(order_book_id, start_date='20230101', end_date=date, adjust="qfq")

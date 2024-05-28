@@ -114,7 +114,8 @@ class AkshareDataBackend(DataBackend):
 
         str_start_date = get_str_date_from_int(start)
         str_end_date = get_str_date_from_int(end)
-        filename = (str(order_book_id) + '-' + str_start_date + '-' + str_end_date).replace('.', '-') + '.csv'
+        order_book_id = str(order_book_id)
+        filename = (order_book_id + '-' + str_start_date + '-' + str_end_date).replace('.', '-') + '.csv'
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 # csv file may be empty, raise except EmptyDataError
