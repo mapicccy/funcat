@@ -89,18 +89,18 @@ class AkshareDataBackend(DataBackend):
         :rtype: numpy.rec.array
         """
         is_index = False
-        is_found = False
-        """
+        is_fund = False
+        
         if ((order_book_id.startswith("0") and order_book_id.endswith(".SH")) or
             (order_book_id.startswith("39") and order_book_id.endswith(".SZ"))
             ):
             is_index = True
-        is_found = False
+        is_fund = False
         if ((order_book_id.startswith("5") and order_book_id.endswith(".SH")) or
             (order_book_id.startswith("1") and order_book_id.endswith(".SZ"))
             ):
-            is_found = True
-        """
+            is_fund = True
+        
 
         ktype = freq
         if freq[-1] == "m":
@@ -140,13 +140,14 @@ class AkshareDataBackend(DataBackend):
         if 'df' not in dir():
             try:
                 if is_index:
-                    code = order_book_id[7:].lower() + order_book_id[:7]
-                    df = self.ak.stock_zh_a_daily(code)
+                    code = order_book_id[7:].lower() + order_book_id[:6]
+                    df = self.ak.stock_zh_index_daily_em(code)
                     df['trade_date'] = df['date'].apply(lambda x: x.strftime("%Y%m%d"))
                     df = df.loc[df["trade_date"] >= str_start_date & df["trade_date"] <= str_end_date]
-                elif is_found:
-                    # akshare has no fund info?
-                    pass
+                elif is_fund:
+                    code = self.convert_code(order_book_id)
+                    df = self.ak.fund_etf_hist_em(code,start_date=start, end_date=end, adjust="qfq")
+                    df.rename(columns={"日期": "trade_date", "开盘": "open", "收盘": "close", "最高": "high", "最低": "low", "成交量": "vol", "成交额": "amount", "涨跌幅": "pct_chg", "涨跌额": "change", "换手率": "turn_over"}, inplace=True)
                 else:
                     code = self.convert_code(order_book_id)
                     df = self.ak.stock_zh_a_hist(code, start_date=start, end_date=end, adjust="qfq")
