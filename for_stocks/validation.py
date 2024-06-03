@@ -99,3 +99,5 @@ with open('daily_stock', 'r') as fp:
 text = text + ATT
 print(text)
 
+if int(day) not in trading_dates:
+    wx.send_message(text, topic_ids=['8112'], token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')

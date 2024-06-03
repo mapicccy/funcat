@@ -196,3 +196,4 @@ else:
     with open('us_daily_stock', 'r') as fp:
         text = fp.read()
         text = text + "\n\n注意：\n美股趋势一但形成很难扭转，本选股策略只会挑选趋势反转的股票，注意止盈止损"
+        wx.send_message(text, uids=uid, token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')
