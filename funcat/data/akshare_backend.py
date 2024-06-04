@@ -141,9 +141,7 @@ class AkshareDataBackend(DataBackend):
             try:
                 if is_index:
                     code = order_book_id[7:].lower() + order_book_id[:6]
-                    df = self.ak.stock_zh_index_daily_em(code)
-                    df['trade_date'] = df['date'].apply(lambda x: x.strftime("%Y%m%d"))
-                    df = df.loc[df["trade_date"] >= str_start_date & df["trade_date"] <= str_end_date]
+                    df = self.ak.stock_zh_index_daily_em(code,start_date=start, end_date=end)
                 elif is_fund:
                     code = self.convert_code(order_book_id)
                     df = self.ak.fund_etf_hist_em(code,start_date=start, end_date=end, adjust="qfq")
