@@ -49,11 +49,10 @@ def select_over_average(n):
         ma13 = MA(C[i], 13)
         ma21 = MA(C[i], 21)
         ma34 = MA(C[i], 34)
-        ma55 = MA(C[i], 55)
-        if REF(C[i], 0) < ma5 or REF(C[i], 0) < ma13 or REF(C[i], 0) < ma21 or REF(C[i], 0) < ma34 or REF(C[i], 0) < ma55:
+        if REF(C[i], 0) < ma5 or REF(C[i], 0) < ma13 or REF(C[i], 0) < ma21 or REF(C[i], 0) < ma34:
             continue
 
-        ret = (COUNT((C[i] > MA(C[i], 5)) & (C[i] > MA(C[i], 13)) & (C[i] > MA(C[i], 21)) & (C[i] > MA(C[i], 34)) & (C[i] > MA(C[i], 55)), n) == 1)
+        ret = (COUNT((C[i] > MA(C[i], 5)) & (C[i] > MA(C[i], 13)) & (C[i] > MA(C[i], 21)) & (C[i] > MA(C[i], 34)), n) == 1)
         # print(i, ret, candidate, get_current_date(), select_by_volume(21), COUNT(select_buy_signal(0), 34), COUNT(100 * (C[i] - REF(C[i], 1)) / REF(C[i], 1) >= 3., 55))
         if ret and select_by_volume(21) and COUNT(select_buy_signal(0), 34) >= 1 and (COUNT(100 * (C[i] - REF(C[i], 1)) / REF(C[i], 1) >= 3., 55) >= 4):
             _, peers = zig_helper(C.series[-(i+1):], 7)
@@ -95,12 +94,12 @@ def select_macd_cross_up():
     return coef
 
 
-# 长期均线34\55连续n天形成上升趋势
+# 长期均线13\34连续n天形成上升趋势
 def select_long_average_up(n):
     model = LinearRegression()
     y_train = []
     for i in range(n - 1, -1, -1):
-        y_train.append(MA(C[i], 34).value)
+        y_train.append(MA(C[i], 13).value)
     try:
         model.fit(np.array(range(len(y_train))).reshape(-1, 1), np.array(y_train).reshape(-1, 1))
     except Exception as e:
@@ -110,7 +109,7 @@ def select_long_average_up(n):
     # print(ma34_coef, y_train)
     y_train = []
     for i in range(n - 1, -1, -1):
-        y_train.append(MA(C[i], 55).value)
+        y_train.append(MA(C[i], 34).value)
     try:
         model.fit(np.array(range(len(y_train))).reshape(-1, 1), np.array(y_train).reshape(-1, 1))
     except Exception as e:
@@ -174,10 +173,9 @@ day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d'
 set_data_backend(AkshareUSDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
-S("SQQQ")
-T("20240504")
+S("UVIX")
+T("20240722")
 print(O, H, L, C)
-print(V.value * C.value > 1000000000)
 print(select_over_average(31))
 print(select_long_average_up(5))
 print(select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12)
