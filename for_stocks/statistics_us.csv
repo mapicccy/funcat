@@ -1,0 +1,3 @@
+select_date,ts_code,symbol,pct_chg,index_pct_chg
+20240807,UVIX,UVIX[VIX恐慌指数2倍做多],-0.096,0
+20240807,PILL,PILL[美国医药指数3倍做多],-0.02,0
