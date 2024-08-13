@@ -141,6 +141,9 @@ class AkshareFutureDataBackend(DataBackend):
                 return np.array([])
 
             df = df.loc[df['trade_date'] <= str_end_date]
+            if df.empty:
+                return np.array([])
+
             df["datetime"] = df.apply(
                 lambda row: int(row["trade_date"].split(" ")[0].replace("-", "")) * 1000000 + int(row["trade_date"].split(" ")[1].replace(":", "")), axis=1)
 
