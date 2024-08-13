@@ -432,9 +432,9 @@ while i >= 0:
     S(sym)
     T(day)
 
-    stage = list(map(lambda x: str(x)[:12], DATETIME.series))
-    up_cond = [True if item[8:] == "1500" and int(item[:8]) in date and direction[date.index(int(item[:8]))] == 1 else False for item in stage]
-    do_cond = [True if item[8:] == "1500" and int(item[:8]) in date and direction[date.index(int(item[:8]))] == 0 else False for item in stage]
+    stage = list(map(lambda x: str(x), DATETIME.series))
+    up_cond = [True if int(item) in date and direction[date.index(int(item))] == 1 else False for item in stage]
+    do_cond = [True if int(item) in date and direction[date.index(int(item))] == 0 else False for item in stage]
 
     i = i - 1
     data = {

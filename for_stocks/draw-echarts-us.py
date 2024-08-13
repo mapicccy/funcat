@@ -22,7 +22,7 @@ day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 
 set_data_backend(AkshareUSDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
-trading_dates = data_backend.get_trading_dates("20150808", day)
+trading_dates = data_backend.get_trading_dates("20130808", day)
 
 class KChartData:
     def __init__(self,name,df,freq='D',precision=2):
@@ -126,9 +126,6 @@ class KChartData:
         if 'BUY' in self.data.columns:
             v1 = self.data[self.data['BUY']==True].index.strftime("%Y-%m-%d").tolist()
             v2 = self.data[self.data['BUY']==True]['low']
-            print("in buy")
-            print(v1)
-            print(v2)
             es_buy = (
                 EffectScatter()
                 .add_xaxis(v1)
@@ -327,7 +324,7 @@ class KChartData:
             iButton=70
         icount=0
         for w in area:
-            print(w)
+            # print(w)
             if type(w)==list:
                 window = Line().add_xaxis(self.dateindex)
                 for l in w:
@@ -414,59 +411,60 @@ class KChartData:
     def save_png(self,charts,filename):
         make_snapshot(snapshot, charts.render(),filename)
 
-with open('us_daily_stock', 'r') as fp:
-    while True:
-        line = fp.readline()
-        if line == "" or line is None:
-            break
+stat = pd.read_csv("statistics_us.csv")
+stat['ts_code'] = stat['ts_code']
+count = stat['ts_code'].nunique()
+handled = []
+i = len(stat) - 1
 
-        if len(line.split(",")) < 2 or "美股" in line:
-            continue
+print("going to draw {} pictures".format(count))
+while i >= 0:
+    if stat.loc[i, 'ts_code'] in handled:
+        i = i - 1
+        continue
 
-        date = line.split(" ")[0]
-        symfull = line.split(" ")[1]
-        sym = symfull.split("[")[0]
+    symfull = stat.loc[i, 'symbol']
+    sym = stat.loc[i, 'ts_code']
+    date = stat.loc[stat['ts_code'] == sym]['select_date'].tolist()
 
-        direction = 1
+    direction = 1
 
-        S(sym)
-        T(day)
-        stage = trading_dates[len(trading_dates) - len(O.series):]
+    S(sym)
+    T(day)
+    stage = trading_dates[len(trading_dates) - len(O.series):]
 
-        T(date)
-        cond = [True if str(item) == date else False for item in stage]
-        T(day)
+    T(date)
+    cond = [True if int(item) in date else False for item in stage]
+    T(day)
 
-        print(symfull, len(O.series), len(cond))
-        if len(stage) == 0 or len(stage) != len(O.series):
-            continue
+    i = i - 1
+    data = {
+        'date': stage,
+        'open': O.series,
+        'high': H.series,
+        'low': L.series,
+        'close': C.series,
+        'volume': V.series,
+        'ma5': MA(C, 5).series,
+        'ma13': MA(C, 13).series,
+    }
 
-        data = {
-            'date': stage,
-            'open': O.series,
-            'high': H.series,
-            'low': L.series,
-            'close': C.series,
-            'volume': V.series,
-            'ma5': MA(C, 5).series,
-            'ma13': MA(C, 13).series,
-        }
+    if True in cond:
+        if direction == 1:
+            data["BUY"] = cond
+        else:
+            data["SELL"] = cond
 
-        if True in cond:
-            if direction == 1:
-                data["BUY"] = cond
-            else:
-                data["SELL"] = cond
+    data['date'] = pd.to_datetime(data['date'], format='%Y%m%d')
+    df = pd.DataFrame(data)
+    df.set_index('date', inplace=True)
 
-        data['date'] = pd.to_datetime(data['date'], format='%Y%m%d')
-        df = pd.DataFrame(data)
-        df.set_index('date', inplace=True)
+    up = "做多" if direction == 1 else "做空"
+    filename = "/home/ec2-user/public/us-stock/{}-{}.html".format(symfull, up)
 
-        up = "做多" if direction == 1 else "做空"
-        filename = "/home/ec2-user/public/us-stock/{}-{}-{}.html".format(date, symfull, up)
+    data = KChartData(symfull, df, precision=2)
+    chart = data.plot(area=['V'], klines=['ma5','ma13'])
+    chart.render(filename)
 
-        data = KChartData(symfull, df, precision=2)
-        chart = data.plot(area=['V'], klines=['ma5','ma13'])
-        chart.render(filename)
-
-        print(symfull, date, O.value, direction)
+    handled.append(sym)
+    print(symfull, date, len(handled))

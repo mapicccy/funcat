@@ -179,25 +179,25 @@ def callback_up(date, order_book_id, sym):
     if os.path.exists("futures.csv"):
         dt = pd.read_csv("futures.csv", index_col=False)
         cur_dt = pd.DataFrame(columns=['select_date', 'ts_code', 'symbol', 'pct_chg', 'index_pct_chg', "dir"])
-        cur_dt = cur_dt.append([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, "dir": 1}], ignore_index=True)
+        cur_dt = cur_dt.append([{'select_date': DATETIME.value, 'ts_code': order_book_id, 'symbol': sym, "dir": 1}], ignore_index=True)
         dt = pd.concat([cur_dt, dt], ignore_index=True)
         dt.to_csv("futures.csv", index=0)
 
     print(order_book_id, sym)
     with open('futures_daily_stock', 'a+') as fp:
-        fp.write(str(date) + " " + sym + " 方向: 做多" + "\n")
+        fp.write(str(DATETIME.value) + " " + sym + " 方向: 做多" + "\n")
 
 def callback_down(date, order_book_id, sym):
     if os.path.exists("futures.csv"):
         dt = pd.read_csv("futures.csv", index_col=False)
         cur_dt = pd.DataFrame(columns=['select_date', 'ts_code', 'symbol', 'pct_chg', 'index_pct_chg', "dir"])
-        cur_dt = cur_dt.append([{'select_date': date, 'ts_code': order_book_id, 'symbol': sym, "dir": 0}], ignore_index=True)
+        cur_dt = cur_dt.append([{'select_date': DATETIME.value, 'ts_code': order_book_id, 'symbol': sym, "dir": 0}], ignore_index=True)
         dt = pd.concat([cur_dt, dt], ignore_index=True)
         dt.to_csv("futures.csv", index=0)
 
     print(order_book_id, sym)
     with open('futures_daily_stock', 'a+') as fp:
-        fp.write(str(date) + " " + sym + " 方向: 做空" + "\n")
+        fp.write(str(DATETIME.value) + " " + sym + " 方向: 做空" + "\n")
 
 day = (datetime.datetime.now() + datetime.timedelta(days=0)).strftime('%Y%m%d')
 day0 = (datetime.datetime.now() + datetime.timedelta(days=-3)).strftime('%Y%m%d')

@@ -171,3 +171,5 @@ else:
         text = fp.read()
         text = text + "\n\n注意：\n美股趋势一但形成很难扭转，本选股策略只会挑选趋势反转的股票，注意止盈止损"
         wx.send_message(text, uids=uid, token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')
+
+os.system('/home/ec2-user/miniconda3/envs/py39/bin/python -u /home/ec2-user/funcat/for_stocks/draw-echarts-us.py')
