@@ -66,7 +66,7 @@ class KChartData:
                     opts.DataZoomOpts(
                         is_show=True,
                         xaxis_index=[0, 1],
-                        type_="slider",
+                        type_="inside",
                         pos_top="85%",
                         range_start=0,
                         range_end=100,
@@ -124,25 +124,50 @@ class KChartData:
             kLine.set_global_opts(xaxis_opts=opts.AxisOpts(type_="category",is_show=False))
             c.overlap(kLine)
 
-        if 'BUY' in self.data.columns:
-            v1 = self.data[self.data['BUY']==True].index.tolist()
-            v2 = self.data[self.data['BUY']==True]['low']
+        # buy open
+        if 'BO' in self.data.columns:
+            v1 = self.data[self.data['BO']==True].index.tolist()
+            v2 = self.data[self.data['BO']==True]['low']
             es_buy = (
                 EffectScatter()
                 .add_xaxis(v1)
-                .add_yaxis("做多", v2, z_level=10, symbol=SymbolType.ARROW, symbol_size=[10, 20], label_opts=opts.LabelOpts(is_show=True), itemstyle_opts=opts.ItemStyleOpts(color="#DC143C"))
+                .add_yaxis("多开", v2, z_level=10, symbol=SymbolType.ARROW, symbol_size=[10, 20], label_opts=opts.LabelOpts(is_show=True), itemstyle_opts=opts.ItemStyleOpts(color="#f5340b"))
             )
             c.overlap(es_buy)
 
-        if 'SELL' in self.data.columns:
-            v1 = self.data[self.data['SELL']==True].index.tolist()
-            v2 = self.data[self.data['SELL']==True]['high']
+        # buy close
+        if 'BC' in self.data.columns:
+            v1 = self.data[self.data['BC']==True].index.tolist()
+            v2 = self.data[self.data['BC']==True]['low']
+            es_buy = (
+                EffectScatter()
+                .add_xaxis(v1)
+                .add_yaxis("多平", v2, z_level=10, symbol=SymbolType.ARROW, symbol_size=[10, 20], label_opts=opts.LabelOpts(is_show=True), itemstyle_opts=opts.ItemStyleOpts(color="#f907e0"))
+            )
+            c.overlap(es_buy)
+
+        # sell open
+        if 'SO' in self.data.columns:
+            v1 = self.data[self.data['SO']==True].index.tolist()
+            v2 = self.data[self.data['SO']==True]['high']
             es_sell = (
                 EffectScatter()
                 .add_xaxis(v1)
-                .add_yaxis("做空", v2, z_level=10, symbol=SymbolType.DIAMOND, symbol_size=[10, 20], label_opts=opts.LabelOpts(is_show=True), itemstyle_opts=opts.ItemStyleOpts(color="#191970"))
+                .add_yaxis("空开", v2, z_level=10, symbol=SymbolType.DIAMOND, symbol_size=[10, 20], label_opts=opts.LabelOpts(is_show=True), itemstyle_opts=opts.ItemStyleOpts(color="#191970"))
             )
             c.overlap(es_sell)
+
+        # sell close
+        if 'SC' in self.data.columns:
+            v1 = self.data[self.data['SC']==True].index.tolist()
+            v2 = self.data[self.data['SC']==True]['high']
+            es_sell = (
+                EffectScatter()
+                .add_xaxis(v1)
+                .add_yaxis("空平", v2, z_level=10, symbol=SymbolType.DIAMOND, symbol_size=[10, 20], label_opts=opts.LabelOpts(is_show=True), itemstyle_opts=opts.ItemStyleOpts(color="#0636f9"))
+            )
+            c.overlap(es_sell)
+
 
         return c
 
@@ -216,7 +241,7 @@ class KChartData:
                         y_axis=round(self.data[i],self.precision).values.tolist(),
                         is_smooth=True,
                         is_symbol_show=False,
-                        is_hover_animation=False,
+            is_hover_animation=False,
                         label_opts=opts.LabelOpts(is_show=False),
                         linestyle_opts= opts.LineStyleOpts(type_='solid',width=2)
                       )
@@ -249,7 +274,7 @@ class KChartData:
             .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
             .set_global_opts(datazoom_opts=[opts.DataZoomOpts(range_start=0,range_end=100)],
                             legend_opts=opts.LegendOpts(orient='vertical',pos_left="top",pos_top="70%"),
-                             xaxis_opts=opts.AxisOpts(
+                            xaxis_opts=opts.AxisOpts(
                             type_="category",
                     is_scale=True,
                     grid_index=1,
@@ -449,10 +474,63 @@ while i >= 0:
     }
 
     if True in up_cond:
-        data["BUY"] = up_cond
+        data["BO"] = up_cond
 
     if True in do_cond:
-        data["SELL"] = do_cond
+        data["SO"] = do_cond
+
+    sc_cond = [False] * len(stage)
+    bc_cond = [False] * len(stage)
+    for it, item in enumerate(stage):
+        if up_cond[it]:
+            jt = it
+            count = 0
+            while jt < len(stage):
+                jt += 1
+                idx = len(stage) - jt
+                if jt < len(stage) and up_cond[jt]:
+                    count = 0
+
+                if H[idx] < MA(C[idx], 13) and H[idx] < MA(C[idx], 21) and H[idx] < MA(C[idx], 34) and H[idx] < MA(C[idx], 55):
+                    count += 1
+                    # print(idx, L[idx], DATETIME[idx], count)
+                else:
+                    count = 0
+
+                if count == 5:
+                    bc_cond[jt] = True
+                    break
+
+        if do_cond[it]:
+            jt = it
+            count = 0
+            while jt < len(stage):
+                jt += 1
+                idx = len(stage) - jt
+                if jt < len(stage) and do_cond[jt]:
+                    count = 0
+
+                if L[idx] > MA(C[idx], 13) and L[idx] > MA(C[idx], 21) and L[idx] > MA(C[idx], 34) and L[idx] > MA(C[idx], 55):
+                    count += 1
+                else:
+                    count = 0
+
+                if count == 5:
+                    sc_cond[jt] = True
+                    break
+
+    if True in sc_cond:
+        data["SC"] = sc_cond
+
+    if True in bc_cond:
+        data["BC"] = bc_cond
+
+    with open('futures_daily_stock', 'a+') as fp:
+        if sc_cond[-1]:
+            fp.write(str(day) + " " + sym + " 方向: 多平 **趋势强化点 or 趋势反转点，请甄别**" + "\n")
+
+        if bc_cond[-1]:
+            fp.write(str(day) + " " + sym + " 方向: 空平 **趋势强化点 or 趋势反转点，请甄别**" + "\n\n")
 
     data['date'] = pd.to_datetime(data['date'], format='%Y%m%d%H%M%S')
     df = pd.DataFrame(data)

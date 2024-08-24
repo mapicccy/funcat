@@ -191,6 +191,12 @@ data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
 
+S("600105.SH")
+T("20240813")
+print(select_over_average(31))
+print(select_long_average_up(3))
+print(select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12)
+
 with open('daily_stock', 'w') as fp:
     fp.write("首次筛选（捕捉短期牛股，30日内5%以上盈利视为准确）:\n")
 

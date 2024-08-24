@@ -65,7 +65,7 @@ class KChartData:
                     opts.DataZoomOpts(
                         is_show=True,
                         xaxis_index=[0, 1],
-                        type_="slider",
+                        type_="inside",
                         pos_top="85%",
                         range_start=0,
                         range_end=100,
@@ -129,7 +129,7 @@ class KChartData:
             es_buy = (
                 EffectScatter()
                 .add_xaxis(v1)
-                .add_yaxis("做多", v2 * 0.98, z_level=10, symbol=SymbolType.ARROW, symbol_size=[10, 20], itemstyle_opts=opts.ItemStyleOpts(color="#DC143C"))
+                .add_yaxis("做多", v2 * 0.98, z_level=10, symbol=SymbolType.ARROW, symbol_size=[10, 20], itemstyle_opts=opts.ItemStyleOpts(color="#f5340b"))
             )
             c.overlap(es_buy)
 
@@ -139,7 +139,7 @@ class KChartData:
             es_sell = (
                 EffectScatter()
                 .add_xaxis(v1)
-                .add_yaxis("做空", v2 * 1.02, z_level=10, symbol=SymbolType.DIAMOND, symbol_size=[10, 20], itemstyle_opts=opts.ItemStyleOpts(color="#191970"))
+                .add_yaxis("做空", v2 * 1.02, z_level=10, symbol=SymbolType.DIAMOND, symbol_size=[10, 20], itemstyle_opts=opts.ItemStyleOpts(color="#04f94b"))
             )
             c.overlap(es_sell)
 

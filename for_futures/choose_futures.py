@@ -226,11 +226,13 @@ select(
 
 # Selecting futures contracts that can be traded on a short position
 select(
-   lambda: select_below_average(31) and select_long_average_down(3) and select_down_from_max(17, 1.05) and C / LLV(L, 21) > 1.05,
+   lambda: V.value > 1000 and select_below_average(31) and select_long_average_down(3) and select_down_from_max(17, 1.05) and C / LLV(L, 21) > 1.05,
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback_down,
 )
+
+os.system('/home/ec2-user/miniconda3/envs/py39/bin/python -u /home/ec2-user/funcat/for_futures/draw-echarts.py')
 
 with open('futures_daily_stock', 'a+') as fp:
     text = "\n\n注意：\n1. 期货自带杠杆，注意风险\n2. 本策略选择可以做多或者做空的品种，注意甄别方向\n3. 标的选择会择机，可能会出现数天没有买入标的的情况，需要耐心等待\n"

@@ -153,7 +153,10 @@ class AkshareUSDataBackend(DataBackend):
             if os.path.isfile(filepath):
                 order_book_id_list = pd.read_csv(filepath)['symbol'].tolist()
             else:
-                info = self.ak.get_us_stock_name()
+                info = self.ak.stock_us_spot_em()
+                info = info[info["成交额"] >= 30000000]
+                info.rename(columns={"名称": "name", "代码": "symbol"}, inplace=True)
+                info['symbol'] = info['symbol'].str[4:]
                 selected_column = ['symbol', 'name']
                 info[selected_column].to_csv(filepath, index=False)
                 order_book_id_list = info['symbol'].tolist()

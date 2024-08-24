@@ -129,7 +129,11 @@ class AkshareFutureDataBackend(DataBackend):
         if 'df' not in dir():
             try:
                 code = self.convert_code(order_book_id).upper()
-                df = self.ak.futures_zh_minute_sina(symbol=code, period=120)
+                # index
+                if (freq == "15m"):
+                    df = self.ak.futures_zh_minute_sina(symbol=code, period=15)
+                else:
+                    df = self.ak.futures_zh_minute_sina(symbol=code, period=120)
                 df.rename(columns={"datetime": "trade_date", "volume": "vol", "成交额": "amount"}, inplace=True)
             except Exception as e:
                 print("There was an error fetching futures market data, possibly due to rate limiting. Sleep 5 minutes and try again later.")

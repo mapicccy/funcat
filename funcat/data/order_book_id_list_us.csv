@@ -1,126 +1,1680 @@
 symbol,name
-YINN,"富时中国3倍做多"
-YANG,"富时中国3倍做空"
-SQQQ,"纳斯达克3倍做空"
-TQQQ,"纳斯达克3倍做多"
-SOXL,"半导体指数3倍做多"
-SOXS,"半导体指数3倍做空"
-UGL,"黄金两倍做多"
-ERX,"美国能源指数2倍做多"
-UCO,"原油2倍做多"
-CONL,"虚拟货币指数2倍做多"
-UVIX,"VIX恐慌指数2倍做多"
-CHAU,"沪深300 2倍做多"
-PILL,"美国医药指数3倍做多"
-GGLL,"Google 2X LONG"
-AAPX,"APPLE 2X LONG"
-AAPD,"APPLE 1X SHORT"
-NVDL,"NVDA 2X LONG"
-NVDQ,"NVDA 2X SHORT"
-FBL,"META 2X LONG"
-CWEB,"中国互联网2倍做多"
-AMZD,"AMAZON 1X SHORT"
-TSLQ,"TSLA 1X SHORT"
-YXI,"富时中国做空"
-WEBL,"美国互联网指数3倍做多"
-WEBS,"美国互联网指数3倍做空"
-GBTC,"比特币ETF"
-MSFT,Microsoft Corp.
-AAPL,"Apple, Inc."
-NVDA,NVIDIA Corp.
-GOOG,"Alphabet, Inc."
-GOOGL,"Alphabet, Inc."
-AMZN,"Amazon.com, Inc."
-META,"Meta Platforms, Inc."
-TSM,"Taiwan Semiconductor Manufacturing Co., Ltd."
-LLY,Eli Lilly & Co.
-AVGO,Broadcom Inc.
-TSLA,"Tesla, Inc."
-JPM,JPMorgan Chase & Co.
-NVO,Novo Nordisk A/S
-V,"Visa, Inc."
-WMT,"Walmart, Inc."
-XOM,Exxon Mobil Corp.
-UNH,"UnitedHealth Group, Inc."
-MA,"Mastercard, Inc."
-VXUS,Vanguard Total International Stock ETF
-PG,Procter & Gamble Co.
-JNJ,Johnson & Johnson
-ASML,ASML Holding NV
-HD,"The Home Depot, Inc."
-COST,Costco Wholesale Corp.
-MRK,"Merck & Co., Inc."
-ORCL,Oracle Corp.
-TM,Toyota Motor Corp.
-CVX,Chevron Corp.
-BAC,Bank of America Corp.
-ABBV,"AbbVie, Inc."
-KO,The Coca-Cola Co.
-CRM,"Salesforce, Inc."
-NFLX,"Netflix, Inc."
-AMD,"Advanced Micro Devices, Inc."
-PEP,"PepsiCo, Inc."
-AZN,AstraZeneca PLC
-SHEL,Shell Plc
-TMO,"Thermo Fisher Scientific, Inc."
-ADBE,"Adobe, Inc."
-SAP,SAP SE
-WFC,Wells Fargo & Co.
-DIS,The Walt Disney Co.
-BABA,Alibaba Group Holding Ltd.
-LIN,Linde Plc
-QCOM,"QUALCOMM, Inc."
-NVS,Novartis AG
-MCD,McDonald's Corp.
-PDD,"PDD Holdings, Inc."
-RDS.A,Shell Plc
-ACN,Accenture Plc
-CSCO,"Cisco Systems, Inc."
-VUG,Vanguard Growth Index Fund
-DHR,Danaher Corp.
-ABT,Abbott Laboratories
-GE,GE Aerospace
-INTU,"Intuit, Inc."
-AMAT,"Applied Materials, Inc."
-HSBC,HSBC Holdings Plc
-AMGN,"Amgen, Inc."
-TTE,TotalEnergies SE
-AXP,American Express Co.
-CAT,"Caterpillar, Inc."
-VZ,"Verizon Communications, Inc."
-TXN,Texas Instruments Incorporated
-VO,Vanguard Mid-Cap Index Fund
-PFE,Pfizer Inc.
-MS,Morgan Stanley
-IBM,International Business Machines Corp.
-CMCSA,Comcast Corp.
-PM,"Philip Morris International, Inc."
-HDB,HDFC Bank Ltd.
-NOW,"ServiceNow, Inc."
-UNP,Union Pacific Corp.
-UBER,"Uber Technologies, Inc."
-NEE,"NextEra Energy, Inc."
-COP,ConocoPhillips
-RY,Royal Bank of Canada
-BHP,BHP Group Ltd.
-GS,"The Goldman Sachs Group, Inc."
-NKE,"NIKE, Inc."
-SCHW,The Charles Schwab Corp.
-ISRG,"Intuitive Surgical, Inc."
-RTX,RTX Corp.
-SPGI,"S&P Global, Inc."
-LOW,"Lowe's Companies, Inc."
-INTC,Intel Corp.
-UL,Unilever Plc
-ETN,Eaton Corp. Plc
-HON,"Honeywell International, Inc."
-TOT,TotalEnergies SE
-MU,"Micron Technology, Inc."
-SYK,Stryker Corp.
-VB,Vanguard Small-Cap ETF
-UPS,"United Parcel Service, Inc."
-ELV,"Elevance Health, Inc."
-SNY,Sanofi
-XPEV,"XPeng, Inc."
-BILI,"Bilibili, Inc."
-BABX,GraniteShares 2x Long BABA Daily ETF
+PRTG,Portage Biotech Inc
+SQNS,Sequans Communications SA ADR
+MNTS,Momentus Inc-A
+APDN,Applied DNA Sciences Inc
+MSTX,Defiance Daily Target 1.75X Lon
+CAVA,CAVA Group Inc
+RDFN,红鳍公司
+AUR,Aurora Innovation Inc-A
+ARQT,Arcutis Biotherapeutics Inc
+SGRY,Surgery Partners Inc
+NOVA,Sunnova Energy International In
+BILI,哔哩哔哩
+DPST,Direxion Daily Regional Banks B
+SEDG,SolarEdge Technologies Inc
+DNN,丹尼森矿业
+UEC,Uranium Energy Corp
+CONL,GraniteShares 2x Long COIN Dail
+WDAY,Workday Inc-A
+NAIL,Direxion Daily Homebuilders & S
+MSTR,MicroStrategy Inc-A
+WRBY,Warby Parker Inc-A
+ROKU,Roku Inc-A
+OPRA,欧朋浏览器
+OPEN,Opendoor Technologies Inc
+BITX,2x Bitcoin Strategy ETF
+BITU,ProShares Ultra Bitcoin ETF
+MARA,Marathon Digital Holdings Inc
+NXE,NexGen Energy Ltd
+CWH,露营世界控股
+IESC,IES Holdings Inc
+FLNC,Fluence Energy Inc-A
+CSIQ,阿特斯太阳能
+HUT,Hut 8 Corp
+TBBB,BBB Foods Inc-A
+COMP,Compass Inc-A
+TNA,三倍做多小型股ETF-Direxion
+BEAM,Beam Therapeutics Inc
+URTY,ProShares UltraPro Russell2000
+LCID,Lucid Group Inc-A
+W,Wayfair Inc-A
+TSLT,T-Rex 2X Long Tesla Daily Targe
+RIVN,Rivian Automotive Inc-A
+NVDX,T-Rex 2X Long NVIDIA Daily Targ
+CORZ,Core Scientific Inc
+TSLL,Direxion Daily TSLA Bull 2X Sha
+BLDR,Builders FirstSource Inc
+NVDU,Direxion Daily NVDA Bull 2X Sha
+NVDL,GraniteShares 2x Long NVDA Dail
+NYCB,纽约社区银行
+POWL,Powell Industries Inc
+VLY,硅谷国家银行
+AX,Axos Financial Inc
+URNM,Sprott Uranium Miners ETF
+BITF,Bitfarms Ltd
+NCLH,挪威邮轮
+RH,RH
+WOLF,Wolfspeed Inc
+RUN,Sunrun Inc
+HASI,HA Sustainable Infrastructure C
+SOXL,三倍做多半导体ETF-Direxion
+CCL,嘉年华邮轮(US)
+SG,Sweetgreen Inc-A
+PCH,PotlatchDeltic Corp
+WBD,华纳兄弟探索
+CUK,嘉年华邮轮(US ADR)
+BYON,Beyond Inc
+VIK,维京游轮
+COLB,哥伦比亚银行系统
+OGN,Organon & Co
+USD,ProShares Ultra Semiconductors
+WSM,Williams-Sonoma Inc
+URA,铀矿ETF-Global X
+MTH,Meritage Homes Corp
+BLD,TopBuild Corp
+NXT,Nextracker Inc-A
+CCS,Century Communities Inc
+BCC,Boise Cascade Co
+CRK,康斯托克能源
+IBP,Installed Building Products Inc
+COIN,Coinbase Global Inc-A
+ENPH,Enphase Energy Inc
+BYND,Beyond Meat Inc
+LITE,Lumentum Holdings Inc
+IREN,Iris Energy Ltd
+AGQ,二倍做多白银ETF-ProShares
+PTON,Peloton Interactive Inc-A
+PEN,Penumbra Inc
+RXRX,Recursion Pharmaceuticals Inc-A
+UWM,二倍做多罗素2000ETF-ProShares
+CLSK,CleanSpark Inc
+TCBI,Texas Capital Bancshares Inc
+GBCI,冰川万通金控
+HOOD,Robinhood Markets Inc-A
+WAL,阿莱恩斯西部银行
+U,Unity Software Inc
+GCT,大健云仓
+GRBK,Green Brick Partners Inc
+OSCR,Oscar Health Inc-A
+UMBF,UMB金融
+GTLS,查特工业
+FSLR,第一太阳能
+CAKE,起司工坊
+BTC,Grayscale Bitcoin Mini Trust (B
+UPST,Upstart Holdings Inc
+ETH,Grayscale Ethereum Mini Trust (
+MHO,MI 家居
+GBTC,Grayscale Bitcoin Trust
+ARKB,ARK 21Shares Bitcoin ETF
+FBTC,Fidelity Wise Origin Bitcoin Fu
+SVIX,VS Trust -1x Short VIX Futures 
+BITB,Bitwise Bitcoin ETF
+IBIT,iShares Bitcoin Trust ETF
+RIOT,Riot Platforms Inc
+ZETA,Zeta Global Holdings Corp-A
+CCJ,卡梅科
+TXG,10x Genomics Inc-A
+ETHA,iShares Ethereum Trust ETF
+BITO,ProShares Bitcoin Strategy ETF
+ATKR,Atkore Inc
+CIFR,Cipher Mining Inc
+BTCO,Invesco Galaxy Bitcoin ETF
+ETHE,Grayscale Ethereum Trust (ETH)
+BE,Bloom Energy Corp-A
+ARRY,Array Technologies Inc
+RKT,Rocket Companies Inc-A
+BC,布朗斯威克
+SITE,SiteOne Landscape Supply Inc
+MOD,摩丁制造
+AMN,AMN医疗服务
+BOH,夏威夷银行
+TREX,Trex Co Inc
+LTH,Life Time Group Holdings Inc
+EH,亿航智能
+TPH,Tri Pointe Homes Inc
+WING,Wingstop Inc
+TOL,托尔兄弟
+SSTK,Shutterstock Inc
+SSB,South State Corp
+MHK,莫霍克工业
+ZG,Zillow Group Inc-A
+VRAX,Virax Biolabs Group Ltd
+LCII,LCI Industries
+M,梅西百货
+BBWI,Bath & Body Works Inc
+TMHC,Taylor Morrison Home Corp
+Z,Zillow Group Inc-C
+KTOS,克瑞拓斯安全防卫
+WBS,韦伯斯特金融
+ADMA,ADMA Biologics Inc
+EXPI,eXp World Holdings Inc
+HOG,哈雷戴维森
+YINN,三倍做多FTSE中国ETF-Direxion
+BANC,Banc of California Inc
+KRE,区域银行ETF-SPDR S&P
+RIG,越洋钻探
+TDW,潮水海运
+OC,欧文斯科宁
+SNV,西诺乌斯金融
+AFRM,Affirm Holdings Inc-A
+ALAB,Astera Labs Inc
+TNDM,Tandem Diabetes Care Inc
+KBH,KB Home
+UFPI,UFP Industries Inc
+RDDT,Reddit Inc-A
+LAD,利西亚车行
+SYM,Symbotic Inc-A
+CZR,凯撒娱乐
+BKE,巴克尔
+PNFP,Pinnacle Financial Partners Inc
+XRAY,登士柏
+RRX,Regal Rexnord Corp
+ACHC,阿卡迪亚医疗保健
+FND,Floor & Decor Holdings Inc-A
+LNTH,Lantheus Holdings Inc
+ONB,Old National Bancorp
+JLL,仲量联行
+UCO,二倍做多原油ETF-ProShares
+ASB,Associated Banc-Corp
+EWBC,华美
+CADE,Cadence Bank
+GGAL,加利西亚金融
+WGO,温尼巴格实业
+SKY,Champion Homes Inc
+ABG,阿斯伯里汽车集团
+GT,固特异轮胎橡胶
+TFC,Truist Financial Corp
+CMA,联信银行
+WSC,WillScot Holdings Corp
+ZION,齐昂银行
+WTFC,信达金融
+LUV,西南航空
+MRVL,迈威尔科技
+VSTS,Vestis Corp
+SLAB,芯科实验室
+QRVO,Qorvo Inc
+OZK,欧扎克银行
+SOFI,SoFi Technologies Inc
+TSLA,特斯拉
+PHM,普得集团(帕尔迪)
+LPX,路易斯安那太平洋
+SMTC,先科电子
+ARM,Arm Holdings plc ADR
+NVDA,英伟达
+FUBO,fuboTV Inc
+GM,通用汽车
+UAL,联合航空
+FHN,第一地平线银行
+ARKK,ARK Innovation ETF
+HE,夏威夷电力
+TECL,Direxion Technology Bull 3X Sha
+PII,北极星
+RNST,Renasant Corp
+PEGA,Pegasystems Inc
+GDXU,MicroSectors Gold Miners 3X Lev
+KMX,车美仕
+EXP,Eagle Materials Inc
+WLK,Westlake Corp
+CVNA,Carvana Co-A
+WHR,惠而浦
+HUN,亨斯曼材料
+TDOC,Teladoc Health Inc
+GNRC,Generac Holdings Inc
+FLEX,伟创力
+VAL,Valaris Ltd
+AA,美国铝业
+XHB,家园建设ETF-SPDR S&P
+KBE,银行ETF-SPDR S&P
+ITB,美国家园建设ETF-iShares
+BN,布鲁克菲尔德
+KYMR,Kymera Therapeutics Inc
+ST,Sensata科技控股
+BIPC,Brookfield Infrastructure Corp-
+ALB,美国雅保
+LABU,三倍做多生物技术ETF-Direxion
+GH,Guardant Health Inc
+CIEN,Ciena科技
+MKSI,万机仪器
+KSS,柯尔百货
+NOG,Northern Oil and Gas Inc
+NE,Noble Corp plc-A
+SBAC,SBA通信-A
+ON,安森美半导体
+NVST,Envista Holdings Corp
+LOW,劳氏
+TLN,Talen Energy Corp
+AZEK,The AZEK Co Inc-A
+ALLY,Ally Financial Inc
+AN,车之国
+HWC,汉考克惠特尼
+GFS,GLOBALFOUNDRIES Inc
+HOMB,Home BancShares Inc
+ACLS,Axcelis Technologies Inc
+WMS,Advanced Drainage Systems Inc
+ARCO,Arcos Dorados Holdings Inc-A
+KEY,KeyCorp
+FBIN,Fortune Brands Innovations Inc
+PRGO,培瑞克
+FNGU,MicroSectors FANG Index 3X Leve
+AEO,美鹰傲飞
+OLN,欧林
+TNET,TriNet Group Inc
+URI,联合租赁
+THO,索尔工业
+DOCN,DigitalOcean Holdings Inc
+ASX,日月光半导体
+LBRT,Liberty Energy Inc-A
+PCOR,Procore Technologies Inc
+ENTG,英特格
+ACVA,ACV Auctions Inc-A
+SWKS,思佳讯
+MAS,马斯可木业
+PLUG,普拉格能源
+JNUG,二倍做多小金矿指数ETF-Direxion
+EXPE,亿客行
+CEIX,CONSOL Energy Inc
+AMKR,艾马克技术
+BCO,布林克
+NVR,NVR Inc
+BECN,Beacon Roofing Supply Inc
+FRPT,Freshpet Inc
+LSCC,莱迪思半导体
+MAC,马塞里奇房产
+JXN,Jackson Financial Inc-A
+PVH,PVH Corp
+SAVA,疼痛治疗
+EAT,布林克国际
+SKX,斯凯奇
+TPR,Tapestry Inc
+MFC,宏利金融
+CBRE,世邦魏理仕
+MGA,麦格纳国际
+MC,Moelis & Co-A
+CFG,Citizens Financial Group Inc
+RYAAY,瑞安航空(US ADR)
+WY,惠好
+WFRD,威德福国际
+RHI,罗致恒富
+TER,泰瑞达
+BULZ,MicroSectors FANG & Innovation 
+GPI,汽车一组
+AHR,American Healthcare REIT Inc
+BOKF,博克金融
+IBOC,国际银行
+BFH,Bread Financial Holdings Inc
+CAR,安飞士
+RVLV,Revolve Group Inc-A
+ARKG,ARK Genomic Revolution ETF
+SW,Smurfit WestRock plc
+LEN,莱纳建筑-A
+TPL,Texas Pacific Land Corp
+TEX,特雷克斯
+AVUV,Avantis U.S. Small Cap Value ET
+SDRL,Seadrill Ltd
+CRDO,Credo Technology Group Holding 
+VERX,Vertex Inc-A
+ARCH,Arch Resources Inc-A
+KVYO,Klaviyo Inc-A
+SLG,SL Green Realty Corp
+ALK,阿拉斯加航空
+IWN,罗素2000价值股ETF-iShares
+DINO,HF Sinclair Corp
+SM,SM Energy Co
+GMED,Globus Medical Inc-A
+STM,意法半导体
+VSAT,卫讯公司
+UAA,安德玛-A
+IAT,iShares U.S. Regional Banks ETF
+CRUS,凌云半导体
+DDS,狄乐百货
+BWA,博格华纳
+AMBA,安霸
+BX,黑石集团
+ENVX,Enovix Corp
+PI,英频杰
+SPHR,Sphere Entertainment Co-A
+CX,西麦斯
+RCL,皇家加勒比邮轮
+RL,拉夫劳伦
+CART,Maplebear Inc
+IJS,iShares S&P Small-Cap 600 Value
+DHI,霍顿房屋
+FYBR,前线通信
+HP,赫尔默里奇&佩恩
+OMF,OneMain Holdings Inc
+COPX,铜矿ETF-Global X
+PTEN,Patterson-UTI Energy Inc
+TLRY,Tilray Brands Inc
+JETS,航空ETF-US Global
+F,福特汽车
+NVT,nVent Electric plc
+BRZE,Braze Inc-A
+ONON,昂跑
+EWY,韩国ETF-iShares MSCI
+IWM,罗素2000ETF-iShares
+DKNG,DraftKings Inc-A
+BXP,BXP Inc
+TWLO,Twilio Inc-A
+NSIT,Insight Enterprises Inc
+ESI,Element Solutions Inc
+LUMN,Lumen Technologies Inc
+TQQQ,三倍做多纳斯达克100ETF
+FCX,自由港麦克莫兰
+CNM,Core & Main Inc-A
+AMT,美国电塔
+AYI,Acuity Brands Inc
+VTWO,Vanguard Russell 2000 ETF
+DAR,美国达尔令国际
+APTV,Aptiv PLC
+WCC,西科国际
+ATI,阿勒格尼技术
+ASPN,Aspen Aerogels Inc
+UDOW,三倍做多道指ETF-ProShares
+TPX,泰普尔丝涟
+CLF,克利夫兰克里夫
+DAL,达美航空
+ZM,Zoom Video通讯
+SF,Stifel Financial Corp
+SLV,白银ETF-iShares
+STLA,Stellantis集团
+AQN,Algonquin Power & Utilities Cor
+SPXL,Direxion Daily S&P 500 Bull 3X 
+UPRO,三倍做多标普500ETF-ProShares
+MPWR,Monolithic Power Systems Inc
+SPSM,SPDR Portfolio S&P 600 Small Ca
+LAZ,Lazard Ltd-A
+GFL,GFL Environmental Inc
+ATMU,Atmus Filtration Technologies I
+SIG,西格内特珠宝
+GMS,GMS Inc
+ROK,罗克韦尔自动化
+DAY,Ceridian HCM Holding Inc
+AZTA,Azenta Inc
+SQM,智利矿业化工
+ABEV,Ambev SA ADR
+POOL,Pool Corp
+TXN,德州仪器
+HL,赫克拉矿业
+ETSY,Etsy Inc
+PNR,滨特尔
+IJR,标普小型股ETF-iShares
+AGCO,爱科集团
+RNG,RingCentral Inc-A
+ICUI,ICU医疗
+SYF,Synchrony Financial
+VST,Vistra Corp
+NXPI,恩智浦半导体
+LYG,劳埃德银行(US ADR)
+FAF,第一美国
+BABA,阿里巴巴
+KKR,KKR & Co Inc
+CALF,Pacer US Small Cap Cash Cows 10
+AIRR,First Trust RBA American Indust
+RF,地区金融
+QTWO,Q2 Holdings Inc
+TRNO,Terreno Realty Corp
+OIH,油服ETF-VanEck Vectors
+SDVY,First Trust SMID Cap Rising Div
+ADI,亚德诺
+SBRA,Sabra Health Care REIT Inc
+TSM,台积电
+SUM,Summit Materials Inc-A
+PATH,UiPath Inc-A
+AEIS,先进能源工业
+CSL,卡莱尔伙伴
+EWT,台湾ETF-iShares MSCI
+VFC,威富
+SVXY,做空恐慌指数期货短期合约ETF
+HBAN,亨廷顿银行
+URBN,Urban Outfitters Inc
+BAX,百特国际
+SCHA,Schwab U.S. Small-Cap ETF
+SCCO,南方铜业
+PB,Prosperity Bancshares Inc
+BBD,布拉德斯科银行-优先股
+HLNE,Hamilton Lane Inc-A
+S,SentinelOne Inc-A
+ICLN,iShares Global Clean Energy ETF
+GVA,花岗岩建筑
+C,花旗集团
+WK,Workiva Inc-A
+CBT,卡博特
+IVZ,景顺
+ANF,阿贝克隆比&费奇
+APO,阿波罗全球管理
+HD,家得宝
+BBY,百思买
+LBRDK,Liberty Broadband Corp-C
+NUVL,Nuvalent Inc-A
+DO,戴蒙德海底钻探
+VMC,火神材料
+DELL,戴尔科技
+IWO,罗素2000成长股ETF-iShares
+JEF,Jefferies Financial Group Inc
+ZBRA,斑马技术
+CVLT,康沃系统
+INSP,Inspire Medical Systems Inc
+JWN,诺德斯特龙
+EVH,Evolent Health Inc-A
+FITB,五三银行
+SOLV,Solventum Corp
+CRH,CRH水泥
+BURL,伯灵顿百货
+USB,美国合众银行
+EQH,安盛公平控股
+MLM,马丁-玛丽埃塔材料
+MTDR,Matador Resources Co
+ALV,奥托立夫
+WBA,沃尔格林-联合博姿
+BCS,巴克莱
+BL,BlackLine Inc
+GTES,Gates Industrial Corp plc
+SPXC,SPX Technologies Inc
+SOXX,半导体ETF-iShares PHLX
+CR,Crane Co
+USO,美国原油基金
+ALRM,Alarm.com Holdings Inc
+QCOM,高通
+TEAM,Atlassian Corp-A
+MTG,MGIC Investment Corp
+SPG,西蒙地产
+AMC,AMC院线
+CCI,冠城
+FTI,TechnipFMC plc
+PR,Permian Resources Corp-A
+AR,Antero Resources Corp
+EXR,Extra Space Storage Inc
+XPO,XPO
+MOS,美盛
+BOOT,Boot Barn Holdings Inc
+VXF,Vanguard Extended Market ETF
+ITT,ITT Inc
+COLD,Americold Realty Trust Inc
+AIT,应用工业技术
+EME,埃姆科
+AVTR,Avantor Inc
+CHK,切萨皮克能源
+MGY,Magnolia Oil & Gas Corp-A
+VBR,Vanguard Small-Cap Value ETF
+CMC,美国工商五金
+GNTX,真泰克
+VTLE,Vital Energy Inc
+FOUR,Shift4 Payments Inc-A
+FR,第一工业地产信托
+PSLV,Sprott Physical Silver Trust
+DY,戴康工业
+MCHP,微芯科技
+H,凯悦酒店
+FIVE,Five Below Inc
+THC,泰尼特保健
+FERG,Ferguson Enterprises Inc
+CRSP,CRISPR Therapeutics AG
+YOU,Clear Secure Inc-A
+WULF,TeraWulf Inc
+CNI,加拿大国家铁路
+EWA,澳大利亚ETF-iShares MSCI
+DXCM,德康医疗
+SHOP,Shopify Inc-A
+AVGO,博通
+CFR,库伦佛寺银行
+EL,雅诗兰黛
+CHTR,特许通讯
+MTCH,Match Group Inc
+FAS,三倍做多金融ETF-Direxion
+AAL,美国航空
+MUR,墨菲石油
+SMH,半导体ETF-VanEck Vectors
+MTB,美国制商银行
+EWW,墨西哥ETF-iShares MSCI
+XRT,零售ETF-SPDR
+ARES,Ares Management Corp-A
+MSOS,AdvisorShares Pure US Cannabis 
+KLAC,科磊
+RMBS,Rambus Inc
+LAMR,拉马尔户外广告
+OPCH,Option Care Health Inc
+VB,小型股指数ETF-Vanguard
+CARR,Carrier Global Corp
+ARE,亚历山大房地产
+GDS,万国数据
+MTSI,MACOM Technology Solutions Hold
+MLI,木勒工业
+SQ,Block Inc-A
+ALSN,艾里逊变速箱
+CHX,ChampionX Corp
+NUGT,二倍做多金矿指数ETF-Direxion
+NXST,Nexstar Media Group Inc
+DVN,戴文能源
+ACGL,艾奇资本
+EEFT,嘉银通
+COOP,Mr. Cooper Group Inc
+ONTO,Onto Innovation Inc
+SPHB,Invesco S&P 500 High Beta ETF
+XME,金属采矿ETF-SPDR
+GS,高盛
+HPE,慧与
+EVR,Evercore Inc-A
+KBWB,Invesco KBW Bank ETF
+BBJP,JPMorgan BetaBuilders Japan ETF
+CGNX,康耐视
+LEA,李尔
+PSA,大众仓储
+ALGN,艾利科技
+VRT,Vertiv Holdings Co-A
+EWJ,日本ETF-iShares MSCI
+MTZ,MasTec Inc
+FMC,FMC Corp
+FNF,富达国民金融
+PLD,安博
+EWZ,巴西ETF-iShares MSCI
+MMYT,MakeMyTrip Ltd
+SWN,西南能源
+BXMT,Blackstone Mortgage Trust Inc
+NTR,Nutrien Ltd
+SLB,斯伦贝谢
+NIO,蔚来
+BG,邦吉
+EQT,EQT能源
+WPC,W. P. Carey Inc
+GXO,GXO Logistics Inc
+VBK,小型成长股指数ETF-Vanguard
+SNA,实耐宝
+IEX,IDEX Corp
+SWK,史丹利百得
+BPOP,大众银行(波多黎各)
+SPMD,SPDR Portfolio S&P 400 Mid Cap 
+ERIC,爱立信
+ZI,ZoomInfo Technologies Inc
+VNQ,房地产信托指数ETF-Vanguard
+PCTY,Paylocity Holding Corp
+COF,第一资本金融
+DNB,邓白氏
+NCNO,nCino Inc
+INTC,英特尔
+PAVE,Global X U.S. Infrastructure De
+NET,Cloudflare Inc-A
+IJH,标普中型股ETF-iShares
+GKOS,Glaukos Corp
+DPZ,达美乐比萨(US)
+CI,信诺
+BIRK,Birkenstock Holding plc
+OLED,Universal Display Corp
+MDY,标普中型股400ETF-SPDR
+AMD,超威半导体
+LRN,Stride Inc
+ERJ,巴西航空工业
+QLD,二倍做多纳斯达克100ETF
+IOVA,Iovance Biotherapeutics Inc
+COWZ,Pacer US Cash Cows 100 ETF
+IYR,美国房地产ETF-iShares
+ADSK,欧特克
+BTG,B2Gold Corp
+VNOM,Viper Energy Inc-A
+WWD,伍德沃德
+ADM,阿彻丹尼尔斯米德兰
+FN,Fabrinet
+EMN,伊士曼化工
+CRM,赛富时
+VOYA,Voya Financial Inc
+CPRI,Capri Holdings Ltd
+JBHT,JB亨特运输服务
+CP,加拿大太平洋堪萨斯城
+DECK,德克斯户外
+KEX,卡比海运
+PAAS,泛美白银
+BYD,博伊德赌场
+LPLA,LPL Financial Holdings Inc
+KRYS,Krystal Biotech Inc
+MPC,马拉松原油
+XOP,油气开采ETF-SPDR S&P
+BAP,Credicorp Ltd
+SSO,二倍做多标普500ETF-ProShares
+SAIA,Saia Inc
+CUBE,CubeSmart
+BLK,贝莱德
+OXY,西方石油
+IOT,Samsara Inc-A
+VSS,全球除美国小型股指数ETF
+VNO,沃那多房产信托
+SOUN,SoundHound AI Inc-A
+TEL,泰科电子
+LYB,利安德巴塞尔工业
+CDW,CDW Corp
+HUBB,哈勃集团
+PBR_A,巴西石油-优先股
+SCZ,小型股ETF-iShares MSCI EAFE
+DEO,帝亚吉欧(US ADR)
+NRG,NRG Energy Inc
+GLPI,Gaming and Leisure Properties I
+LKQ,LKQ Corp
+PWR,广达服务
+TECK,泰克资源
+EQNR,Equinor ASA ADR
+ESNT,Essent Group Ltd
+WEX,WEX Inc
+EUFN,欧洲金融ETF-iShares MSCI
+SHAK,Shake Shack Inc-A
+ESS,埃塞克斯信托
+TM,丰田汽车(US ADR)
+TRU,TransUnion
+APA,阿帕奇石油
+APG,APi Group Corp
+PBF,PBF Energy Inc-A
+GDXJ,金矿小型股ETF-VanEck Vectors
+IP,国际纸业
+ARW,艾睿电子
+HAL,哈里伯顿
+CRL,查尔斯河
+OKTA,Okta Inc-A
+SCHF,Schwab International Equity ETF
+CWEB,Direxion Daily CSI China Intern
+SCHH,Schwab U.S. REIT ETF
+EPR,EPR不动产
+SNAP,Snap Inc-A
+SNX,新聚思
+CF,CF实业
+SFM,Sprouts Farmers Market Inc
+BNS,加拿大丰业银行
+LULU,lululemon athletica inc
+QLYS,科力斯
+XLY,可选消费ETF-SPDR
+PAYC,Paycom Software Inc
+EFX,艾可菲
+VEA,Vanguard FTSE Developed Markets
+XLRE,房地产ETF-SPDR
+EFV,iShares MSCI EAFE Value ETF
+RY,加拿大皇家银行
+SPDW,SPDR Portfolio Developed World 
+RNR,RenaissanceRe Holdings Ltd
+CW,寇蒂斯莱特
+SIRI,天狼星XM
+GL,环球人寿
+CSGP,科斯塔
+CYTK,Cytokinetics Inc
+EWC,加拿大ETF-iShares MSCI
+CBSH,科默斯银行
+AWI,阿姆斯特朗
+WAB,美国西屋制动
+CTVA,Corteva Inc
+YPF,阿根廷YPF
+PZZA,棒约翰
+MAGS,Roundhill Magnificent Seven ETF
+CE,塞拉尼斯
+WAT,沃特世
+PRU,保德信金融
+EMXC,iShares MSCI Emerging Markets e
+HST,HOST酒店及度假村
+CRS,卡朋特科技
+PFG,信安金融
+TTE,TotalEnergies SE ADR
+DUOL,多邻国
+GTLB,Gitlab Inc-A
+IEFA,iShares Core MSCI EAFE ETF
+KRG,凯特地产信托
+GPK,Graphic Packaging Holding Co
+FUN,六旗娱乐
+CROX,卡骆驰
+BERY,Berry Global Group Inc
+DOW,陶氏
+RBLX,Roblox Corp-A
+FROG,JFrog Ltd
+FIVN,Five9 Inc
+WPM,惠顿贵金属
+NSA,National Storage Affiliates Tru
+EFA,EAFE指数ETF-iShares MSCI
+LYFT,Lyft Inc-A
+CRI,卡特
+FLR,福陆
+ITUB,艾涛巴西联合银行
+FTAI,FTAI Aviation Ltd-A
+IRT,Independence Realty Trust Inc
+BP,英国石油(US)
+FANG,Diamondback Energy Inc
+PNC,PNC金融服务集团
+TRV,旅行者保险
+FXN,First Trust Energy AlphaDEX Fun
+TMF,三倍做多20年+国债ETF-Direxion
+IXUS,iShares Core MSCI Total Interna
+BRX,Brixmor Property Group Inc
+KIM,金克地产
+HAS,孩之宝
+VRNS,Varonis Systems Inc
+ACM,AECOM
+STT,道富
+MIDD,The Middleby Corp
+RDVY,First Trust Rising Dividend Ach
+NGG,英国国家电网
+VGT,信息科技指数ETF-Vanguard
+INCY,因塞特医疗
+SNY,赛诺菲
+TTD,The Trade Desk Inc-A
+LII,雷诺士
+FRT,FRT信托
+ACWX,全球除美国ETF-iShares MSCI
+CAT,卡特彼勒
+ITRI,埃创
+VXUS,Vanguard Total International St
+ROST,罗斯百货
+VICI,VICI Properties Inc
+VEU,全球除美国ETF-Vanguard FTSE
+EHC,Encompass Health Corp
+RKLB,Rocket Lab USA Inc-A
+HALO,奥洛兹美医疗
+RPM,RPM International Inc
+CVS,西维斯健康
+AES,爱依斯电力
+EFG,iShares MSCI EAFE Growth ETF
+NTRS,北方信托
+CMI,康明斯
+AI,C3.ai Inc-A
+CNX,康索尔能源
+BMO,蒙特利尔银行
+UDR,UDR不动产信托
+AOS,A.O.史密斯
+UMC,联华电子
+BKR,Baker Hughes Co-A
+WIX,Wix.com Ltd
+CNQ,加拿大自然资源
+MRNA,Moderna Inc
+UL,联合利华(英国)
+SBUX,星巴克
+AIZ,安信龙保险
+MAT,美泰
+DKS,迪克体育用品
+ROIV,Roivant Sciences Ltd
+VGK,欧洲ETF-Vanguard FTSE
+TDG,TransDigm Group Inc
+CVE,Cenovus能源
+DOV,都福
+TFII,TFI International Inc
+IPG,埃培智
+APPF,AppFolio Inc-A
+AVB,艾芙隆海湾社区
+VLO,瓦莱罗能源
+GEN,Gen Digital Inc
+FCFS,第一富金融服务
+EG,Everest Group Ltd
+OVV,Ovintiv Inc
+EZU,欧元区ETF-iShares MSCI
+AER,AerCap飞机租赁
+UHS,Universal Health Services Inc-B
+CIVI,Civitas Resources Inc
+TRMB,天宝导航
+FFIV,F5
+VOD,沃达丰(US)
+PECO,Phillips Edison & Co Inc
+DBX,Dropbox Inc-A
+EEM,新兴市场ETF-iShares MSCI
+AAON,艾伦建材
+IR,英格索兰
+FTEC,Fidelity MSCI Information Techn
+XP,XP Inc-A
+PSX,Phillips 66
+PBA,Pembina Pipeline Corp
+RPRX,Royalty Pharma plc-A
+BKNG,Booking Holdings
+LINE,Lineage Inc
+ACAD,阿卡迪亚
+BHP,必和必拓(US ADR)
+HPQ,惠普
+PAYX,沛齐
+RGLD,皇家黄金
+HIMS,Hims & Hers Health Inc-A
+MDGL,Madrigal Pharmaceuticals Inc
+STLD,Steel Dynamics Inc
+AXTA,Axalta涂层系统
+IEMG,iShares Core MSCI Emerging Mark
+GLW,康宁
+GSK,葛兰素史克(US)
+IQV,艾昆纬
+AEM,伊格尔矿业
+XLK,科技ETF-SPDR
+MT,安赛乐米塔尔
+PARA,派拉蒙全球-B
+IYT,道琼斯运输业指数ETF-iShares
+REXR,Rexford Industrial Realty Inc
+FSS,联邦信号
+STWD,Starwood Property Trust Inc
+ILMN,Illumina Inc
+OLLI,Ollie's Bargain Outlet Holdings
+IWR,罗素中型股ETF-iShares
+ENB,恩桥
+CAMT,康特科技
+OSK,Oshkosh Corp
+BIO,Bio Rad实验室-A
+TU,泰勒斯
+FXI,中国大型股ETF-iShares
+MAA,MAA房产信托
+DFAC,Dimensional U.S. Core Equity 2 
+PFGC,Performance Food Group Co
+IWS,罗素中型价值股ETF-iShares
+RVTY,Revvity Inc
+AMCR,Amcor plc
+VTRS,Viatris Inc
+PCVX,Vaxcyte Inc
+GLNG,Golar LNG Ltd
+TD,道明银行
+MMS,马克西姆斯
+EMLC,新兴市场地方货币债ETF
+DOC,Healthpeak Properties Inc
+SCI,Service Corp International
+HDB,HDFC银行
+URTH,iShares MSCI World ETF
+MRO,马拉松石油
+MMM,3M公司
+SON,Sonoco Products Co
+CG,凯雷集团
+EPRT,Essential Properties Realty Tru
+HES,赫斯
+NSC,诺福克南方
+XLE,能源ETF-SPDR
+CNH,CNH Industrial NV
+INDV,Indivior PLC
+WSO,华斯科
+BEKE,贝壳
+NU,Nu Holdings Ltd-A
+HCA,HCA Healthcare Inc
+PLNT,Planet Fitness Inc-A
+ALLE,安朗杰
+TSCO,拖拉机供应
+NOK,诺基亚
+CRWD,CrowdStrike Holdings Inc-A
+VT,世界全市场指数ETF-Vanguard
+XPEV,小鹏汽车
+RACE,法拉利
+RMD,瑞思迈
+LFUS,美国力特保险丝
+GDX,金矿ETF-VanEck Vectors
+HSBC,汇丰控股
+VWO,新兴市场ETF-Vanguard FTSE
+ZBH,捷迈邦美
+RDNT,RadNet Inc
+SCHD,美元红利股ETF-Schwab
+EQR,公平住屋
+AXP,美国运通
+ODFL,Old Dominion Freight Line Inc
+GLOB,Globant SA
+CRBG,Corebridge Financial Inc
+EGP,EastGroup Properties Inc
+IWP,罗素中型成长股ETF-iShares
+NTNX,路坦力
+CHWY,Chewy Inc-A
+HSIC,亨利香恩服务
+MSI,摩托罗拉解决方案
+TFX,泰利福
+LRCX,拉姆研究
+DDOG,Datadog Inc-A
+COHR,Coherent Corp
+SMCI,超微电脑
+BK,纽约梅隆银行
+WMB,威廉姆斯
+SPYD,SPDR Portfolio S&P 500 High Div
+XOM,埃克森美孚
+CSX,CSX运输
+BWXT,BWX Technologies Inc
+AMP,阿默普莱斯金融
+CACI,CACI国际
+TRP,TC Energy Corp
+CHRD,Chord Energy Corp
+SHEL,壳牌
+IYW,美国科技ETF-iShares
+NWL,纽威品牌
+XBI,生物技术ETF-SPDR S&P
+MTN,Vail Resorts Inc
+CM,加拿大帝国商业银行
+BJ,BJ批发俱乐部
+VIPS,唯品会
+ACWI,全球ETF-iShares MSCI
+BAC,美国银行
+UBER,优步
+APP,Applovin Corp-A
+TAK,武田制药
+EOG,EOG能源
+TMDX,TransMedics Group Inc
+PTC,PTC Inc
+KMI,金德摩根
+CPT,卡姆登物业信托
+FNV,Franco-Nevada Corp
+RRC,山脉资源
+FTV,Fortive Corp
+AVY,艾利丹尼森
+MS,摩根士丹利
+WFC,富国银行
+XLB,基础材料ETF-SPDR
+VOT,Vanguard Mid-Cap Growth ETF
+TECH,Bio-Techne Corp
+AMGN,安进
+WELL,Welltower Inc
+AME,阿美特克
+DOCU,DocuSign Inc
+AVT,安富利
+COP,康菲石油
+EPAM,EPAM Systems Inc
+CVX,雪佛龙
+INTA,Intapp Inc
+DVY,股息指数ETF-iShares
+ABR,阿伯房地产信托
+DFS,探索金融服务
+IWD,罗素1000价值股ETF-iShares
+GIL,吉登运动服
+POST,Post Holdings Inc
+GOLD,巴里克黄金
+TXT,德事隆
+CLX,高乐氏
+JBL,捷普
+BA,波音
+RSP,标普500等权ETF-Guggenheim
+CHH,精选国际酒店
+VTI,全市场指数ETF-Vanguard
+MUSA,Murphy USA Inc
+CTRA,Coterra Energy Inc
+BEN,富兰克林资源
+VYM,高股息指数ETF-Vanguard
+VO,Vanguard Mid-Cap ETF
+ET,能源转换
+RBA,RB Global Inc
+HUBS,HubSpot Inc
+SCHB,美国全市场ETF-Schwab
+HACK,网络安全ETF-PureFunds ISE
+PCAR,帕卡
+AU,AngloGold Ashanti plc
+AMAT,应用材料
+KNX,Knight-Swift Transportation Hol
+DYNF,BlackRock U.S. Equity Factor Ro
+NEM,纽蒙特
+DE,迪尔
+KGC,金罗斯黄金
+BCE,加拿大贝尔
+SU,森科能源
+ABNB,爱彼迎
+IAUM,iShares Gold Trust Micro ETF
+FDN,互联网指数ETF-First Trust
+NICE,NICE Ltd ADR
+VFH,金融指数ETF-Vanguard
+KVUE,Kenvue Inc
+SONY,索尼
+CGGR,Capital Group Growth ETF
+ITOT,iShares Core S&P Total U.S. Sto
+ICLR,ICON plc
+MOAT,VanEck Morningstar Wide Moat ET
+SPTM,SPDR Portfolio S&P 1500 Composi
+PHYS,Sprott Physical Gold Trust
+BALL,鲍尔包装
+CB,安达保险
+MEDP,Medpace Holdings Inc
+GRMN,佳明
+BTI,英美烟草
+OMC,宏盟集团
+SGOL,Aberdeen Standard Physical Gold
+BUD,百威英博
+VV,Vanguard Large-Cap ETF
+MO,奥驰亚集团
+IWB,罗素1000ETF-iShares
+VONG,Vanguard Russell 1000 Growth ET
+IVW,标普500成长股ETF-iShares
+IUSG,iShares Core S&P U.S. Growth ET
+IAU,黄金ETF-iShares
+ULTA,ULTA美妆
+BOX,Box Inc-A
+GOOG,谷歌-C
+HON,霍尼韦尔(US)
+VOE,Vanguard Mid-Cap Value ETF
+SCHG,Schwab U.S. Large-Cap Growth ET
+CNK,喜满客影城
+ENSG,恩赛因
+AAAU,Goldman Sachs Physical Gold ETF
+GLD,黄金ETF-SPDR
+VONV,Vanguard Russell 1000 Value ETF
+GPN,环汇
+IWF,罗素1000成长股ETF-iShares
+IWY,iShares Russell Top 200 Growth 
+OHI,Omega Healthcare Investors Inc
+VUG,成长股指数ETF-Vanguard
+SPYG,SPDR Portfolio S&P 500 Growth E
+MSCI,明晟
+STX,希捷科技
+CTRE,CareTrust REIT Inc
+TDY,Teledyne Technologies Inc
+MCHI,中国ETF-iShares MSCI
+ESGU,iShares ESG MSCI USA ETF
+GLDM,SPDR Gold MiniShares Trust
+NTAP,美国网存
+T,美国电话电报
+LNG,Cheniere Energy Inc
+XLG,Invesco S&P 500 Top 50 ETF
+SCHX,Schwab U.S. Large-Cap ETF
+CGDV,Capital Group Dividend Value ET
+IUSV,iShares Core S&P U.S. Value ETF
+VEEV,Veeva Systems Inc-A
+GOOGL,谷歌-A
+PH,派克汉尼汾
+VTV,价值股指数ETF-Vanguard
+XYL,赛莱默
+BNTX,BioNTech SE ADR
+EQIX,易昆尼克斯
+PBR,巴西石油
+KHC,卡夫亨氏
+JNJ,强生
+PPG,PPG工业
+TMUS,T-Mobile US Inc
+BROS,Dutch Bros Inc-A
+QQQ,纳斯达克100ETF-ProShares
+EXAS,精密科学
+VOO,标普500ETF-Vanguard
+EMB,新兴市场美元债ETF-iShares
+GILD,吉利德科学
+IVV,标普500ETF-iShares
+MANH,曼哈顿联合软件
+NWSA,新闻集团-A
+DVA,达维塔保健
+QQQM,Invesco NASDAQ 100 ETF
+FCNCA,第一公民银行股份-A
+TGT,塔吉特
+DTM,DT Midstream Inc
+DIA,道琼斯工业ETF-SPDR
+SPY,标普500ETF-SPDR
+NNN,NNN REIT Inc
+WCN,Waste Connections Inc
+LDOS,Leidos Holdings Inc
+SITC,SITE Centers Corp
+BTBT,比特数字
+VOOG,Vanguard S&P 500 Growth ETF
+RS,Reliance Steel & Aluminum Co
+UBS,瑞银集团
+CMCSA,康卡斯特
+SPLG,SPDR Portfolio S&P 500 ETF
+UNP,联合太平洋
+CSCO,思科
+HR,医疗保健房地产信托
+NUE,纽柯钢铁
+MGK,Vanguard Mega Cap Growth ETF
+BMY,百时美施贵宝
+AAPL,苹果
+IBB,NASDAQ生物技术ETF-iShares
+SMAR,Smartsheet Inc-A
+QQQE,Direxion NASDAQ-100 Equal Weigh
+STNE,StoneCo Ltd-A
+DGRW,WisdomTree U.S. Quality Dividen
+DD,陶氏杜邦
+FVD,First Trust VL Dividend
+PKG,美国包装
+CHDN,Churchill Downs Inc
+PSTG,Pure Storage Inc-A
+UNH,联合健康
+XLI,工业ETF-SPDR
+PINS,Pinterest Inc-A
+CPRT,科帕特
+SPYV,SPDR Portfolio S&P 500 Value ET
+HAE,美国血液技术
+DLR,数字房地产信托
+FDX,联邦快递
+HXL,赫氏
+O,Realty Income Corp
+ATR,AptarGroup Inc
+BRK_B,伯克希尔哈撒韦-B
+REGN,再生元制药
+REG,Regency Centers Corp
+MTUM,iShares Edge MSCI USA Momentum 
+SPMO,Invesco S&P 500 Momentum ETF
+IONQ,IonQ Inc
+WEN,云狄斯快餐
+CRC,加州资源
+SERV,Serve Robotics Inc
+BRK_A,伯克希尔哈撒韦-A
+NEE,新纪元能源
+GRAB,Grab Holdings Ltd-A
+DGRO,iShares Core Dividend Growth ET
+CLS,天弘科技
+TEVA,梯瓦制药
+AMLP,Alerian MLP ETF
+TTC,托罗配件
+BKH,黑山
+IBN,印度工业信贷投资银行
+QUAL,iShares Edge MSCI USA Quality F
+CWB,可转债ETF-SPDR
+GE,通用电气(US)
+JCI,江森自控
+FMX,Fomento Económico Mexicano SAB
+RGA,美国再保险集团
+IVE,标普500价值股ETF-iShares
+AZN,阿斯利康(US ADR)
+TRGP,Targa Resources Corp
+NOW,现在服务公司
+AGNC,AGNC Investment Corp
+UPS,联合包裹服务
+ICE,洲际交易所
+APH,安费诺
+HII,亨廷顿英戈尔斯工业
+KWEB,中概互联网ETF-KraneShares
+RVMD,Revolution Medicines Inc
+MTD,梅特勒-托利多
+SAP,思爱普
+FLUT,Flutter Entertainment plc
+FAST,快扣
+LIN,Linde plc
+AVAV,AeroVironment Inc
+SEE,希悦尔
+ACI,艾伯森
+DXJ,日本证券汇率对冲ETF-WisdomTree
+XLF,金融ETF-SPDR
+HIG,哈特福德金融
+OEF,标普100ETF-iShares
+PCG,太平洋煤气电力
+SSNC,SS&C Technologies Holdings Inc
+VLTO,Veralto Corp
+LYV,Live Nation Entertainment Inc
+JBLU,捷蓝航空
+ANET,Arista Networks Inc
+ZS,Zscaler Inc
+VZ,威瑞森通讯
+BIIB,生化基因
+VIG,股利增长指数ETF-Vanguard
+AGI,Alamos Gold Inc-A
+VSCO,Victoria’s Secret & Co
+SJM,JM斯马克
+ACN,埃森哲
+NEE_R,NextEra Energy Inc Corporate Un
+VCLT,长期公司债指数ETF-Vanguard
+KBR,KBR科技
+ORCL,甲骨文
+STE,思泰瑞医疗
+ALC,Alcon Inc
+CDE,科尔黛伦矿业
+BRKR,布鲁克
+ETN,伊顿
+JPM,摩根大通
+IAG,IAMGOLD Corp
+VVV,胜牌
+GGG,固瑞克
+NOBL,ProShares S&P 500 Dividend Aris
+NKE,耐克
+PPL,PPL能源
+EDV,美国超长期国债ETF-Vanguard
+ERIE,伊瑞保险
+WST,西氏医药服务
+MKC,味好美
+AIG,美国国际集团
+IGLB,iShares Long-Term Corporate Bon
+GAP,盖普
+SYK,史赛克
+BTU,皮博迪能源
+JEPQ,JPMorgan Nasdaq Equity Premium 
+IT,加特纳
+FIS,富达国民信息服务
+TSN,泰森食品
+JD,京东
+DIS,迪士尼
+MPLX,MPLX LP
+NFE,New Fortress Energy Inc-A
+XLC,The Communication Services Sele
+WH,温德姆酒店及度假村
+MKL,Markel Group Inc
+RARE,Ultragenyx Pharmaceutical Inc
+DOCS,Doximity Inc-A
+EPD,Enterprise Products Partners LP
+AFL,美国家庭人寿保险
+BSY,Bentley Systems Inc-B
+NVS,诺华制药
+QYLD,Global X NASDAQ 100 Covered Cal
+BLV,长期债券指数ETF-Vanguard
+KNSL,Kinsale Capital Group Inc
+MET,大都会人寿
+KO,可口可乐
+OMFL,Invesco Russell 1000 Dynamic Mu
+TLT,20年+国债ETF-iShares
+NLY,Annaly Capital Management Inc
+HLT,希尔顿酒店
+OKE,欧尼克
+TEM,Tempus AI Inc-A
+USFD,美国食品控股
+PFF,美国优先股ETF-iShares
+ADC,艾格里不动产
+TT,特灵科技
+G,简柏特
+DHR,丹纳赫
+EPI,印度收入指数ETF-WisdomTree
+STZ,星座品牌-A
+SIGI,Selective Insurance Group Inc
+FI,费哲金融服务
+GPC,通用配件
+ABBV,艾伯维
+MDT,美敦力
+INGR,宜瑞安
+FOXA,福克斯-A
+VGLT,Vanguard Long-Term Treasury ETF
+SPTL,SPDR Portfolio Long Term Treasu
+INVH,Invitation Homes Inc
+MELI,MercadoLibre Inc
+VTR,芬塔公司
+LQD,投资级公司债ETF-iShares
+AMH,American Homes 4 Rent-A
+IDCC,InterDigital Inc
+IGV,北美软件ETF-iShares
+USMV,美国最小波幅ETF-iShares
+OXLC,Oxford Lane Capital Corp.
+MDLZ,亿滋国际
+SNOW,Snowflake Inc-A
+MOH,Molina Healthcare Inc
+TAP,摩森康胜-B
+TLH,10-20年国债ETF-iShares
+HWM,Howmet Aerospace Inc
+SCHP,美国抗通胀债ETF-Schwab
+FRO,Frontline plc
+SUI,Sun Communities Inc
+COO,库珀医疗
+CTSH,高知特
+CCEP,可口可乐欧洲太平洋合伙(US)
+NDSN,诺信
+CELH,燃力士控股
+SPHQ,Invesco S&P 500 Quality ETF
+TIP,抗通胀债ETF-iShares
+HYG,高收益公司债ETF-iShares iBoxx
+JNK,高收益债ETF-SPDR
+INDA,印度ETF-iShares MSCI
+IGIB,iShares Intermediate-Term Corpo
+ABT,雅培
+BAH,博思艾伦
+HYLB,Xtrackers USD High Yield Corpor
+APD,空气化工
+USIG,iShares Broad USD Investment Gr
+GWW,固安捷
+VCIT,中期公司债指数ETF-Vanguard
+SE,Sea Ltd ADR
+AMZN,亚马逊
+JKHY,杰克亨利
+WTRG,Essential Utilities Inc
+OTIS,Otis Worldwide Corp
+BF_B,百富门-B
+TOST,Toast Inc-A
+MAR,万豪国际
+SPHY,SPDR Portfolio High Yield Bond 
+IRM,铁山
+VIRT,Virtu Financial Inc-A
+RJF,瑞杰金融
+MBB,按揭抵押债ETF-iShares
+CAG,康尼格拉
+CTAS,信达思
+MGM,美高梅
+CMG,墨式烧烤
+GEHC,GE HealthCare Technologies Inc
+ELV,Elevance Health Inc
+USHY,iShares Broad USD High Yield Co
+DJT,Trump Media & Technology Group 
+WDC,西部数据
+TTEK,德照科技
+FICO,Fair Isaac Corp
+DGX,奎斯特诊疗
+ITW,伊利诺伊机械
+BIV,中期债券指数ETF-Vanguard
+A,安捷伦
+IEF,7-10年ETF-iShares
+EIX,爱迪生国际
+PENN,PENN Entertainment Inc
+BDX,碧迪医疗
+AGG,美国全债市ETF-iShares
+BOND,PIMCO Active Bond ETF
+CHRW,罗宾逊全球物流
+IUSB,iShares Core Total USD Bond Mar
+UGI,UGI公用事业
+LW,蓝威斯顿控股
+FIX,Comfort Systems USA Inc
+RIO,力拓(US)
+YETI,YETI Holdings Inc
+BND,全债市指数ETF-Vanguard
+SHYG,iShares 0-5 Year High Yield Cor
+VKTX,Viking Therapeutics Inc
+TTWO,Take-Two Interactive Software I
+SJNK,短期高收益债ETF-SPDR
+XLV,医疗ETF-SPDR
+FBND,Fidelity Total Bond ETF
+PGR,前进保险
+VMBS,Vanguard Mortgage-Backed Securi
+SPAB,SPDR Portfolio Aggregate Bond E
+SQSP,Squarespace Inc-A
+RTX,雷神技术
+CFLT,Confluent Inc-A
+PFE,辉瑞
+BRBR,BellRing Brands Inc
+JEPI,JPMorgan Equity Premium Income 
+HCC,勇士煤业
+WRB,WR柏克利
+MNDY,monday.com Ltd
+CNC,康西哥
+GME,游戏驿站
+ECL,艺康
+MDB,MongoDB Inc-A
+VGIT,Vanguard Intermediate-Term Trea
+SCHR,Schwab Intermediate-Term U.S. T
+CPB,金宝汤
+TJX,The TJX Companies Inc
+HSY,好时
+WES,Western Midstream Partners LP
+SPIB,SPDR Portfolio Intermediate Ter
+DTE,DTE能源
+SPTI,SPDR Portfolio Intermediate Ter
+CLH,Clean Harbors Inc
+SPGI,标普全球
+TMO,赛默飞世尔科技
+SPLV,标普500低波幅ETF-PowerShares
+MNST,怪物饮料
+PANW,派拓网络
+WYNN,永利度假村
+IEI,3-7年ETF-iShares
+TROW,普信集团
+UNM,尤纳姆
+BFAM,Bright Horizons Family Solution
+GOVT,美国债ETF-iShares
+ROP,儒博实业
+UTHR,联合治疗
+XEL,埃克西尔能源
+EA,艺电
+IGSB,iShares Short-Term Corporate Bo
+FTNT,防特网
+ENV,Envestnet Inc
+LH,徕博科
+VCSH,短期公司债指数ETF-Vanguard
+CTLT,Catalent Inc
+ELF,elf Beauty Inc
+MSFT,微软
+DG,达乐
+TRI,汤森路透
+OWL,Blue Owl Capital Inc-A
+PRKS,United Parks & Resorts Inc
+MUB,美国市政债ETF-iShares
+VTIP,Vanguard Short-Term Inflation-P
+FUTU,富途控股
+AWK,美国水业
+ATO,Atmos Energy Corp
+XLP,日常消费ETF-SPDR
+VRTX,福泰制药
+BNDX,国际全债市指数ETF-Vanguard
+XLU,公用事业ETF-SPDR
+LNT,美国联合能源
+BSV,短期国债指数ETF-Vanguard
+EMR,艾默生电气
+HEI,海科航空
+CPAY,Corpay Inc
+CGCP,Capital Group Core Plus Income 
+EVRG,Evergy
+J,Jacobs Solutions Inc
+OGE,OGE Energy Corp
+PYPL,PayPal Holdings Inc
+NVAX,诺瓦瓦克斯医药
+CL,高露洁
+TW,Tradeweb Markets Inc-A
+AKAM,阿卡迈
+TGTX,TG Therapeutics Inc
+SRLN,SPDR Blackstone GSO Senior Loan
+FDS,辉盛研究系统
+KEYS,是德科技
+AMR,Alpha Metallurgical Resources I
+SHY,1-3年国债ETF-iShares
+TKO,TKO Group Holdings Inc-A
+SHW,宣伟
+GIS,通用磨坊
+VTEB,Vanguard Tax-Exempt Bond ETF
+DUK,杜克能源
+LEGN,Legend Biotech Corp ADR
+ASND,Ascendis Pharma AS ADR
+SCHO,Schwab Short-Term U.S. Treasury
+SRCL,消毒循环
+HOLX,豪洛捷
+SPSB,SPDR Portfolio Short Term Corpo
+BKLN,高级银团贷款ETF-PowerShares
+COST,开市客
+SCHW,嘉信理财
+ELS,宜居生活资产信托
+DT,Dynatrace Inc
+VGSH,Vanguard Short-Term Treasury ET
+KDP,Keurig Dr Pepper Inc
+LANC,兰卡斯特食品
+TXRH,德州公路酒吧
+WMT,沃尔玛
+NBIX,神经分泌生物科学
+NEAR,iShares Short Maturity Bond ETF
+JNPR,瞻博网络
+ADBE,奥多比
+NI,尼索思
+BZ,BOSS直聘
+ARMK,Aramark
+MKTX,MarketAxess Holdings Inc
+SRE,桑普拉能源
+VUSB,Vanguard Ultra-Short Bond ETF
+DRI,达登饭店
+SILK,Silk Road Medical Inc
+MCD,麦当劳
+CHE,Chemed Corp
+PRFT,The Perficient Inc
+PULS,PGIM Ultra Short Bond ETF
+VALE,淡水河谷
+AMED,阿米斯医疗
+HCP,HashiCorp Inc-A
+PAGS,PagSeguro Digital Ltd-A
+ESTC,Elastic NV
+STNG,Scorpio Tankers Inc
+SPOT,Spotify Technology SA
+FTSM,First Trust Enhanced Short Matu
+ADP,自动数据处理
+NTRA,Natera Inc
+FLOT,浮动利率债ETF-iShares
+PEP,百事
+IBM,IBM国际商业机器(US)
+NVO,诺和诺德
+BOXX,Alpha Architect 1-3 Month Box E
+BILS,SPDR Bloomberg 3-12 Month T-Bil
+GBIL,Goldman Sachs Access Treasury 0
+USFR,WisdomTree Floating Rate Treasu
+JPST,JPMorgan Ultra-Short Income ETF
+JAAA,Janus Henderson AAA CLO ETF
+D,道明尼能源
+ARCC,阿瑞斯资本
+SBLK,Star Bulk Carriers Corp
+SHV,短期国债ETF-iShares
+BIL,美国1-3月国债ETF-SPDR
+MRK,默沙东
+PM,菲利普莫里斯国际
+EXPD,康捷国际物流
+MINT,PIMCO Enhanced Short Maturity A
+SGOV,iShares 0-3 Month Treasury Bond
+TFLO,iShares Treasury Floating Rate 
+ICSH,iShares Ultra Short-Term Bond E
+K,家乐氏
+CEG,Constellation Energy Corp
+TBIL,US Treasury 3 Month Bill ETF
+JMST,JPMorgan Ultra-Short Municipal 
+GDDY,GoDaddy Inc-A
+LNW,Light & Wonder Inc
+DASH,DoorDash Inc-A
+PLAY,Dave & Buster's Entertainment I
+PGRU,PropertyGuru Group Ltd
+INFY,印孚瑟斯
+HA,夏威夷控股
+FWONK,Liberty Media Corp Liberty Form
+FLRN,SPDR Bloomberg Investment Grade
+ETR,安特吉
+DEA,Easterly Government Properties 
+BMRN,拜玛林制药
+CHKP,Check Point Software Technologi
+FE,第一能源
+AEP,美国电力
+ASML,阿斯麦
+NOC,诺斯罗普-格鲁曼(US)
+PNW,品尼高西方资本
+VGR,Vector Group Ltd
+WM,美国废物管理
+ED,爱迪生联合电气
+CBOE,芝加哥期权交易所
+PEG,公共服务企业
+TME,腾讯音乐
+BIDU,百度
+CBRL,CB乡村店
+MCO,穆迪
+HTHT,华住
+ALKS,阿尔凯默斯
+PSN,Parsons Corp
+LLY,礼来
+TYL,泰勒科技
+CRNX,Crinetics Pharmaceuticals Inc
+CASY,Casey’s General Stores Inc
+EDR,Endeavor Group Holdings Inc-A
+V,维萨
+NTES,网易
+CMS,CMS能源
+INSM,Insmed Inc
+IDA,IDACORP Inc
+ROL,Rollins Inc
+HRL,荷美尔食品
+CCK,皇冠控股
+LHX,L3Harris Technologies Inc
+EBAY,易趣
+EXC,爱克斯龙电力
+CYBR,CyberArk Software Ltd
+ELAN,Elanco Animal Health Inc
+RCM,R1 RCM Inc
+AEE,阿曼瑞恩
+IFF,国际香料香精
+RSG,共和废品处理
+WEC,WEC能源
+NFLX,奈飞
+SN,SharkNinja Inc
+PODD,银休特
+SO,南方电力
+TENB,Tenable Holdings Inc
+LMT,洛克希德马丁
+NDAQ,纳斯达克
+ALL,好事达保险
+PRMW,Primo Water Corp
+VRSN,威瑞信
+PLTR,Palantir Technologies Inc-A
+COKE,可口可乐装瓶
+DLB,杜比实验室
+CHD,丘奇&德怀特
+HRB,H&R布洛克
+ASO,Academy Sports and Outdoors Inc
+MA,万事达
+BSX,波士顿科学
+KR,克罗格
+HUM,哈门那
+CPNG,Coupang Inc-A
+GWRE,Guidewire Software Inc
+AXON,Axon Enterprise Inc
+ES,能源方案
+SYY,西斯科
+ANSS,安西斯
+IBKR,盈透证券
+BR,布罗德里奇金融
+ARGX,argenx SE ADR
+PG,宝洁
+EW,爱德华兹生命科学
+JAZZ,爵士制药
+CLOV,Clover Health Investments Corp-
+COTY,科蒂
+LI,理想汽车
+CDNS,铿腾电子
+SRPT,Sarepta Therapeutics Inc
+CNP,中点能源
+UNG,美国天然气基金
+VRSK,Verisk分析
+MPW,Medical Properties Trust Inc
+GD,通用动力
+KMB,金佰利
+ZTS,硕腾
+QXO,QXO Inc
+QFIN,奇富科技
+IDXX,IDEXX实验室
+META,Meta Platforms Inc-A
+FL,富乐客
+ISRG,直觉外科
+AON,怡安保险
+RYAN,Ryan Specialty Holdings Inc-A
+RGEN,Repligen Corp
+CAH,卡地纳健康
+YUM,百胜餐饮
+YMM,满帮
+BGNE,百济神州
+BXSL,Blackstone Secured Lending Fund
+MMC,威达信
+QGEN,快而精医药
+DLTR,美元树
+ORLY,奥莱利
+TCOM,携程
+SPDN,Direxion Daily S&P 500 Bear 1X 
+DOG,做空道指ETF-ProShares
+PSQ,做空纳斯达克100ETF-ProShares
+SH,做空标普500ETF-ProShares
+SIMO,慧荣科技
+LVS,金沙集团
+PRCT,PROCEPT BioRobotics Corp
+BOIL,二倍做多天然气ETF-ProShares
+YUMC,百胜中国
+COR,Cencora Inc
+CME,芝加哥商业交易所
+WTW,Willis Towers Watson PLC
+IONS,Ionis Pharmaceuticals Inc
+MU,美光科技
+AJG,亚瑟加拉格尔
+QSR,餐饮品牌国际
+AZO,汽车地带
+GEV,GE Vernova Inc
+LUNR,Intuitive Machines Inc-A
+HMY,哈莫尼黄金
+MCK,麦克森
+MODG,Topgolf Callaway Brands Corp
+SNPS,新思科技
+BRO,布朗保险
+ALNY,Alnylam Pharmaceuticals Inc
+MASI,麦斯莫医疗
+ZTO,中通快递
+SDS,二倍做空标普500ETF-ProShares
+QID,二倍做空纳斯达克100ETF
+DXD,二倍做空道指ETF-ProShares
+EDU,新东方
+FAZ,三倍做空金融ETF-Direxion
+DUST,二倍做空金矿指数ETF-Direxion
+X,美国钢铁
+OSIS,OSI Systems Inc
+SPXU,三倍做空标普500ETF-ProShares
+RWM,做空罗素2000ETF-ProShares
+SPXS,Direxion Daily S&P 500 Bear 3X 
+SQQQ,三倍做空纳斯达克100ETF
+SDOW,三倍做空道指ETF-ProShares
+SMMT,Summit Therapeutics Inc
+LABD,三倍做空生物技术ETF-Direxion
+ASTS,AST SpaceMobile Inc-A
+AAP,Advance Auto Parts Inc
+FNGD,MicroSectors FANG Index -3X Inv
+HOV,霍夫纳尼安
+TSLS,Direxion Daily TSLA Bear 1X Sha
+NARI,Inari Medical Inc
+TECS,Direxion Technology Bear 3X Sha
+YANG,三倍做空FTSE中国ETF-Direxion
+PDD,拼多多
+ZIM,ZIM Integrated Shipping Service
+MBLY,Mobileye Global Inc-A
+BITI,ProShares Short Bitcoin Strateg
+VXX,恐慌指数期货短期合约ETN-iPath
+VIXY,恐慌指数期货短期合约ETF
+TWM,二倍做空罗素2000ETF-ProShares
+NVDS,Tradr 1.5X Short NVDA Daily ETF
+MULN,Mullen Automotive Inc
+BILL,BILL Holdings Inc
+INTU,财捷
+SLNO,Soleno Therapeutics Inc
+SOXS,Direxion Daily Semiconductor Be
+GFI,金田
+NVDQ,T-Rex 2X Inverse NVIDIA Daily T
+NVD,GraniteShares 2x Short NVDA Dai
+UVXY,1.5倍做多恐慌指数短期期货ETF
+TSLQ,Tradr 2X Short TSLA Daily ETF
+TSLZ,T-Rex 2X Inverse Tesla Daily Ta
+TZA,三倍做空小型股ETF-Direxion
+SRTY,三倍做空罗素2000ETF-ProShares
+IQ,爱奇艺
+FFIE,法拉第未来
+SBIT,ProShares UltraShort Bitcoin ET
+UVIX,VS Trust 2x Long VIX Futures ET
+GOVX,GeoVax Labs Inc
+HOLO,MicroCloud Hologram Inc
+GDC,GD Culture Group Ltd
+UBXG,有家保险
