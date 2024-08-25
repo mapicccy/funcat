@@ -103,7 +103,7 @@ class AkshareFutureDataBackend(DataBackend):
 
         str_start_date = get_str_date_from_int(start)
         str_end_date = get_str_date_from_int(end)
-        filename = (str(order_book_id) + '-' + str_start_date + '-' + str_end_date).replace('.', '-') + '.csv'
+        filename = (str(order_book_id) + '-' + str_start_date + '-' + str_end_date[:8]).replace('.', '-') + '.csv'
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 # csv file may be empty, raise except EmptyDataError
@@ -117,7 +117,7 @@ class AkshareFutureDataBackend(DataBackend):
                 for td in reversed(trading_dates):
                     str_td = get_str_date_from_int(td)
                     ad_filename = (order_book_id + '-' + '2015-04-01' + '-' + str_td).replace('.', '-') + '.csv'
-                    if os.path.exists('data/' + ad_filename) and str_end_date <= str_td:
+                    if os.path.exists('data/' + ad_filename) and str_end_date[:8] <= str_td.replace('-', ''):
                         df = pd.read_csv('data/' + ad_filename)
                         df['trade_date'] = pd.to_datetime(df['trade_date']).dt.date
                         df = df[df['trade_date'] <= pd.Timestamp(str_end_date).date()]
@@ -130,7 +130,7 @@ class AkshareFutureDataBackend(DataBackend):
             try:
                 code = self.convert_code(order_book_id).upper()
                 # index
-                if (freq == "15m"):
+                if freq == "15m":
                     df = self.ak.futures_zh_minute_sina(symbol=code, period=15)
                 else:
                     df = self.ak.futures_zh_minute_sina(symbol=code, period=120)
@@ -153,8 +153,15 @@ class AkshareFutureDataBackend(DataBackend):
 
             df.to_csv('data/' + filename, index=False)
 
-        df['trade_date'] = pd.to_datetime(df['trade_date']).dt.date
-        df = df[df['trade_date'] <= pd.Timestamp(str_end_date).date()]
+        if freq == "15m" and len(str(end)) == 14:
+            df = df[df['datetime'] <= end]
+        else:
+            df['trade_date'] = pd.to_datetime(df['trade_date']).dt.date
+            df = df[df['trade_date'] <= pd.Timestamp(str_end_date).date()]
+
+        if df.empty:
+            return np.array([])
+
         df = df.sort_index(ascending=True)
         arr = df.to_records()
         return arr

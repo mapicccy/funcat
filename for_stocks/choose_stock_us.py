@@ -155,7 +155,7 @@ print(select_long_average_up(5))
 print(select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12)
 
 with open('us_daily_stock', 'w') as fp:
-    fp.write("美股选股(共114只热门股及ETF，30日内5%以上盈利视为准确):\n")
+    fp.write("美股选股(1680只热门股及ETF，30日内5%以上盈利视为准确):\n")
 
 select(
    lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
