@@ -27,6 +27,8 @@ from .func import (
     drawnull,
     zig,
     troughbars,
+    square_root,
+    power2,
 )
 from .context import (
     symbol,
