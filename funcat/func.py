@@ -319,3 +319,15 @@ def troughbars(s, n, m):
             count += 1
 
     return 0
+
+@handle_numpy_warning
+def power2(s, n):
+    series = s.series
+    assert isinstance(series, np.ndarray)
+    return NumericSeries(np.power(series, n))
+
+@handle_numpy_warning
+def square_root(s):
+    series = s.series
+    assert isinstance(series, np.ndarray)
+    return NumericSeries(np.sqrt(series))

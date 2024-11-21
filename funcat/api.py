@@ -77,6 +77,8 @@ CONST = const
 DRAWNULL = drawnull
 ZIG = zig  # zig当前以收盘价为准
 TROUGHBARS = troughbars
+POW = power2
+SQRT = square_root
 
 S = set_current_security
 T = set_current_date
@@ -118,6 +120,8 @@ __all__ = [
     "DRAWNULL",
     "ZIG",
     "TROUGHBARS",
+    "POW",
+    "SQRT",
 
     "S",
     "T",
