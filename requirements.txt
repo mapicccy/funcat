@@ -1,4 +1,5 @@
 setuptools
+pathos
 wheel
 numpy==1.26.4
 six

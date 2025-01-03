@@ -5,7 +5,10 @@ from __future__ import print_function
 
 import datetime
 import numpy as np
+import os
+
 from tqdm import tqdm
+from pathos.multiprocessing import ProcessingPool as Pool
 
 from .context import ExecutionContext, set_current_security, set_current_date, symbol, get_current_security
 from .utils import getsourcelines, FormulaException, get_int_date
@@ -54,6 +57,55 @@ def select(func, start_date="2019-10-01", end_date=None, callback=print, order_b
         for order_book_id in order_book_id_list:
             choose(order_book_id, func, callback)
             order_book_id_list.set_description("Processing {}".format(order_book_id))
+
+    print("")
+
+def worker(args):
+    """处理子列表中的每个任务"""
+    results = []
+    for date, order_book_id, func, callback in args:
+        set_current_date(str(date))
+        result = choose(order_book_id, func, callback)  # 调用 choose 函数
+        results.append(result)
+    return results
+
+def split_list(input_list, num_chunks):
+    """将列表拆分成指定数量的子列表"""
+    avg = len(input_list) // num_chunks
+    remainder = len(input_list) % num_chunks
+    chunks = []
+    start = 0
+    for i in range(num_chunks):
+        end = start + avg + (1 if i < remainder else 0)
+        chunks.append(input_list[start:end])
+        start = end
+    return chunks
+
+@suppress_numpy_warn
+def select_multi(func, start_date="2019-10-01", end_date=None, callback=print, order_book_id_list=None):
+    print(getsourcelines(func))
+    start_date = get_int_date(start_date)
+    if end_date is None:
+        end_date = datetime.date.today()
+    end_date = get_int_date(end_date)
+    data_backend = ExecutionContext.get_data_backend()
+    if not order_book_id_list:
+        order_book_id_list = data_backend.get_order_book_id_list()
+    trading_dates = data_backend.get_trading_dates(start=start_date, end=end_date)
+
+    for idx, date in enumerate(reversed(trading_dates)):
+        if end_date and date > get_int_date(end_date):
+            continue
+        if date < get_int_date(start_date):
+            break
+
+        print("[{}]".format(date))
+
+        temp_list = [(date, order_book_id, func, callback) for order_book_id in order_book_id_list]
+        procs = min(60, os.cpu_count() * 2)
+        args_list = split_list(temp_list, 60)
+        with Pool(processes=procs) as pool:
+            results = pool.map(worker, args_list)
 
     print("")
 
