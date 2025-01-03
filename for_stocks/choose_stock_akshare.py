@@ -190,6 +190,7 @@ set_data_backend(AkshareDataBackend())
 data_backend = funcat_execution_context.get_data_backend()
 trading_dates = data_backend.get_trading_dates("20150808", day)
 order_book_id_list = data_backend.get_order_book_id_list()
+print(order_book_id_list)
 
 S("600105.SH")
 T("20240813")
@@ -205,6 +206,7 @@ select(
    start_date=trading_dates[-1],
    end_date=trading_dates[-1],
    callback=callback,
+   order_book_id_list=order_book_id_list,
 )
 
 # os.system('/root/miniconda3/envs/py39/bin/python -u /root/project/funcat/for_stocks/stock_sift.py')
@@ -256,7 +258,7 @@ print(sorted_stock)
 
 print("Total candidates: ", t_count, "profit: ", count)
 
-ATT = """\n\n重要:\n1. 不要迷信量化选股，2023-12-01到2024-01-31两个月时间选股成功率只有40%左右。创业板和科创板跌幅达到-20%，泥沙俱下行情注意保命！\n2. 访问 http://ekirui.cloud:8000/stock 查看近两年的选股记录与后期走势, 每日更新！\n\n注意：\n1. 已屏蔽换手率过低以及不活跃股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n6. 历史数据显示，如果首次筛选选出较多的股票，代表大盘临近上涨趋势点\n7. 如果您有更好的交易\选股策略，苦于没有编程经验，请联系微信zhao9111，独家服务帮您实现\n8. tushare数据源获取成本大幅提高，股票池固化在2023/05/24，总共5193只，后续不再更新股票池\n"""
+ATT = """\n\n重要:\n1. 不要迷信量化选股，2023-12-01到2024-01-31两个月时间选股成功率只有40%左右。创业板和科创板跌幅达到-20%，泥沙俱下行情注意保命！\n2. 访问 https://mapicccy.online:8000/stock 查看近两年的选股记录与后期走势, 每日更新！\n3. 连续多天没有选出股票时，请耐心等待，空仓也是交易的一部分!\n\n注意：\n1. 已屏蔽换手率过低以及不活跃股票，仅供参考\n2. 不要选ST股票、MA55/MA120长期均线走势弯折（操纵迹象明显）\n3. 资金介入明显\n4. 回测2020/01/01至今，所有选出股票在30个交易日之后3228只盈利，2150只亏损，胜率60%，最大单只盈利541%，最大单只亏损-46%\n5. 参考1-3，可以提高胜率，将测试盈利与否的30交易日延长，胜率会逼近87%，侧面说明大盘长期向上\n6. 历史数据显示，如果首次筛选选出较多的股票，代表大盘临近上涨趋势点\n7. 如果您有更好的交易\选股策略，苦于没有编程经验，请联系微信zhao9111，独家服务帮您实现\n8. tushare数据源获取成本大幅提高，股票池固化在2023/05/24，总共5193只，后续不再更新股票池\n"""
 
 t_profit = 0.
 max_profit = sorted_stock[0][1][0]
@@ -271,7 +273,7 @@ with open('daily_stock', 'a+') as fp:
             s = s + " 最高盈利" + str(sorted_stock[i][1][1]) + "%\n"
 
     t_profit = round(float(t_profit / t_count), 2)
-    text = f"\n近两个月程序共选出股票{t_count}只,达到预期涨幅(4%)的{count}只,占比{ratio}%\n所有股票选出日买入同等份额持有至今共盈利{t_profit}%\n所有股票最大盈利{max_profit}%,最大亏损{max_loss}%\n\n近2月程序选出牛股TOP8：\n"
+    text = f"\n近两个月程序共选出股票{t_count}只,达到预期涨幅(4%)的{count}只,占比{ratio}%\n近两个月选出股票在选出日买入同等份额持有至今共盈利{t_profit}%\n近两个月选出股票最大盈利{max_profit}%,最大亏损{max_loss}%\n\n近2月程序选出牛股TOP8：\n"
     fp.write(text)
     if s != "":
         fp.write(s)

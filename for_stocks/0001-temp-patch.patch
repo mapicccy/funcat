@@ -1,0 +1,33 @@
+From 84d26d2e7de53c79acf6820b0b0a730f057355f3 Mon Sep 17 00:00:00 2001
+From: Guanjun <guanjun@linux.alibaba.com>
+Date: Mon, 3 Jun 2024 17:39:42 +0800
+Subject: [PATCH 1/1] temp patch
+
+Signed-off-by: Guanjun <guanjun@linux.alibaba.com>
+---
+ for_stocks/choose_stock_us.py | 1 +
+ for_stocks/validation.py      | 2 ++
+ 2 files changed, 3 insertions(+)
+
+diff --git a/for_stocks/choose_stock_us.py b/for_stocks/choose_stock_us.py
+index 7b4bbe6..4c46895 100644
+--- a/for_stocks/choose_stock_us.py
++++ b/for_stocks/choose_stock_us.py
+@@ -196,3 +196,4 @@ else:
+     with open('us_daily_stock', 'r') as fp:
+         text = fp.read()
+         text = text + "\n\n注意：\n美股趋势一但形成很难扭转，本选股策略只会挑选趋势反转的股票，注意止盈止损"
++        wx.send_message(text, uids=uid, token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')
+diff --git a/for_stocks/validation.py b/for_stocks/validation.py
+index daa2a32..d9d99cf 100644
+--- a/for_stocks/validation.py
++++ b/for_stocks/validation.py
+@@ -99,3 +99,5 @@ with open('daily_stock', 'r') as fp:
+ text = text + ATT
+ print(text)
+ 
++if int(day) not in trading_dates:
++    wx.send_message(text, topic_ids=['8112'], token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')
+-- 
+2.43.5
+

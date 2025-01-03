@@ -159,8 +159,8 @@ with open('us_daily_stock', 'w') as fp:
 
 select(
    lambda: select_over_average(31) and select_long_average_up(5) and select_down_from_max(31, 1.12) and HHV(H, 21) / C > 1.12,
-   start_date=trading_dates[-1],
-   end_date=trading_dates[-1],
+   start_date="20150101",
+   end_date="20160204",
    callback=callback,
 )
 
@@ -171,5 +171,3 @@ else:
         text = fp.read()
         text = text + "\n\n注意：\n美股趋势一但形成很难扭转，本选股策略只会挑选趋势反转的股票，注意止盈止损"
         wx.send_message(text, uids=uid, token='AT_dmMmeBfDKT1tyV82aZvT98Vm4xNYx1M2')
-
-os.system('/home/ec2-user/miniconda3/envs/py39/bin/python -u /home/ec2-user/funcat/for_stocks/draw-echarts-us.py')
