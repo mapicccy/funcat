@@ -103,7 +103,7 @@ class AkshareFutureDataBackend(DataBackend):
 
         str_start_date = get_str_date_from_int(start)
         str_end_date = get_str_date_from_int(end)
-        filename = (str(order_book_id) + '-' + str_start_date + '-' + str_end_date[:8]).replace('.', '-') + '.csv'
+        filename = (str(order_book_id) + '-' + str_start_date + '-' + str_end_date).replace('.', '-') + '.csv'
         if os.path.exists('data'):
             if os.path.exists('data/' + filename):
                 # csv file may be empty, raise except EmptyDataError
@@ -117,7 +117,7 @@ class AkshareFutureDataBackend(DataBackend):
                 for td in reversed(trading_dates):
                     str_td = get_str_date_from_int(td)
                     ad_filename = (order_book_id + '-' + '2015-04-01' + '-' + str_td).replace('.', '-') + '.csv'
-                    if os.path.exists('data/' + ad_filename) and str_end_date[:8] <= str_td.replace('-', ''):
+                    if os.path.exists('data/' + ad_filename) and str_end_date <= str_td.replace('-', ''):
                         df = pd.read_csv('data/' + ad_filename)
                         df['trade_date'] = pd.to_datetime(df['trade_date']).dt.date
                         df = df[df['trade_date'] <= pd.Timestamp(str_end_date).date()]
@@ -144,7 +144,7 @@ class AkshareFutureDataBackend(DataBackend):
             if df is None:
                 return np.array([])
 
-            df = df.loc[df['trade_date'] <= str_end_date]
+            df = df.loc[df['trade_date'] <= str_end_date + " 23:59:00"]
             if df.empty:
                 return np.array([])
 

@@ -20,6 +20,7 @@ Classifier: Programming Language :: Python :: 3.11
 Description-Content-Type: text/x-rst
 License-File: LICENSE
 Requires-Dist: setuptools
+Requires-Dist: pathos
 Requires-Dist: wheel
 Requires-Dist: numpy==1.26.4
 Requires-Dist: six
