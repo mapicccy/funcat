@@ -23,17 +23,6 @@ class CryptoBackend(DataBackend):
         self.passphrase = passphrase
         self.freq = int(freq)
 
-    @cached_property
-    def ts(self):
-        try:
-            import tushare as ts
-            return ts
-        except ImportError:
-            print("-" * 50)
-            print(">>> Missing tushare. Please run `pip install tushare`")
-            print("-" * 50)
-            raise
-
     @lru_cache(maxsize=4096)
     def get_price(self, ts_code, start, end, freq):
         tmp_end = end
